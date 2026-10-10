@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://lambtoncapital.com.au/sitemap.xml
