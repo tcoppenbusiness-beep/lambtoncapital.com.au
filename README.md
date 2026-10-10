@@ -1,3 +1,6 @@
 # Lambton Capital website
 
-Static site deployed to Cloudflare from the `main` branch. No build step: output directory is the repo root.
+Static site in `public/`, deployed to Cloudflare from `main` (config in `wrangler.jsonc`). No build step.
+
+- Workers flow: build command blank, deploy command `npx wrangler deploy`
+- Pages flow: build command blank, output directory `public`
