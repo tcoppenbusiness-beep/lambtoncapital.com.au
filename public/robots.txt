@@ -1,4 +1,5 @@
 User-agent: *
-Allow: /
+Disallow: /lp/
+Disallow: /thank-you.html
 
 Sitemap: https://lambtoncapital.com.au/sitemap.xml
