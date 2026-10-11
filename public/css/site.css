@@ -616,7 +616,13 @@ img{ height:auto; }
 .section-photo-inner{ position:relative; max-width:860px; margin-left:max(var(--gutter), calc((100% - var(--maxw)) / 2 + var(--gutter))); }
 .section-photo .h2{ color:var(--ground); }
 .section-photo .answer-first,
-.section-photo .scan-list li{ color:#E6ECEF; }
+.section-photo .scan-list li,
+.section-photo .body,
+.section-photo .body li,
+.section-photo .body-sm,
+.section-photo .ink-2{ color:#E6ECEF; }
+.section-photo strong{ color:#FFFFFF; }
+.section-photo a:focus-visible{ outline:2px solid var(--amber); outline-offset:2px; }
 .section-photo .scan-list strong{ color:#FFFFFF; }
 .section-photo .scan-list li::before{ background:var(--amber); }
 .section-photo a{ color:#9FD0E6; }
@@ -625,3 +631,28 @@ img{ height:auto; }
   .section-photo-tint{ background:rgba(15,42,56,0.84); }
   .section-photo-inner{ margin-left:0; }
 }
+
+/* ---- Mobile / touch refinements ---- */
+/* Footer and inline text links: 44px-high touch targets (WCAG 2.5.5 / Google mobile guidance) */
+.footer-col{ gap:0; }
+.footer-col a, .footer-links a{ display:inline-flex; align-items:center; min-height:44px; }
+.footer-links{ gap:0 24px; }
+.fee-link{ display:inline-flex; align-items:center; min-height:44px; }
+.mobile-nav a.mobile-sub{ padding-top:12px; padding-bottom:12px; }
+/* Long words, URLs and grid children never force sideways scrolling */
+body{ overflow-wrap:break-word; }
+.card, .tools-card, .grid-2 > *, .grid-3 > *{ min-width:0; }
+img, video, svg{ max-width:100%; }
+@media (max-width:479px){
+  /* Buttons wrap onto two lines instead of running off small phones */
+  .btn{ white-space:normal; height:auto; min-height:48px; padding:12px 20px; text-align:center; }
+  .pref-source-btn, .pref-source-btn .btn{ width:100%; }
+  .tools-card{ padding:20px; }
+  .section-photo{ padding:48px 0; }
+}
+/* Standalone "See ... →" links on cards (direct children of a card, not inside text) */
+.card > a:not(.btn), .stack > a:not(.btn){ display:inline-flex; align-items:center; min-height:44px; }
+.card-img-body > a:not(.btn){ display:inline-flex; align-items:center; min-height:44px; }
+.checkbox-row input[type="checkbox"]{ width:22px; height:22px; flex:none; }
+.checkbox-row{ min-height:44px; align-items:center; }
+.wrap > a:not(.btn):not(.logo):not(.brand){ display:inline-flex; align-items:center; min-height:44px; margin-right:16px; }
