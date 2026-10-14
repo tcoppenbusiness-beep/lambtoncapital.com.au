@@ -9,7 +9,7 @@
   /* ---------- CONFIG ---------- */
   var FORM_ENDPOINT = "https://api.web3forms.com/submit";
   var FORM_ACCESS_KEY = "af8e9c26-1c01-45f3-8e06-d1f62c0856d6";
-  var DEMO_MODE = true;
+  var DEMO_MODE = false;
   var BOOKING_URL = "https://calendar.app.google/REPLACE-ME";
   var STORAGE_KEY = "lc_enquiry_v1";
 
@@ -70,6 +70,10 @@
   function selectField(id, label, why, options){
     return { id: id, type: "select", label: label, why: why, options: options, required: true };
   }
+  function showIfMatches(cond){
+    var v = state.answers[cond.field];
+    return cond.in ? cond.in.indexOf(v) > -1 : v === cond.equals;
+  }
   function textField(id, label, why, opts){
     opts = opts || {};
     return { id: id, type: "text", label: label, why: why, required: !!opts.required, placeholder: opts.placeholder || "" };
@@ -99,8 +103,10 @@
           tilesField("buyingEntity", "Buying entity", "Some lenders won't lend to trusts or SMSFs (self-managed super funds), so this narrows the lenders quickly.", ["Company","Trust","SMSF","Individuals","Not decided"]),
           tilesField("stage", "Where are you at?", "Timing tells us how urgently to move.", ["Researching","Found a property","Offer made","Contract exchanged"])
         ],
-          conditional: [ { showIf: { field: "stage", equals: "Contract exchanged" }, field: dateField("financeDate", "Finance clause date (the contract deadline to get your loan approved)", "We prioritise deals against the finance clause deadline.") } ],
-          extra: [ textField("postcode", "Property postcode", "Helps us match valuers and lenders active in the area.", { required: true, placeholder: "e.g. 2285" }) ]
+          conditional: [
+            { showIf: { field: "stage", in: ["Found a property","Offer made","Contract exchanged"] }, field: textField("postcode", "Property postcode", "Helps us match valuers and lenders active in the area.", { required: true, placeholder: "e.g. 2285" }) },
+            { showIf: { field: "stage", equals: "Researching" }, field: textField("searchArea", "Where are you looking? (optional)", "A suburb, region or city is enough. We can talk options before you've found a property.", { placeholder: "e.g. Newcastle, Western Sydney" }) },
+            { showIf: { field: "stage", equals: "Contract exchanged" }, field: dateField("financeDate", "Finance clause date (the contract deadline to get your loan approved)", "We prioritise deals against the finance clause deadline.") } ]
         }
       ]
     },
@@ -321,7 +327,7 @@
       stepDef.fields.forEach(function(f){ stepWrap.appendChild(renderField(f)); });
       if (stepDef.conditional){
         stepDef.conditional.forEach(function(c){
-          if (state.answers[c.showIf.field] === c.showIf.equals) stepWrap.appendChild(renderField(c.field));
+          if (showIfMatches(c.showIf)) stepWrap.appendChild(renderField(c.field));
         });
       }
       if (stepDef.extra) stepDef.extra.forEach(function(f){ stepWrap.appendChild(renderField(f)); });
@@ -479,7 +485,7 @@
     var fields = stepDef.fields.slice();
     if (stepDef.extra) fields = fields.concat(stepDef.extra);
     if (stepDef.conditional){
-      stepDef.conditional.forEach(function(c){ if (state.answers[c.showIf.field] === c.showIf.equals) fields.push(c.field); });
+      stepDef.conditional.forEach(function(c){ if (showIfMatches(c.showIf)) fields.push(c.field); });
     }
     if (!validateStep(fields, false)) return;
     state.step += 1;
