@@ -608,3 +608,6 @@ img{ height:auto; }
 .hero-home .reviewed-by{ color:#C9D6DE; }
 .reviewed-section{ padding:16px 0 !important; border-top:1px solid var(--rule); background:var(--ground); }
 .reviewed-section .reviewed-by{ margin:0; }
+
+/* Pre-launch (Oct 2026) */
+.prelaunch-note{ background:var(--surface); border:1px solid var(--rule); border-left:3px solid var(--amber); border-radius:8px; padding:14px 18px; margin:0 0 20px; font-size:16px; color:var(--ink); }

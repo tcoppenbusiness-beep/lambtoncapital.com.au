@@ -615,19 +615,16 @@
     ty.style.display = "block";
     ty.innerHTML = "";
     ty.appendChild(el("h2", { class: "h2", text: "Your enquiry is in." }));
-    ty.appendChild(el("p", { class: "lead", text: "Pick a time and I'll have your answers ready for the call." }));
+    ty.appendChild(el("p", { class: "lead", text: "Thanks. We'll reply in writing within two business days. Deal assessments open once our lender panel is confirmed, and early enquiries are contacted first." }));
     var actions = el("div", { class: "thankyou-actions" });
+    if (BOOKING_URL.indexOf("REPLACE-ME") === -1){
     var bookBtn = el("a", { class: "btn btn-primary", href: BOOKING_URL, target: "_blank", rel: "noopener noreferrer", text: "Book a 20-minute discovery call" });
     bookBtn.addEventListener("click", function(){ track("booking_click", { branch: state.branch }); });
     actions.appendChild(bookBtn);
     ty.appendChild(actions);
-    ty.appendChild(el("p", { class: "body-sm", text: "Reply within one business day either way." }));
-    ty.appendChild(el("p", { class: "body-sm", html: '<a href="' + relativeTo("thank-you.html") + '">See the confirmation page</a> · <a href="#credit-guide">Read our credit guide</a>' }));
+    }
+    ty.appendChild(el("p", { class: "body-sm", html: '<a href="' + relativeTo("thank-you.html") + '">See the confirmation page</a> · <a href="' + relativeTo("fees.html") + '">How our fees work</a>' }));
 
-    var details = el("details", { class: "payload-details" });
-    details.appendChild(el("summary", { text: "What the email will contain" }));
-    details.appendChild(el("pre", { class: "payload-pre", text: JSON.stringify(payload, null, 2) }));
-    ty.appendChild(details);
   }
 
   /* Resolve a root-relative asset name against how deep the current page sits. */
