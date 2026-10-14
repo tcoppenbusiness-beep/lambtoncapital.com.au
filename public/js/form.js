@@ -8,7 +8,7 @@
 
   /* ---------- CONFIG ---------- */
   var FORM_ENDPOINT = "https://api.web3forms.com/submit";
-  var FORM_ACCESS_KEY = "YOUR-ACCESS-KEY";
+  var FORM_ACCESS_KEY = "af8e9c26-1c01-45f3-8e06-d1f62c0856d6";
   var DEMO_MODE = true;
   var BOOKING_URL = "https://calendar.app.google/REPLACE-ME";
   var STORAGE_KEY = "lc_enquiry_v1";
