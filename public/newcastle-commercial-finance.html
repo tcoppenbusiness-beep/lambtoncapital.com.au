@@ -223,6 +223,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </section>
 
+  <section class="section-dark stat-band-placeholder" data-placeholder="stats" hidden>
+    <div class="wrap stack-lg">
+      <!-- PLACEHOLDER: replace each [TBC] with real settled-deal figures, then delete hidden + data-placeholder -->
+      <div class="stat-band-grid">
+        <div class="stat-band-item"><p class="stat">[TBC]</p><p class="label">Deals settled</p></div>
+        <div class="stat-band-item"><p class="stat">[TBC]</p><p class="label">Total loans settled (cumulative)</p></div>
+        <div class="stat-band-item"><p class="stat">[TBC]</p><p class="label">Median days to settlement</p></div>
+        <div class="stat-band-item"><p class="stat">[TBC]</p><p class="label">Average LVR (loan as % of property value)</p></div>
+      </div>
+      <p class="body-sm" style="color:#C9D6DE;margin:0;">Staging only: placeholder figures. Hidden on lambtoncapital.com.au until real numbers are added.</p>
+    </div>
+  </section>
+  <script>/* show stats placeholder on staging/preview hosts only */
+    if(!/(^|\.)lambtoncapital\.com\.au$/.test(location.hostname)){document.querySelectorAll('[data-placeholder="stats"]').forEach(function(e){e.hidden=false;});}
+  </script>
 
   <section id="deal-notes">
     <div class="wrap stack">
