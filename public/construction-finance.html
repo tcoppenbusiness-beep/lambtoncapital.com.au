@@ -306,6 +306,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </section>
 
+  <section id="lenders" data-placeholder="lenders">
+    <div class="wrap stack">
+      <h2 class="h2">Lender panel</h2>
+      <div class="lender-grid">
+        <div class="lender-slot lender-name"><img loading="lazy" decoding="async" width="400" height="277" class="lender-logo" src="img/lenders/cba.png" alt="Commonwealth Bank" onerror="this.remove()"><span>Commonwealth Bank</span></div>
+        <div class="lender-slot lender-name"><img loading="lazy" decoding="async" width="400" height="156" class="lender-logo" src="img/lenders/nab.png" alt="NAB" onerror="this.remove()"><span>NAB</span></div>
+        <div class="lender-slot lender-name"><img loading="lazy" decoding="async" width="400" height="75" class="lender-logo" src="img/lenders/westpac.png" alt="Westpac" onerror="this.remove()"><span>Westpac</span></div>
+        <div class="lender-slot lender-name"><img loading="lazy" decoding="async" width="400" height="126" class="lender-logo" src="img/lenders/anz.png" alt="ANZ" onerror="this.remove()"><span>ANZ</span></div>
+        <div class="lender-slot lender-name"><img loading="lazy" decoding="async" width="400" height="71" class="lender-logo" src="img/lenders/macquarie.png" alt="Macquarie" onerror="this.remove()"><span>Macquarie</span></div>
+        <div class="lender-slot lender-name"><img loading="lazy" decoding="async" width="199" height="106" class="lender-logo" src="img/lenders/judo.png" alt="Judo Bank" onerror="this.remove()"><span>Judo Bank</span></div>
+        <div class="lender-slot lender-name"><img loading="lazy" decoding="async" width="291" height="330" class="lender-logo" src="img/lenders/boq.png" alt="Bank of Queensland" onerror="this.remove()"><span>Bank of Queensland</span></div>
+        <div class="lender-slot lender-name"><img loading="lazy" decoding="async" width="400" height="58" class="lender-logo" src="img/lenders/thinktank.png" alt="Thinktank" onerror="this.remove()"><span>Thinktank</span></div>
+      </div>
+      <p class="body-sm">Target panel — accreditations (approvals to arrange loans with each lender) in progress. Logos are published as each is confirmed.</p>
+    </div>
+  </section>
+
   <section class="section-border-top" id="enquiry">
     <div class="wrap form-panel">
       <p class="prelaunch-note"><strong>Now taking early enquiries.</strong> Deal assessments open once our lender panel is confirmed &mdash; early enquiries are contacted first.</p>
@@ -406,5 +423,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </div>
 
 <script src="js/form.js"></script>
+<script>/* Placeholders (stats, lender panel): visible on staging, removed on the live domain until confirmed */
+  if(/(^|\.)lambtoncapital\.com\.au$/.test(location.hostname)){document.querySelectorAll('[data-placeholder]').forEach(function(e){e.remove();});}
+</script>
 </body>
 </html>
