@@ -656,3 +656,6 @@ img, video, svg{ max-width:100%; }
 .checkbox-row input[type="checkbox"]{ width:22px; height:22px; flex:none; }
 .checkbox-row{ min-height:44px; align-items:center; }
 .wrap > a:not(.btn):not(.logo):not(.brand){ display:inline-flex; align-items:center; min-height:44px; margin-right:16px; }
+
+/* Pre-launch (Oct 2026) */
+.prelaunch-note{ background:var(--surface); border:1px solid var(--rule); border-left:3px solid var(--amber); border-radius:8px; padding:14px 18px; margin:0 0 20px; font-size:16px; color:var(--ink); }
