@@ -190,7 +190,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </div>
 
-  <section class="section-dark stat-band-placeholder" data-placeholder="stats" hidden>
+  <section class="section-dark stat-band-placeholder" data-placeholder="stats">
     <div class="wrap stack-lg">
       <!-- PLACEHOLDER: replace each [TBC] with real settled-deal figures, then delete hidden + data-placeholder -->
       <div class="stat-band-grid">
@@ -202,8 +202,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <p class="body-sm" style="color:#C9D6DE;margin:0;">Staging only: placeholder figures. Hidden on lambtoncapital.com.au until real numbers are added.</p>
     </div>
   </section>
-  <script>/* show stats placeholder on staging/preview hosts only */
-    if(!/(^|\.)lambtoncapital\.com\.au$/.test(location.hostname)){document.querySelectorAll('[data-placeholder="stats"]').forEach(function(e){e.hidden=false;});}
+  <script>/* placeholder stats: remove on the live domain until real figures are added */
+    if(/(^|\.)lambtoncapital\.com\.au$/.test(location.hostname)){document.querySelectorAll('[data-placeholder="stats"]').forEach(function(e){e.remove();});}
   </script>
 
   <section id="business-finance">
