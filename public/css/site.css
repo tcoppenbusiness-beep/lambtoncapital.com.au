@@ -662,5 +662,5 @@ img, video, svg{ max-width:100%; }
 .lender-slot .lender-name, .lender-slot > span{ color:var(--ink-2); text-align:center; padding:0 8px; line-height:1.25; }
 
 /* Spacing tidy (Oct 2026): card title sits close to its text; list and card grid read as separate blocks */
-.card.stack > .h3 + p{ margin-top:-14px; }
+.card.stack > .h3 + p.body-sm{ margin-top:-14px; }
 .scan-list + .grid-2, .scan-list + .grid-3, .answer-first + .grid-2, .answer-first + .grid-3{ margin-top:16px; }
