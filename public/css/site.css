@@ -660,3 +660,7 @@ img, video, svg{ max-width:100%; }
 /* Pre-launch (Oct 2026) */
 .prelaunch-note{ background:var(--surface); border:1px solid var(--rule); border-left:3px solid var(--amber); border-radius:8px; padding:14px 18px; margin:0 0 20px; font-size:16px; color:var(--ink); }
 .lender-slot .lender-name, .lender-slot > span{ color:var(--ink-2); text-align:center; padding:0 8px; line-height:1.25; }
+
+/* Spacing tidy (Oct 2026): card title sits close to its text; list and card grid read as separate blocks */
+.card.stack > .h3 + p{ margin-top:-14px; }
+.scan-list + .grid-2, .scan-list + .grid-3, .answer-first + .grid-2, .answer-first + .grid-3{ margin-top:16px; }
