@@ -664,3 +664,6 @@ img, video, svg{ max-width:100%; }
 /* Spacing tidy (Oct 2026): card title sits close to its text; list and card grid read as separate blocks */
 .card.stack > .h3 + p.body-sm{ margin-top:-14px; }
 .scan-list + .grid-2, .scan-list + .grid-3, .answer-first + .grid-2, .answer-first + .grid-3{ margin-top:16px; }
+
+/* How-it-works image on phones and tablets: fixed-height crop so a portrait photo stays short */
+@media (max-width:1023px){ .how-with-image .how-image img{ height:260px; object-position:50% 35%; } }
