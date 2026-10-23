@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url><loc>https://lambtoncapital.com.au/about.html</loc><lastmod>2026-10-08</lastmod></url>
   <url><loc>https://lambtoncapital.com.au/asset-equipment-finance.html</loc><lastmod>2026-10-08</lastmod></url>
   <url><loc>https://lambtoncapital.com.au/brisbane-commercial-finance.html</loc><lastmod>2026-10-08</lastmod></url>
   <url><loc>https://lambtoncapital.com.au/business-acquisition-finance.html</loc><lastmod>2026-10-08</lastmod></url>
   <url><loc>https://lambtoncapital.com.au/business-finance.html</loc><lastmod>2026-10-08</lastmod></url>
-  <url><loc>https://lambtoncapital.com.au/childcare-centre-finance.html</loc><lastmod>2026-10-08</lastmod></url>
+  <url><loc>https://lambtoncapital.com.au/childcare-centre-finance.html</loc><lastmod>2026-10-23</lastmod><image:image><image:loc>https://lambtoncapital.com.au/img/pt-childcare.webp</image:loc></image:image><image:image><image:loc>https://lambtoncapital.com.au/img/bg/childcare-centre-building-playground-1600.webp</image:loc></image:image></url>
   <url><loc>https://lambtoncapital.com.au/commercial-debt-restructure.html</loc><lastmod>2026-10-08</lastmod></url>
   <url><loc>https://lambtoncapital.com.au/commercial-property-finance.html</loc><lastmod>2026-10-08</lastmod></url>
   <url><loc>https://lambtoncapital.com.au/commercial-refinance.html</loc><lastmod>2026-10-08</lastmod></url>
