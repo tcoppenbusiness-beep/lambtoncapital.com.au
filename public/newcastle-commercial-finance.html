@@ -2,11 +2,8 @@
 <html lang="en">
 <head>
 <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-WKKHH22N');</script>
+<script>/* GTM loads after first interaction or 3.5s after page load, keeping it off the critical path */
+(function(w,d,i){w.dataLayer=w.dataLayer||[];var done=false,ev=['scroll','pointerdown','keydown','touchstart'];function go(){if(done)return;done=true;ev.forEach(function(e){w.removeEventListener(e,go,{passive:true});});w.dataLayer.push({'gtm.start':new Date().getTime(),event:'gtm.js'});var j=d.createElement('script');j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i;d.head.appendChild(j);}ev.forEach(function(e){w.addEventListener(e,go,{passive:true});});function later(){setTimeout(go,3500);}if(d.readyState==='complete')later();else w.addEventListener('load',later);})(window,document,'GTM-WKKHH22N');</script>
 <!-- End Google Tag Manager -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -24,8 +21,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta property="og:image" content="https://lambtoncapital.com.au/img/newcastle.jpg">
 <link rel="preload" href="/fonts/ibm-plex-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/ibm-plex-serif-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/ibm-plex-sans-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="css/site.css">
-  <script async src="https://news.google.com/swg/js/v1/publisher.js"></script>
 <script type="application/ld+json">
 {
  "@context": "https://schema.org",
@@ -314,21 +311,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <h2 class="h2">What we're seeing in the Hunter</h2>
       <div class="grid-3">
         <article class="card card-flush">
-          <img loading="lazy" decoding="async" width="1800" height="1350" class="card-img" src="img/pt-warehouse.webp" srcset="img/pt-warehouse-800.webp 800w, img/pt-warehouse.webp 1800w" sizes="100vw" alt="Modern industrial unit with roller-door bays">
+          <img loading="lazy" decoding="async" width="1800" height="1350" class="card-img" src="img/pt-warehouse.webp" srcset="img/pt-warehouse-480.webp 480w, img/pt-warehouse-800.webp 800w, img/pt-warehouse.webp 1800w" sizes="(min-width:901px) 400px, 100vw" alt="Modern industrial unit with roller-door bays">
           <div class="card-img-body" style="gap:8px;">
             <h3 class="h3">Hunter industrial vacancy</h3>
             <p class="body-sm">Few industrial units sit empty across the Hunter, which keeps prices and rents firm. For a business buying its own premises, that makes the repayment test tighter.</p>
           </div>
         </article>
         <article class="card card-flush">
-          <img loading="lazy" decoding="async" width="1400" height="745" class="card-img" src="img/port.webp" srcset="img/port-800.webp 800w, img/port.webp 1400w" sizes="100vw" alt="Port cranes and container terminal">
+          <img loading="lazy" decoding="async" width="1400" height="745" class="card-img" src="img/port.webp" srcset="img/port-640.webp 640w, img/port-800.webp 800w, img/port.webp 1400w" sizes="(min-width:901px) 400px, 100vw" alt="Port cranes and container terminal">
           <div class="card-img-body" style="gap:8px;">
             <h3 class="h3">Port and logistics demand</h3>
             <p class="body-sm">Newcastle's port and logistics corridor continues to draw warehouse and distribution buyers seeking premises finance.</p>
           </div>
         </article>
         <article class="card card-flush">
-          <img loading="lazy" decoding="async" width="1400" height="933" class="card-img" src="img/trades.webp" srcset="img/trades-800.webp 800w, img/trades.webp 1400w" sizes="100vw" alt="Earthmoving machinery on a work site">
+          <img loading="lazy" decoding="async" width="1400" height="933" class="card-img" src="img/trades.webp" srcset="img/trades-480.webp 480w, img/trades-800.webp 800w, img/trades.webp 1400w" sizes="(min-width:901px) 400px, 100vw" alt="Earthmoving machinery on a work site">
           <div class="card-img-body" style="gap:8px;">
             <h3 class="h3">Trades equipment market</h3>
             <p class="body-sm">Local trades businesses are financing fleet and equipment upgrades as older assets reach replacement age.</p>
@@ -395,7 +392,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <p class="prelaunch-note"><strong>Now taking early enquiries.</strong> Deal assessments open once our lender panel is confirmed &mdash; early enquiries are contacted first.</p>
       <form id="enquiryForm" novalidate>
         <div id="formSteps"></div>
-        <input type="text" name="botcheck" id="botcheck" class="honeypot" tabindex="-1" autocomplete="off">
+        <label class="honeypot" aria-hidden="true">Leave this field empty <input type="text" name="botcheck" id="botcheck" tabindex="-1" autocomplete="off"></label>
       </form>
       <div id="thankyou" class="thankyou" style="display:none;"></div>
     </div>
