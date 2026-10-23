@@ -2,11 +2,8 @@
 <html lang="en">
 <head>
 <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-WKKHH22N');</script>
+<script>/* GTM loads after first interaction or 3.5s after page load, keeping it off the critical path */
+(function(w,d,i){w.dataLayer=w.dataLayer||[];var done=false,ev=['scroll','pointerdown','keydown','touchstart'];function go(){if(done)return;done=true;ev.forEach(function(e){w.removeEventListener(e,go,{passive:true});});w.dataLayer.push({'gtm.start':new Date().getTime(),event:'gtm.js'});var j=d.createElement('script');j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i;d.head.appendChild(j);}ev.forEach(function(e){w.addEventListener(e,go,{passive:true});});function later(){setTimeout(go,3500);}if(d.readyState==='complete')later();else w.addEventListener('load',later);})(window,document,'GTM-WKKHH22N');</script>
 <!-- End Google Tag Manager -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,6 +22,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta property="og:image" content="https://lambtoncapital.com.au/img/lp.jpg">
 <link rel="preload" href="/fonts/ibm-plex-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/ibm-plex-serif-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/ibm-plex-sans-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../css/site.css">
 </head>
 <body data-depth="1">
@@ -208,7 +206,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="wrap stack-lg">
       <h2 class="h2">How it works</h2>
       <div class="how-with-image">
-        <div class="how-image"><img loading="lazy" decoding="async" width="1400" height="745" src="../img/port.webp" srcset="../img/port-800.webp 800w, ../img/port.webp 1400w" sizes="100vw" alt="Port and logistics corridor near Newcastle."></div>
+        <div class="how-image"><img loading="lazy" decoding="async" width="1400" height="745" src="../img/port.webp" srcset="../img/port-640.webp 640w, ../img/port-800.webp 800w, ../img/port.webp 1400w" sizes="(min-width:1024px) 420px, 100vw" alt="Port and logistics corridor near Newcastle."></div>
         <div class="how-steps">
           <div class="card stack how-card" style="gap:16px;">
             <p class="stat" style="color:var(--harbour-2);">1</p>
@@ -282,7 +280,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <p class="prelaunch-note"><strong>Now taking early enquiries.</strong> Deal assessments open once our lender panel is confirmed &mdash; early enquiries are contacted first.</p>
       <form id="enquiryForm" novalidate>
         <div id="formSteps"></div>
-        <input type="text" name="botcheck" id="botcheck" class="honeypot" tabindex="-1" autocomplete="off">
+        <label class="honeypot" aria-hidden="true">Leave this field empty <input type="text" name="botcheck" id="botcheck" tabindex="-1" autocomplete="off"></label>
       </form>
       <div id="thankyou" class="thankyou" style="display:none;"></div>
     </div>

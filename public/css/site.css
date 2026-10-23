@@ -242,12 +242,16 @@ td{ padding:16px; border-bottom:1px solid var(--rule); font-size:15px; color:var
 @media (max-width:767px){ .hero-home{ min-height:0; align-items:stretch; } }
 .hero-home img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center; display:block; }
 .hero-home-tint{ position:absolute; inset:0; background:rgba(15,42,56,0.62); }
-.hero-home-inner{ position:relative; z-index:1; padding:64px var(--gutter) 88px; display:flex; flex-direction:column; align-items:flex-start; gap:20px; text-align:left; }
+.hero-home-inner{ position:relative; z-index:1; width:100%; padding:64px var(--gutter) 88px; display:flex; flex-direction:column; align-items:flex-start; gap:20px; text-align:left; }
 @media (max-width:767px){ .hero-home-inner{ padding:40px var(--gutter) 32px; } }
 .hero-home .eyebrow{ color:#C9D6DE; }
 .hero-home .h-display{ color:var(--ground); max-width:760px; }
 .hero-home .lead{ color:#E6ECEF; max-width:680px; }
 .hero-home-tiles{ width:100%; margin-top:4px; }
+/* reserve space until form.js renders the tiles (prevents layout shift) */
+.hero-home-tiles:empty{ min-height:520px; }
+@media (min-width:600px){ .hero-home-tiles:empty{ min-height:330px; } }
+@media (min-width:1024px){ .hero-home-tiles:empty{ min-height:199px; } }
 .hero-home-tiles > .label{ color:#C9D6DE; }
 .hero-home-tiles .tile-group{ grid-template-columns:1fr; gap:16px; }
 @media (min-width:600px){ .hero-home-tiles .tile-group{ grid-template-columns:repeat(2, minmax(0,1fr)); } }
