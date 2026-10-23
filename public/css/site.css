@@ -667,3 +667,8 @@ img, video, svg{ max-width:100%; }
 
 /* How-it-works image on phones and tablets: fixed-height crop so a portrait photo stays short */
 @media (max-width:1023px){ .how-with-image .how-image img{ height:260px; object-position:50% 35%; } }
+
+/* Logo: L monogram (matches favicon) before the wordmark */
+.wordmark{ display:inline-flex; align-items:center; gap:10px; }
+.wordmark-mark{ width:30px; height:30px; flex:none; display:block; }
+@media (max-width:479px){ .wordmark{ gap:8px; font-size:18px; } .wordmark-mark{ width:26px; height:26px; } }
