@@ -907,16 +907,25 @@
     }
     bar.classList.add("eligible");
     var hero = document.querySelector(".hero-home, .hero, main > section");
-    function onScroll(){
-      var heroGone = hero ? hero.getBoundingClientRect().bottom < 0 : (window.scrollY > 400);
-      var fr = form.getBoundingClientRect();
-      var formInView = fr.top < window.innerHeight && fr.bottom > 0;
+    /* IntersectionObserver instead of getBoundingClientRect on scroll: no forced reflow */
+    var heroGone = false, formInView = false;
+    function update(){
       if (heroGone && !formInView){ bar.classList.add("visible"); }
       else { bar.classList.remove("visible"); }
     }
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-    onScroll();
+    if ("IntersectionObserver" in window){
+      if (hero){
+        new IntersectionObserver(function(es){ es.forEach(function(e){ heroGone = !e.isIntersecting && e.boundingClientRect.bottom < 0; }); update(); }).observe(hero);
+      } else {
+        window.addEventListener("scroll", function(){ heroGone = window.scrollY > 400; update(); }, { passive: true });
+      }
+      new IntersectionObserver(function(es){ es.forEach(function(e){ formInView = e.isIntersecting; }); update(); }).observe(form);
+    } else {
+      window.addEventListener("scroll", function(){
+        heroGone = hero ? hero.getBoundingClientRect().bottom < 0 : (window.scrollY > 400);
+        var fr = form.getBoundingClientRect(); formInView = fr.top < window.innerHeight && fr.bottom > 0; update();
+      }, { passive: true });
+    }
   }
 
   function initCtaTracking(){
