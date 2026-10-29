@@ -724,7 +724,114 @@
     initEmailGate(root);
   }
 
-  function initEmailGate(root){
+
+  /* Full commercial loan calculator (tools/commercial-loan-calculator.html).
+     Adds interest rate, term, repayment type, income (interest cover) limit and facility-expiry timing.
+     No default rate is applied: repayments and income limit stay blank until a rate is entered. */
+  var ICR_HURDLE = 1.75; /* assumed minimum interest cover lenders look for; lender policies vary */
+
+  function initLoanCalc(root){
+    if (!root) return;
+    function q(a){ return root.querySelector("[" + a + "]"); }
+    var typeSel = q("data-calc-type"), priceInp = q("data-calc-price"), ownerBox = q("data-calc-owner"),
+        rentInp = q("data-calc-rent"), rateInp = q("data-calc-rate"), termInp = q("data-calc-term"),
+        repaySel = q("data-calc-repay"), expiryInp = q("data-calc-expiry");
+    var lendOut = q("data-calc-lend"), limitOut = q("data-calc-limit"), depositOut = q("data-calc-deposit"),
+        payOut = q("data-calc-payment"), icrOut = q("data-calc-icr"), rateHint = q("data-calc-rate-note"),
+        expiryRows = q("data-calc-expiry-rows"), startOut = q("data-calc-start-by"),
+        daysOut = q("data-calc-days"), expStatus = q("data-calc-expiry-status");
+    if (!typeSel || !priceInp || !lendOut || !depositOut) return;
+
+    var last = {};
+
+    function lvrFor(val){ return LVR_BANDS[val] !== undefined ? LVR_BANDS[val] : parseFloat(val) || 0; }
+    function fmtDate(d){ return d.toLocaleDateString("en-AU", { day: "numeric", month: "long", year: "numeric" }); }
+    function isoDate(d){
+      var m = d.getMonth() + 1, day = d.getDate();
+      return d.getFullYear() + "-" + (m < 10 ? "0" : "") + m + "-" + (day < 10 ? "0" : "") + day;
+    }
+
+    function recalc(){
+      var lvr = lvrFor(typeSel.value);
+      if (ownerBox && ownerBox.checked) lvr = Math.min(lvr + 0.05, 0.80);
+      var price = parseMoney(priceInp.value);
+      var income = rentInp ? parseMoney(rentInp.value) : 0;
+      var ratePct = rateInp && rateInp.value !== "" ? parseFloat(rateInp.value) : NaN;
+      var hasRate = !isNaN(ratePct) && ratePct >= 0;
+      var termYears = termInp ? parseFloat(termInp.value) : NaN;
+      if (isNaN(termYears) || termYears <= 0) termYears = 15;
+      var interestOnly = repaySel && repaySel.value === "io";
+
+      var lvrLimit = price * lvr;
+      var loan = lvrLimit, limitedBy = "Limited by LVR";
+      if (hasRate && ratePct > 0 && income > 0){
+        var incomeLimit = income / ((ratePct / 100) * ICR_HURDLE);
+        if (incomeLimit < lvrLimit){ loan = incomeLimit; limitedBy = "Limited by income (interest cover)"; }
+      }
+      loan = Math.max(0, loan);
+      var deposit = Math.max(0, price - loan);
+
+      var payment = null;
+      if (hasRate && loan > 0){
+        var r = ratePct / 100 / 12, n = Math.round(termYears * 12);
+        if (interestOnly) payment = loan * r;
+        else if (r === 0) payment = loan / n;
+        else payment = loan * r / (1 - Math.pow(1 + r, -n));
+      }
+      var icr = null;
+      if (hasRate && ratePct > 0 && income > 0 && loan > 0) icr = income / (loan * ratePct / 100);
+
+      lendOut.textContent = fmtMoney(loan);
+      if (limitOut) limitOut.textContent = limitedBy;
+      depositOut.textContent = fmtMoney(deposit);
+      if (payOut) payOut.textContent = payment === null ? "\u2014" : fmtMoney(payment) + " / month";
+      if (icrOut) icrOut.textContent = icr === null ? "\u2014" : icr.toFixed(2) + "\u00d7";
+      if (rateHint) rateHint.hidden = hasRate;
+
+      /* Facility expiry */
+      var expiryIso = "", expiryMsg = "";
+      var ev = expiryInp ? expiryInp.value : "";
+      var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(ev);
+      if (expiryRows) expiryRows.hidden = !m;
+      if (m){
+        var expiry = new Date(+m[1], +m[2] - 1, +m[3]);
+        var now = new Date(); var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+        var startBy = new Date(expiry.getTime()); startBy.setMonth(startBy.getMonth() - 6);
+        var days = Math.round((expiry - today) / 86400000);
+        expiryIso = isoDate(expiry);
+        if (startOut) startOut.textContent = fmtDate(startBy);
+        if (days < 0){ expiryMsg = "Expired"; if (daysOut) daysOut.textContent = "Expired"; }
+        else {
+          if (daysOut) daysOut.textContent = days + (days === 1 ? " day" : " days");
+          expiryMsg = startBy <= today ? "Under 6 months \u2014 start now" : "On track \u2014 start by " + fmtDate(startBy);
+        }
+        if (expStatus){
+          expStatus.textContent = expiryMsg;
+          expStatus.classList.toggle("calc-urgent", days < 0 || startBy <= today);
+        }
+      }
+
+      last = {
+        property_type: typeSel.value, owner_occupied: !!(ownerBox && ownerBox.checked),
+        value: Math.round(price), income: Math.round(income),
+        rate_pct: hasRate ? ratePct : "", term_years: termYears,
+        repayment_type: interestOnly ? "interest_only" : "principal_and_interest",
+        max_loan: Math.round(loan), limited_by: limitedBy, deposit: Math.round(deposit),
+        monthly_repayment: payment === null ? "" : Math.round(payment),
+        icr: icr === null ? "" : Math.round(icr * 100) / 100,
+        expiry_date: expiryIso, expiry_status: expiryMsg
+      };
+    }
+
+    [typeSel, repaySel, ownerBox, expiryInp].forEach(function(el){ if (el) el.addEventListener("change", recalc); });
+    [priceInp, rentInp, rateInp, termInp, expiryInp].forEach(function(el){ if (el) el.addEventListener("input", recalc); });
+    recalc();
+
+    var gate = document.querySelector("[data-loan-gate]");
+    if (gate) initEmailGate(gate, function(){ recalc(); return last; });
+  }
+
+  function initEmailGate(root, payloadFn){
     var emailBtn = root.querySelector("[data-calc-email-btn]");
     var gate = root.querySelector("[data-calc-gate]");
     if (emailBtn && gate){
@@ -747,8 +854,36 @@
       form.addEventListener("submit", function(ev){
         ev.preventDefault();
         var successNote = root.querySelector("[data-calc-success]");
-        if (successNote) successNote.classList.add("show");
-        track("calc_email_result", {});
+        var errNote = root.querySelector("[data-calc-error]");
+        var payload = {};
+        try { if (typeof payloadFn === "function") payload = payloadFn() || {}; } catch (e) { payload = {}; }
+        var fnEl = root.querySelector("#fn"), emEl = root.querySelector("#em"), consentEl = root.querySelector("[data-calc-consent]");
+        var firstName = fnEl ? fnEl.value.trim() : "", email = emEl ? emEl.value.trim() : "";
+        var brokerSel = root.querySelector("[data-calc-broker-check] .tile[aria-checked='true']");
+        var wantsBroker = brokerSel ? brokerSel.textContent.trim() : "Not answered";
+        var botEl = document.getElementById("botcheck");
+        if (!firstName || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email) || (consentEl && !consentEl.checked)){
+          if (errNote) errNote.hidden = false;
+          return;
+        }
+        if (errNote) errNote.hidden = true;
+        if (botEl && botEl.checked) return;
+        // Analytics gets the calculation only - never name or email
+        track("calc_email_result", payload);
+        if (DEMO_MODE){ if (successNote) successNote.classList.add("show"); return; }
+        var body = Object.assign({
+          access_key: FORM_ACCESS_KEY,
+          subject: "Calculator result request - " + firstName + (wantsBroker === "Yes" ? " (wants broker check)" : ""),
+          from_name: firstName,
+          name: firstName,
+          email: email,
+          wants_broker_check: wantsBroker,
+          consent: "Yes",
+          source_page: location.pathname
+        }, payload);
+        fetch(FORM_ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) })
+          .then(function(res){ if (!res.ok) throw new Error("Network response was not ok"); if (successNote) successNote.classList.add("show"); })
+          .catch(function(err){ console.log("[calc-submit:error]", err); if (errNote){ errNote.textContent = "Something went wrong sending your result. Please try again."; errNote.hidden = false; } });
       });
     }
   }
@@ -847,7 +982,8 @@
 
     document.querySelectorAll("[data-lvr-basic]").forEach(initBasicCalc);
     document.querySelectorAll("[data-lvr-extended]").forEach(initExtendedCalc);
-    document.querySelectorAll("[data-lvr-gate]").forEach(initEmailGate);
+    document.querySelectorAll("[data-lvr-gate]").forEach(function(g){ initEmailGate(g); });
+    document.querySelectorAll("[data-loan-calc]").forEach(initLoanCalc);
 
     /* Single pre-set tile used on the SMSF page sidebar */
     document.querySelectorAll("[data-select-branch]").forEach(function(btn){

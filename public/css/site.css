@@ -682,3 +682,9 @@ img, video, svg{ max-width:100%; }
 .wordmark{ display:inline-flex; align-items:center; gap:10px; }
 .wordmark-mark{ width:30px; height:30px; flex:none; display:block; }
 @media (max-width:479px){ .wordmark{ gap:8px; font-size:18px; } .wordmark-mark{ width:26px; height:26px; } }
+
+/* Commercial loan calculator */
+.calc-hint{ font-size:14px; line-height:1.5; color:var(--ink-2); margin:6px 0 0; }
+.calc-urgent{ color:#9A3412; font-weight:600; }
+.calc-result-row .h3{ text-align:right; }
+.calc-result [hidden]{ display:none !important; }
