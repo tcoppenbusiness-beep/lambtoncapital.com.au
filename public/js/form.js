@@ -283,7 +283,7 @@
     state.step = 2;
     state.answers = {};
     safeSessionSet();
-    track("form_start", { branch: label });
+    track("enquiry_start", { branch: label, page_path: pagePath() });
     renderAll();
     var target = document.getElementById("enquiry");
     if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -490,7 +490,7 @@
     if (!validateStep(fields, false)) return;
     state.step += 1;
     safeSessionSet();
-    track("form_step_" + state.step, { branch: state.branch, step: state.step });
+    track("enquiry_step", { branch: state.branch, step: state.step });
     renderFormArea();
     scrollFormIntoView();
   }
@@ -591,14 +591,13 @@
     var hidden = buildHiddenFields(scoring);
     var payload = Object.assign({ access_key: FORM_ACCESS_KEY, subject: subject, from_name: state.answers.fullName || "Website enquiry" }, state.answers, hidden);
 
-    track("form_submit", { branch: state.branch, tier: scoring.tier, score: scoring.score });
-
     if (DEMO_MODE){ showThankYou(payload); return; }
 
     fetch(FORM_ENDPOINT, {
       method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload)
     }).then(function(res){
       if (!res.ok) throw new Error("Network response was not ok");
+      track("generate_lead", { form_name: "enquiry", branch: state.branch, tier: scoring.tier, score: scoring.score, page_path: pagePath() });
       showThankYou(payload);
     }).catch(function(err){
       console.log("[submit:error]", err);
@@ -867,9 +866,7 @@
           return;
         }
         if (errNote) errNote.hidden = true;
-        if (botEl && botEl.checked) return;
-        // Analytics gets the calculation only - never name or email
-        track("calc_email_result", payload);
+        if (botEl && botEl.value) return;
         if (DEMO_MODE){ if (successNote) successNote.classList.add("show"); return; }
         var body = Object.assign({
           access_key: FORM_ACCESS_KEY,
@@ -882,7 +879,7 @@
           source_page: location.pathname
         }, payload);
         fetch(FORM_ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) })
-          .then(function(res){ if (!res.ok) throw new Error("Network response was not ok"); if (successNote) successNote.classList.add("show"); })
+          .then(function(res){ if (!res.ok) throw new Error("Network response was not ok"); track("tool_email_signup", Object.assign({ form_name: "calculator_result", wants_broker_check: wantsBroker, page_path: pagePath() }, payload)); /* calculation only - never name or email */ if (successNote) successNote.classList.add("show"); })
           .catch(function(err){ console.log("[calc-submit:error]", err); if (errNote){ errNote.textContent = "Something went wrong sending your result. Please try again."; errNote.hidden = false; } });
       });
     }
@@ -907,16 +904,25 @@
     }
     bar.classList.add("eligible");
     var hero = document.querySelector(".hero-home, .hero, main > section");
-    function onScroll(){
-      var heroGone = hero ? hero.getBoundingClientRect().bottom < 0 : (window.scrollY > 400);
-      var fr = form.getBoundingClientRect();
-      var formInView = fr.top < window.innerHeight && fr.bottom > 0;
+    /* IntersectionObserver instead of getBoundingClientRect on scroll: no forced reflow */
+    var heroGone = false, formInView = false;
+    function update(){
       if (heroGone && !formInView){ bar.classList.add("visible"); }
       else { bar.classList.remove("visible"); }
     }
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-    onScroll();
+    if ("IntersectionObserver" in window){
+      if (hero){
+        new IntersectionObserver(function(es){ es.forEach(function(e){ heroGone = !e.isIntersecting && e.boundingClientRect.bottom < 0; }); update(); }).observe(hero);
+      } else {
+        window.addEventListener("scroll", function(){ heroGone = window.scrollY > 400; update(); }, { passive: true });
+      }
+      new IntersectionObserver(function(es){ es.forEach(function(e){ formInView = e.isIntersecting; }); update(); }).observe(form);
+    } else {
+      window.addEventListener("scroll", function(){
+        heroGone = hero ? hero.getBoundingClientRect().bottom < 0 : (window.scrollY > 400);
+        var fr = form.getBoundingClientRect(); formInView = fr.top < window.innerHeight && fr.bottom > 0; update();
+      }, { passive: true });
+    }
   }
 
   function initCtaTracking(){

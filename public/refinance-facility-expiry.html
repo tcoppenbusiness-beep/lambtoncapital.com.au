@@ -490,6 +490,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload)
     }).then(function(res){
       if (!res.ok) throw new Error("Network response was not ok");
+      try { (window.dataLayer = window.dataLayer || []).push({ event: "generate_lead", form_name: "facility_expiry", page_path: location.pathname }); } catch(e){}
       form.style.display = "none";
       successEl.style.display = "block";
     }).catch(function(){
