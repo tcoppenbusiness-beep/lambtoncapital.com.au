@@ -42,6 +42,9 @@
 - [Commercial Finance Broker Brisbane](https://lambtoncapital.com.au/brisbane-commercial-finance.html)
 - [Commercial Finance Broker Perth](https://lambtoncapital.com.au/perth-commercial-finance.html)
 
+## Data
+- [Australian commercial lending conditions (quarterly)](https://lambtoncapital.com.au/commercial-lending-conditions.html): business lending rates by business size, credit growth, bank commercial property exposures, from RBA and APRA data; CSV at https://lambtoncapital.com.au/data/commercial-lending-conditions.csv; free to cite under CC BY 4.0
+
 ## Tools
 - [Commercial loan calculator — repayments, LVR & borrowing power](https://lambtoncapital.com.au/tools/commercial-loan-calculator.html)
 

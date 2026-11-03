@@ -1,0 +1,42 @@
+{
+  "_note": "Values copied from primary-source files on 3 Nov 2026 via browser fetch. RBA CSVs: https://www.rba.gov.au/statistics/tables/csv/<table>-data.csv (F7 and D14 publication date 08-Oct-2026; D1 to 30-Sep-2026). APRA from quarterly ADI statistics media releases.",
+  "cash_rate": {
+    "source_url": "https://www.rba.gov.au/media-releases/2026/mr-26-30.html",
+    "history_url": "https://www.rba.gov.au/statistics/cash-rate/",
+    "after_3_nov_2026": 4.85, "decision_3_nov_2026": "+0.25, Statement by the Monetary Policy Board 2026-30",
+    "30_jun_2026": 4.35, "30_sep_2026": 4.60, "31_aug_2025": 3.60, "31_aug_2026": 4.35,
+    "a2_changes": {"13-Aug-2025": 3.60, "04-Feb-2026": 3.85, "18-Mar-2026": 4.10, "06-May-2026": 4.35, "30-Sep-2026": 4.60}
+  },
+  "f7": {
+    "source_url": "https://www.rba.gov.au/statistics/tables/#interest-rates",
+    "dates": {"aug25": "31/08/2025", "jun26": "30/06/2026", "aug26": "31/08/2026"},
+    "FLRBFOSBT": {"title": "Outstanding; Small business; Total", "aug25": 6.90, "jun26": 7.45, "aug26": 7.47},
+    "FLRBFOSBR": {"title": "Outstanding; Small business; of which, Residentially secured", "aug25": 6.33, "jun26": 6.98, "aug26": 6.99},
+    "FLRBFOSBV": {"title": "Outstanding; Small business; Variable-rate", "aug25": 6.76, "jun26": 7.41, "aug26": 7.42},
+    "FLRBFOMBV": {"title": "Outstanding; Medium business; Variable-rate", "aug25": 5.48, "jun26": 6.15, "aug26": 6.18},
+    "FLRBFOLBV": {"title": "Outstanding; Large business; Variable-rate", "aug25": 5.11, "jun26": 5.72, "aug26": 5.75},
+    "FLRBFNSBV": {"title": "New loans funded in the month; Small business; Variable-rate", "aug25": 6.31, "jun26": 6.67, "aug26": 6.81},
+    "FLRBFNLBV": {"title": "New loans funded in the month; Large business; Variable-rate", "aug25": 5.11, "jun26": 5.67, "aug26": 5.67}
+  },
+  "d1": {
+    "source_url": "https://www.rba.gov.au/statistics/frequency/fin-agg/2026/fin-agg-0926.html",
+    "DGFACBNF12": {"title": "Credit; Non-financial Business; 12-month ended growth", "sep25": 9.4, "jun26": 11.0, "sep26": 11.3},
+    "DGFACH12": {"title": "Credit; Housing; 12-month ended growth", "sep25": 6.3, "jun26": 7.5, "sep26": 7.0}
+  },
+  "d14": {
+    "source_url": "https://www.rba.gov.au/statistics/tables/#money-credit",
+    "units": "$ million",
+    "DLBOST": {"title": "Outstanding; Small business; Total", "jun25": 192051, "aug25": 192933, "jun26": 207951, "aug26": 209833},
+    "DLBOMT": {"title": "Outstanding; Medium business; Total", "jun25": 534226, "aug25": 538855, "jun26": 584788, "aug26": 589714},
+    "DLBOLT": {"title": "Outstanding; Large business; Total", "jun25": 716622, "aug25": 734227, "jun26": 820606, "aug26": 841510}
+  },
+  "d14_resi_aug26": 102420,
+  "_d14_resi_note": "DLBOSR, Outstanding; Small business; of which, Residentially secured, $ million, 31/08/2026",
+  "apra_qpex": {
+    "jun26_url": "https://www.apra.gov.au/news-and-publications/apra-releases-quarterly-authorised-deposit-taking-institution-statistics-27",
+    "mar26_url": "https://www.apra.gov.au/news-and-publications/apra-releases-quarterly-authorised-deposit-taking-institution-statistics-26",
+    "exposures_bn": {"jun25": 463.3, "mar26": 487.6, "jun26": 501.6},
+    "limits_bn": {"jun25": 498.2, "mar26": 525.8, "jun26": 541.0},
+    "jun26_release_date": "2026-09-17"
+  }
+}
