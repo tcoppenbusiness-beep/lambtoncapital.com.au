@@ -45,6 +45,9 @@
 ## Data
 - [Australian commercial lending conditions (quarterly)](https://lambtoncapital.com.au/commercial-lending-conditions.html): business lending rates by business size, credit growth, bank commercial property exposures, from RBA and APRA data; CSV at https://lambtoncapital.com.au/data/commercial-lending-conditions.csv; free to cite under CC BY 4.0
 
+## Guides
+- [How much can I borrow against commercial property?](https://lambtoncapital.com.au/guides/how-much-can-i-borrow-commercial-property.html): Loan-to-value caps by property type, a worked serviceability example in dollars, deposit and costs, home equity and super fund borrowing, for Australia.
+
 ## Tools
 - [Commercial loan calculator — repayments, LVR & borrowing power](https://lambtoncapital.com.au/tools/commercial-loan-calculator.html)
 

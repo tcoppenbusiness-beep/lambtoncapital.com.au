@@ -937,7 +937,7 @@
     var panel = document.querySelector("#enquiry .form-panel");
     if (!panel || panel.querySelector(".form-reassure")) return;
     var p = document.createElement("p"); p.className = "form-reassure";
-    var priv = (location.pathname.indexOf("/lp/") > -1 || location.pathname.indexOf("/tools/") > -1) ? "../privacy.html" : "privacy.html";
+    var priv = relativeTo("privacy.html");
     p.innerHTML = "<span>About 2 minutes</span><span>No obligation</span><span>No credit check at this stage</span><span><a href=\"" + priv + "\">How we handle your details</a></span>";
     panel.insertBefore(p, panel.firstChild);
   }

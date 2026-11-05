@@ -1,0 +1,74 @@
+{
+  "title": "How much can I borrow against commercial property?",
+  "description": "Loan-to-value caps by property type, a worked serviceability example in dollars, deposit and costs, home equity and super fund borrowing, for Australia.",
+  "seo_title": "How much can I borrow on commercial property? | Lambton Capital",
+  "published": "2026-11-05",
+  "updated": "2026-11-05",
+  "updated_human": "5 November 2026",
+  "keywords": [
+    "commercial property loan",
+    "LVR",
+    "serviceability",
+    "interest cover ratio",
+    "commercial property deposit",
+    "SMSF commercial property",
+    "Australia"
+  ],
+  "related_from": [
+    "commercial-property-finance.html",
+    "warehouse-finance.html",
+    "smsf-commercial-property-loans.html",
+    "office-finance.html",
+    "tools/commercial-loan-calculator.html"
+  ],
+  "faq": [
+    {
+      "q": "What LVR can I get on commercial property?",
+      "a": "Many lenders work to roughly 55% to 70% of valuation, depending on property type. Industrial sits at the top of that range and specialised assets such as pubs and service stations at the bottom."
+    },
+    {
+      "q": "Why might I borrow less than the LVR cap allows?",
+      "a": "Serviceability can bind first. If net rent or business earnings do not cover the interest by a common margin such as 1.75 times, the loan is capped by income, not by the property's value."
+    },
+    {
+      "q": "Can I use my home as security for a commercial purchase?",
+      "a": "Yes, using home equity is common, but it ties your home to the business loan and raises your effective LVR. Falls in house prices reduce the equity you can use."
+    }
+  ],
+  "card_image": {
+    "base": "guide-how-much-can-i-borrow",
+    "variants": [
+      480,
+      800
+    ],
+    "width": 1400,
+    "height": 787,
+    "alt": "Modern commercial building at sunset, the kind of property this guide works through"
+  },
+  "photo_sections": [
+    {
+      "id": "equity",
+      "image": "brick-commercial-building-car-park",
+      "width": 1400,
+      "height": 933,
+      "alt": "Brick commercial building with a car park out front"
+    },
+    {
+      "id": "reduces",
+      "image": "industrial-estate-warehouses",
+      "width": 1600,
+      "height": 1066,
+      "alt": "Row of warehouses in an industrial estate"
+    }
+  ],
+  "hero_image": {
+    "base": "bg/modern-commercial-office-building",
+    "variants": [
+      800,
+      1600
+    ],
+    "width": 1600,
+    "height": 1242,
+    "alt": "Modern commercial building at sunset, the kind of property this guide works through"
+  }
+}
