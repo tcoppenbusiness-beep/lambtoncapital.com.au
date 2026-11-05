@@ -201,6 +201,12 @@ def build_page(m):
         faq_html = f'<section><div class="wrap stack"><h2 class="h2">Frequently asked</h2><div class="stack" style="gap:0;">{items}</div></div></section>'
     updated_human = m["updated_human"]
     m["body"] = photo_sections(m["body"], m)
+    hi = m.get("hero_image")
+    if hi and 'class="guide-hero-media"' not in m["body"]:
+        srcset = ", ".join(f'../img/{hi["base"]}-{x}.webp {x}w' for x in hi.get("variants", []))
+        band = (f'<div class="guide-hero-media"><img src="../img/{hi["base"]}-{hi["variants"][-1]}.webp" srcset="{srcset}" sizes="(min-width:1200px) 1200px, 100vw" '
+                f'width="{hi["width"]}" height="{hi["height"]}" alt="{esc(hi["alt"])}" fetchpriority="high" decoding="async"></div>')
+        m["body"] = m["body"].replace("</section>", "</section>\n" + band, 1)
     rel = re.search(r'<section[^>]*><div class="wrap stack">\s*<h2 class="h2">Related</h2>', m["body"])
     body_with_pref = (m["body"][:rel.start()] + PREF_SOURCE + "\n" + m["body"][rel.start():]) if rel else m["body"] + PREF_SOURCE
     page = f"""<!doctype html>
@@ -226,6 +232,7 @@ def build_page(m):
 <link rel="preload" href="/fonts/ibm-plex-serif-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/ibm-plex-sans-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../css/site.css">
+<style>.guide-hero-media{{max-width:var(--maxw);margin:8px auto 0;padding:0 var(--gutter)}} .guide-hero-media img{{display:block;width:100%;height:auto;max-height:440px;object-fit:cover;object-position:50% 35%;border-radius:10px}} @media (max-width:767px){{.guide-hero-media img{{max-height:220px}}}}</style>
 <script type="application/ld+json">
 {json.dumps(article, indent=1)}
 </script>

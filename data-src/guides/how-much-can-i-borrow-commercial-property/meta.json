@@ -36,14 +36,14 @@
     }
   ],
   "card_image": {
-    "base": "pt-warehouse",
+    "base": "guide-how-much-can-i-borrow",
     "variants": [
       480,
       800
     ],
-    "width": 1800,
-    "height": 1350,
-    "alt": "Warehouse and industrial unit with roller doors, the kind of commercial property this guide works through"
+    "width": 1400,
+    "height": 787,
+    "alt": "Business owner at a laptop in a warehouse office, working out what the business can borrow"
   },
   "photo_sections": [
     {
@@ -60,5 +60,15 @@
       "height": 1066,
       "alt": "Row of warehouses in an industrial estate"
     }
-  ]
+  ],
+  "hero_image": {
+    "base": "bg/business-owner-warehouse-office",
+    "variants": [
+      800,
+      1600
+    ],
+    "width": 1400,
+    "height": 787,
+    "alt": "Business owner at a laptop in a warehouse office"
+  }
 }
