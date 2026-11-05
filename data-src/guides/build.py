@@ -50,6 +50,128 @@ def chrome():
     return gtm, body, fix(footer)
 
 
+HOME_START, HOME_END = "<!-- guides:home -->", "<!-- /guides:home -->"
+
+
+def patch_nav_and_footer():
+    """Idempotent: add a Guides link to the desktop nav, mobile nav and footer Company column on every page."""
+    n = 0
+    for f in list(PUBLIC.glob("*.html")) + list(PUBLIC.glob("tools/*.html")) + list(PUBLIC.glob("guides/*.html")):
+        depth = len(f.relative_to(PUBLIC).parts) - 1
+        pre = "../" * depth
+        s = f.read_text()
+        if f'href="{pre}guides/index.html">Guides</a>' in s:
+            continue
+        if f'{pre}tools/commercial-loan-calculator.html' not in s:
+            continue
+        guides = f'<a href="{pre}guides/index.html">Guides</a>'
+        def add_after_tools(block):
+            pat = r'^([ \t]*)(<a href="' + re.escape(pre) + r'tools/commercial-loan-calculator\.html"[^>]*>Tools</a>)[ \t]*$'
+            return re.sub(pat, lambda mm: mm.group(1) + mm.group(2) + "\n" + mm.group(1) + guides, block, count=1, flags=re.M)
+        for nav_class in ("site-nav", "mobile-nav"):
+            m = re.search(rf'<nav class="{nav_class}".*?</nav>', s, flags=re.S)
+            if m:
+                s = s[:m.start()] + add_after_tools(m.group(0)) + s[m.end():]
+        s = s.replace(f'        <a href="{pre}deal-notes.html">Deal notes</a>\n', f'        {guides}\n        <a href="{pre}deal-notes.html">Deal notes</a>\n', 1)
+        f.write_text(s)
+        n += 1
+    return n
+
+
+def build_index(guides):
+    gtm, body, footer = chrome()
+    cards = "".join(
+        f'<article class="card stack"><p class="label">Guide · updated {esc(g["updated_human"])}</p>'
+        f'<h2 class="h3" style="margin:0;"><a href="{g["slug"]}.html">{esc(g["title"])}</a></h2>'
+        f'<p class="body-sm">{esc(g["description"])}</p></article>'
+        for g in sorted(guides, key=lambda g: g["updated"], reverse=True))
+    data_cards = (
+        '<article class="card stack"><p class="label">Quarterly data</p>'
+        '<h2 class="h3" style="margin:0;"><a href="../commercial-lending-conditions.html">Australian commercial lending conditions</a></h2>'
+        '<p class="body-sm">Business lending rates by business size, credit growth and bank commercial property exposures, from RBA and APRA data. CSV included, free to cite.</p></article>'
+        '<article class="card stack"><p class="label">Deal notes</p>'
+        '<h2 class="h3" style="margin:0;"><a href="../deal-notes.html">Deals we arrange, with the numbers</a></h2>'
+        '<p class="body-sm">Anonymised deal structures: loan size, LVR, lender tier and days to settle.</p></article>')
+    collection = {"@context": "https://schema.org", "@type": "CollectionPage", "name": "Guides and data", "url": f"{SITE}/guides/",
+                  "description": "Plain-English guides to commercial property and business finance in Australia, plus Lambton Capital's quarterly lending data.",
+                  "publisher": {"@type": "Organization", "@id": f"{SITE}/#org", "name": "Lambton Capital Pty Ltd"},
+                  "hasPart": [{"@type": "Article", "headline": g["title"], "url": f"{SITE}/guides/{g['slug']}.html"} for g in guides]}
+    page = f"""<!doctype html>
+<html lang="en">
+<head>
+{gtm}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/favicon.ico?v=2" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=2" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#0F2A38">
+<title>Guides and data | Lambton Capital</title>
+<meta name="description" content="Plain-English guides to commercial property and business finance in Australia, with worked examples, plus our quarterly lending data and deal notes.">
+<link rel="canonical" href="{SITE}/guides/">
+<meta property="og:title" content="Guides and data | Lambton Capital">
+<meta property="og:description" content="Plain-English guides to commercial property and business finance in Australia, with worked examples, plus our quarterly lending data and deal notes.">
+<meta property="og:image" content="{SITE}/img/og-lambton-capital.jpg">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="/fonts/ibm-plex-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/ibm-plex-serif-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../css/site.css">
+<script type="application/ld+json">
+{json.dumps(collection, indent=1)}
+</script>
+</head>
+{body}
+
+<main id="main">
+  <section class="section-tight">
+    <div class="wrap stack">
+      <p class="eyebrow">Guides and data</p>
+      <h1 class="h1">How commercial finance works, with the numbers.</h1>
+      <p class="lead max-820">Plain-English guides to buying, refinancing and borrowing against commercial property and businesses in Australia. Each one has a worked example and says where its figures come from.</p>
+    </div>
+  </section>
+  <section>
+    <div class="wrap stack-lg">
+      <h2 class="h2">Guides</h2>
+      <div class="grid-3">{cards}</div>
+    </div>
+  </section>
+  <section class="section-alt">
+    <div class="wrap stack-lg">
+      <h2 class="h2">Data and deal notes</h2>
+      <div class="grid-3">{data_cards}</div>
+    </div>
+  </section>
+  <section>
+    <div class="wrap stack">
+      <p class="body-sm max-820">General information only, not credit advice. Got a deal in mind? <a href="../contact.html">Send an early enquiry</a> and we'll reply in writing within two business days.</p>
+    </div>
+  </section>
+</main>
+
+{footer}"""
+    (PUBLIC / "guides" / "index.html").write_text(page)
+
+
+def update_home(guides):
+    f = PUBLIC / "index.html"
+    s = f.read_text()
+    latest = sorted(guides, key=lambda g: g["updated"], reverse=True)[:3]
+    cards = "".join(
+        f'<article class="card stack"><p class="label">Guide</p><h3 class="h3" style="margin:0;"><a href="guides/{g["slug"]}.html">{esc(g["title"])}</a></h3>'
+        f'<p class="body-sm">{esc(g["description"])}</p></article>' for g in latest)
+    block = (f'{HOME_START}\n  <section id="guides">\n    <div class="wrap stack-lg">\n      <p class="eyebrow">Guides and data</p>\n'
+             f'      <h2 class="h2">How it works, with the numbers.</h2>\n      <p class="body ink-2">Plain-English guides with worked examples, and our quarterly lending data. <a href="guides/index.html">All guides and data</a>.</p>\n'
+             f'      <div class="grid-3">{cards}</div>\n    </div>\n  </section>\n  {HOME_END}')
+    if HOME_START in s:
+        s = re.sub(re.escape(HOME_START) + r".*?" + re.escape(HOME_END), block, s, flags=re.S)
+    else:
+        s = s.replace('  <section id="deal-notes">', block + '\n\n  <section id="deal-notes">', 1)
+    f.write_text(s)
+
+
 def guide_pages():
     out = []
     for d in sorted(SRC.iterdir()):
@@ -176,6 +298,13 @@ def update_service_pages(guides):
 
 def update_sitemap(guides):
     s = (PUBLIC / "sitemap.xml").read_text()
+    idx = f"{SITE}/guides/"
+    newest = max(g["updated"] for g in guides)
+    entry = f"  <url><loc>{idx}</loc><lastmod>{newest}</lastmod></url>\n"
+    if idx + "</loc>" in s:
+        s = re.sub(rf"  <url><loc>{re.escape(idx)}</loc><lastmod>[^<]*</lastmod></url>\n", entry, s)
+    else:
+        s = s.replace("</urlset>", entry + "</urlset>")
     for g in guides:
         loc = f"{SITE}/guides/{g['slug']}.html"
         entry = f"  <url><loc>{loc}</loc><lastmod>{g['updated']}</lastmod></url>\n"
@@ -204,5 +333,8 @@ if __name__ == "__main__":
     for g in gs:
         print("built", build_page(g))
     print("service pages updated:", update_service_pages(gs))
+    build_index(gs)
+    update_home(gs)
+    print("nav/footer patched on", patch_nav_and_footer(), "pages")
     update_sitemap(gs)
     update_llms(gs)
