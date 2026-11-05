@@ -43,7 +43,7 @@
     ],
     "width": 1400,
     "height": 787,
-    "alt": "Business owner at a laptop in a warehouse office, working out what the business can borrow"
+    "alt": "Modern commercial building at sunset, the kind of property this guide works through"
   },
   "photo_sections": [
     {
@@ -62,13 +62,13 @@
     }
   ],
   "hero_image": {
-    "base": "bg/business-owner-warehouse-office",
+    "base": "bg/modern-commercial-office-building",
     "variants": [
       800,
       1600
     ],
-    "width": 1400,
-    "height": 787,
-    "alt": "Business owner at a laptop in a warehouse office"
+    "width": 1600,
+    "height": 1242,
+    "alt": "Modern commercial building at sunset, the kind of property this guide works through"
   }
 }
