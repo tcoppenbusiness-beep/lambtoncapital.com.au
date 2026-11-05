@@ -17,6 +17,18 @@ PUBLIC = ROOT / "public"
 SRC = Path(__file__).resolve().parent
 SITE = "https://lambtoncapital.com.au"
 BLOCK_START, BLOCK_END = "<!-- guides:related -->", "<!-- /guides:related -->"
+PREF_SOURCE = """<section class="pref-source" aria-label="Follow Lambton Capital on Google">
+  <div class="wrap pref-source-inner">
+    <div class="pref-source-copy">
+      <p class="pref-source-title">See Lambton Capital first in Google</p>
+      <p class="pref-source-text">Add us as a preferred source and our deal notes and guides are highlighted for you in Top Stories, AI Overviews and AI Mode.</p>
+    </div>
+    <div class="pref-source-btn" google-add-preferred-source-btn data-lang="en">
+      <a class="btn btn-secondary" href="https://www.google.com/preferences/source?q=lambtoncapital.com.au" target="_blank" rel="noopener">Add as a preferred source on Google</a>
+    </div>
+  </div>
+</section>
+"""
 
 
 def esc(s):
@@ -71,6 +83,8 @@ def build_page(m):
             for f in m["faq"])
         faq_html = f'<section><div class="wrap stack"><h2 class="h2">Frequently asked</h2><div class="stack" style="gap:0;">{items}</div></div></section>'
     updated_human = m["updated_human"]
+    rel = re.search(r'<section[^>]*><div class="wrap stack">\s*<h2 class="h2">Related</h2>', m["body"])
+    body_with_pref = (m["body"][:rel.start()] + PREF_SOURCE + "\n" + m["body"][rel.start():]) if rel else m["body"] + PREF_SOURCE
     page = f"""<!doctype html>
 <html lang="en">
 <head>
@@ -106,7 +120,7 @@ def build_page(m):
 {body}
 
 <main id="main">
-{m['body']}
+{body_with_pref}
 {faq_html}
 
   <section class="section-border-top" id="enquiry">
@@ -120,18 +134,6 @@ def build_page(m):
     </div>
   </section>
 </main>
-
-<section class="pref-source" aria-label="Follow Lambton Capital on Google">
-  <div class="wrap pref-source-inner">
-    <div class="pref-source-copy">
-      <p class="pref-source-title">See Lambton Capital first in Google</p>
-      <p class="pref-source-text">Add us as a preferred source and our deal notes and guides are highlighted for you in Top Stories, AI Overviews and AI Mode.</p>
-    </div>
-    <div class="pref-source-btn" google-add-preferred-source-btn data-lang="en">
-      <a class="btn btn-secondary" href="https://www.google.com/preferences/source?q=lambtoncapital.com.au" target="_blank" rel="noopener">Add as a preferred source on Google</a>
-    </div>
-  </div>
-</section>
 
   <section class="reviewed-section" aria-label="Page review">
     <div class="wrap">
