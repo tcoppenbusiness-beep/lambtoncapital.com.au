@@ -82,7 +82,7 @@ def build_page(m):
 <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
 <link rel="manifest" href="/site.webmanifest">
 <meta name="theme-color" content="#0F2A38">
-<title>{esc(m['title'])} — Lambton Capital</title>
+<title>{esc(m.get('seo_title', m['title']))}</title>
 <meta name="description" content="{esc(m['description'])}">
 <link rel="canonical" href="{url}">
 <meta property="og:title" content="{esc(m['title'])}">
