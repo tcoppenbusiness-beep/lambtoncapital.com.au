@@ -1,5 +1,5 @@
 /* ============================================================
-   Lambton Capital — enquiry form engine, LVR calculators,
+   Lambton Capital enquiry form engine, LVR calculators,
    header/nav and sticky-bar behaviour.
    Extracted and restyled from the working form prototype.
    ============================================================ */
@@ -92,7 +92,7 @@
       totalSteps: 5,
       steps: [
         { title: "The property", fields: [
-          tilesField("propertyType", "What type of property?", "LVR (loan-to-value ratio — the loan as a percentage of the property's value) and which lenders will lend vary a lot by property type.", ["Industrial / warehouse","Retail","Office","Medical, childcare or specialised","Mixed-use","Rural or other"]),
+          tilesField("propertyType", "What type of property?", "LVR (loan-to-value ratio, the loan as a percentage of the property's value) and which lenders will lend vary a lot by property type.", ["Industrial / warehouse","Retail","Office","Medical, childcare or specialised","Mixed-use","Rural or other"]),
           tilesField("occupancy", "Owner-occupied or investment?", "This changes both maximum LVR and which lenders will consider the deal.", ["Owner-occupied","Investment","Both"])
         ]},
         { title: "The numbers", fields: [
@@ -156,7 +156,7 @@
         ]},
         { title: "Security and tax position", fields: [
           tilesField("security", "Security available (an asset to back the loan)", "Loans secured against an asset are usually cheaper and faster to arrange.", ["Yes, commercial","Yes, residential","No"]),
-          tilesField("atoArrears", "Any overdue tax debt with the ATO (Australian Taxation Office)?", "This must be disclosed early — it doesn't rule you out, but it narrows the lenders who can help.", ["No","Yes, on a plan","Yes, not yet arranged","Prefer to discuss"])
+          tilesField("atoArrears", "Any overdue tax debt with the ATO (Australian Taxation Office)?", "This must be disclosed early. It doesn't rule you out, but it narrows the lenders who can help.", ["No","Yes, on a plan","Yes, not yet arranged","Prefer to discuss"])
         ]}
       ]
     },
@@ -204,7 +204,7 @@
     textField("email", "Email", "For your written summary and lender documents.", { required: true, placeholder: "name@example.com" }),
     textField("businessName", "Business name (optional)", "Only relevant if the finance is for a business or entity.", { required: false }),
     tilesField("bestTime", "Best time to call", "So we don't chase you at a bad time.", ["Morning","Midday","After 5pm"]),
-    textField("notes", "Anything we should know?", "Optional — anything unusual about the deal that helps us prep.", { required: false })
+    textField("notes", "Anything we should know?", "Optional: anything unusual about the deal that helps us prep.", { required: false })
   ];
 
   /* ---------- DOM helpers ---------- */
@@ -711,7 +711,7 @@
         var rent = rentInp ? parseMoney(rentInp.value) : 0;
         var annualInterest = lend * ASSUMED_RATE;
         var icr = annualInterest > 0 ? (rent / annualInterest) : 0;
-        icrOut.textContent = icr > 0 ? (Math.round(icr * 10) / 10).toFixed(1) + "x" : "—";
+        icrOut.textContent = icr > 0 ? (Math.round(icr * 10) / 10).toFixed(1) + "x" : "–";
       }
     }
     typeSel.addEventListener("change", recalc);
@@ -783,8 +783,8 @@
       lendOut.textContent = fmtMoney(loan);
       if (limitOut) limitOut.textContent = limitedBy;
       depositOut.textContent = fmtMoney(deposit);
-      if (payOut) payOut.textContent = payment === null ? "\u2014" : fmtMoney(payment) + " / month";
-      if (icrOut) icrOut.textContent = icr === null ? "\u2014" : icr.toFixed(2) + "\u00d7";
+      if (payOut) payOut.textContent = payment === null ? "\u2013" : fmtMoney(payment) + " / month";
+      if (icrOut) icrOut.textContent = icr === null ? "\u2013" : icr.toFixed(2) + "\u00d7";
       if (rateHint) rateHint.hidden = hasRate;
 
       /* Facility expiry */
@@ -802,7 +802,7 @@
         if (days < 0){ expiryMsg = "Expired"; if (daysOut) daysOut.textContent = "Expired"; }
         else {
           if (daysOut) daysOut.textContent = days + (days === 1 ? " day" : " days");
-          expiryMsg = startBy <= today ? "Under 6 months \u2014 start now" : "On track \u2014 start by " + fmtDate(startBy);
+          expiryMsg = startBy <= today ? "Under 6 months: start now" : "On track. Start by " + fmtDate(startBy);
         }
         if (expStatus){
           expStatus.textContent = expiryMsg;
