@@ -80,18 +80,14 @@ def patch_nav_and_footer():
 
 def build_index(guides):
     gtm, body, footer = chrome()
-    cards = "".join(
-        f'<article class="card stack"><p class="label">Guide · updated {esc(g["updated_human"])}</p>'
-        f'<h2 class="h3" style="margin:0;"><a href="{g["slug"]}.html">{esc(g["title"])}</a></h2>'
-        f'<p class="body-sm">{esc(g["description"])}</p></article>'
-        for g in sorted(guides, key=lambda g: g["updated"], reverse=True))
+    cards = "".join(guide_card(g, "../", "h2") for g in sorted(guides, key=lambda g: g["updated"], reverse=True))
     data_cards = (
-        '<article class="card stack"><p class="label">Quarterly data</p>'
+        '<article class="card card-flush"><img loading="lazy" decoding="async" width="1400" height="788" class="card-img" src="../img/home2.webp" srcset="../img/home2-480.webp 480w, ../img/home2-800.webp 800w, ../img/home2.webp 1400w" sizes="(min-width:901px) 400px, 100vw" alt="Industrial unit exterior"><div class="card-img-body"><p class="label">Quarterly data</p>'
         '<h2 class="h3" style="margin:0;"><a href="../commercial-lending-conditions.html">Australian commercial lending conditions</a></h2>'
-        '<p class="body-sm">Business lending rates by business size, credit growth and bank commercial property exposures, from RBA and APRA data. CSV included, free to cite.</p></article>'
-        '<article class="card stack"><p class="label">Deal notes</p>'
+        '<p class="body-sm">Business lending rates by business size, credit growth and bank commercial property exposures, from RBA and APRA data. CSV included, free to cite.</p></div></article>'
+        '<article class="card card-flush"><img loading="lazy" decoding="async" width="800" height="1000" class="card-img" src="../img/cp-brick-commercial-building.webp" srcset="../img/cp-brick-commercial-building-480.webp 480w, ../img/cp-brick-commercial-building.webp 800w" sizes="(min-width:901px) 400px, 100vw" alt="Brick commercial building"><div class="card-img-body"><p class="label">Deal notes</p>'
         '<h2 class="h3" style="margin:0;"><a href="../deal-notes.html">Deals we arrange, with the numbers</a></h2>'
-        '<p class="body-sm">Anonymised deal structures: loan size, LVR, lender tier and days to settle.</p></article>')
+        '<p class="body-sm">Anonymised deal structures: loan size, LVR, lender tier and days to settle.</p></div></article>')
     collection = {"@context": "https://schema.org", "@type": "CollectionPage", "name": "Guides and data", "url": f"{SITE}/guides/",
                   "description": "Plain-English guides to commercial property and business finance in Australia, plus Lambton Capital's quarterly lending data.",
                   "publisher": {"@type": "Organization", "@id": f"{SITE}/#org", "name": "Lambton Capital Pty Ltd"},
@@ -159,9 +155,7 @@ def update_home(guides):
     f = PUBLIC / "index.html"
     s = f.read_text()
     latest = sorted(guides, key=lambda g: g["updated"], reverse=True)[:3]
-    cards = "".join(
-        f'<article class="card stack"><p class="label">Guide</p><h3 class="h3" style="margin:0;"><a href="guides/{g["slug"]}.html">{esc(g["title"])}</a></h3>'
-        f'<p class="body-sm">{esc(g["description"])}</p></article>' for g in latest)
+    cards = "".join(guide_card(g, "", "h3") for g in latest)
     block = (f'{HOME_START}\n  <section id="guides">\n    <div class="wrap stack-lg">\n      <p class="eyebrow">Guides and data</p>\n'
              f'      <h2 class="h2">How it works, with the numbers.</h2>\n      <p class="body ink-2">Plain-English guides with worked examples, and our quarterly lending data. <a href="guides/index.html">All guides and data</a>.</p>\n'
              f'      <div class="grid-3">{cards}</div>\n    </div>\n  </section>\n  {HOME_END}')
@@ -192,6 +186,7 @@ def build_page(m):
         "author": {"@type": "Person", "@id": f"{SITE}/#founder", "name": "Thomas Coppen", "url": f"{SITE}/about.html"},
         "publisher": {"@type": "Organization", "@id": f"{SITE}/#org", "name": "Lambton Capital Pty Ltd", "url": f"{SITE}/"},
         "isPartOf": {"@type": "WebSite", "url": f"{SITE}/"}, "keywords": m.get("keywords", []),
+        "image": f"{SITE}/img/{m['card_image']['base']}.webp" if m.get("card_image") else f"{SITE}/img/og-lambton-capital.jpg",
         "about": "Commercial property finance in Australia",
     }
     breadcrumb = {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
@@ -205,6 +200,7 @@ def build_page(m):
             for f in m["faq"])
         faq_html = f'<section><div class="wrap stack"><h2 class="h2">Frequently asked</h2><div class="stack" style="gap:0;">{items}</div></div></section>'
     updated_human = m["updated_human"]
+    m["body"] = photo_sections(m["body"], m)
     rel = re.search(r'<section[^>]*><div class="wrap stack">\s*<h2 class="h2">Related</h2>', m["body"])
     body_with_pref = (m["body"][:rel.start()] + PREF_SOURCE + "\n" + m["body"][rel.start():]) if rel else m["body"] + PREF_SOURCE
     page = f"""<!doctype html>
@@ -223,9 +219,7 @@ def build_page(m):
 <link rel="canonical" href="{url}">
 <meta property="og:title" content="{esc(m['title'])}">
 <meta property="og:description" content="{esc(m['description'])}">
-<meta property="og:image" content="{SITE}/img/og-lambton-capital.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
+<meta property="og:image" content="{SITE}/img/{m['card_image']['base'] + '.webp' if m.get('card_image') else 'og-lambton-capital.jpg'}">
 <meta property="og:type" content="article">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preload" href="/fonts/ibm-plex-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
@@ -267,6 +261,37 @@ def build_page(m):
     (PUBLIC / "guides").mkdir(exist_ok=True)
     (PUBLIC / "guides" / f"{m['slug']}.html").write_text(page)
     return url
+
+
+def card_img(g, prefix):
+    im = g.get("card_image")
+    if not im:
+        return ""
+    base, alt, w, h = im["base"], im["alt"], im.get("width", 1400), im.get("height", 788)
+    srcset = ", ".join(f'{prefix}img/{base}-{x}.webp {x}w' for x in im.get("variants", [])) + (", " if im.get("variants") else "") + f"{prefix}img/{base}.webp {w}w"
+    return (f'<img loading="lazy" decoding="async" width="{w}" height="{h}" class="card-img" src="{prefix}img/{base}.webp" '
+            f'srcset="{srcset}" sizes="(min-width:901px) 400px, 100vw" alt="{esc(alt)}">')
+
+
+def guide_card(g, prefix, heading_tag="h2"):
+    return (f'<article class="card card-flush">{card_img(g, prefix)}<div class="card-img-body">'
+            f'<p class="label">Guide · updated {esc(g["updated_human"])}</p>'
+            f'<{heading_tag} class="h3" style="margin:0;"><a href="{prefix}guides/{g["slug"]}.html">{esc(g["title"])}</a></{heading_tag}>'
+            f'<p class="body-sm">{esc(g["description"])}</p></div></article>')
+
+
+def photo_sections(body, g):
+    """Turn the sections named in meta photo_sections into photo-backed sections (site pattern)."""
+    for ps in g.get("photo_sections", []):
+        sid, im, alt = ps["id"], ps["image"], ps["alt"]
+        w, h = ps.get("width", 1600), ps.get("height", 1066)
+        pat = re.compile(rf'<section( class="[^"]*")? id="{sid}"><div class="wrap stack">')
+        img = (f'<section class="section-photo" id="{sid}">\n    <img src="../img/bg/{im}-1600.webp" srcset="../img/bg/{im}-800.webp 800w, ../img/bg/{im}-1600.webp 1600w" '
+               f'sizes="100vw" alt="{esc(alt)}" loading="lazy" decoding="async" width="{w}" height="{h}">\n    <div class="section-photo-tint" aria-hidden="true"></div>\n    <div class="wrap stack section-photo-inner">')
+        body, n = pat.subn(img, body, count=1)
+        if not n:
+            print("photo section not found:", sid)
+    return body
 
 
 def related_block(guides, for_page):
