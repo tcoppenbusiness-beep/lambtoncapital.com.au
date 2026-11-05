@@ -108,7 +108,30 @@ def build_page(m):
 <main id="main">
 {m['body']}
 {faq_html}
+
+  <section class="section-border-top" id="enquiry">
+    <div class="wrap form-panel">
+      <p class="prelaunch-note"><strong>Now taking early enquiries.</strong> Deal assessments open once our lender panel is confirmed. Early enquiries are contacted first. Written reply within two business days, no obligation, and we don't pass your details to anyone without asking you.</p>
+      <form id="enquiryForm" novalidate>
+        <div id="formSteps"></div>
+        <label class="honeypot" aria-hidden="true">Leave this field empty <input type="text" name="botcheck" id="botcheck" tabindex="-1" autocomplete="off"></label>
+      </form>
+      <div id="thankyou" class="thankyou" style="display:none;"></div>
+    </div>
+  </section>
 </main>
+
+<section class="pref-source" aria-label="Follow Lambton Capital on Google">
+  <div class="wrap pref-source-inner">
+    <div class="pref-source-copy">
+      <p class="pref-source-title">See Lambton Capital first in Google</p>
+      <p class="pref-source-text">Add us as a preferred source and our deal notes and guides are highlighted for you in Top Stories, AI Overviews and AI Mode.</p>
+    </div>
+    <div class="pref-source-btn" google-add-preferred-source-btn data-lang="en">
+      <a class="btn btn-secondary" href="https://www.google.com/preferences/source?q=lambtoncapital.com.au" target="_blank" rel="noopener">Add as a preferred source on Google</a>
+    </div>
+  </div>
+</section>
 
   <section class="reviewed-section" aria-label="Page review">
     <div class="wrap">
@@ -116,7 +139,7 @@ def build_page(m):
     </div>
   </section>
 
-{footer}"""
+{footer.replace('<script src="../js/form.js"></script>', '<div class="sticky-bar" id="stickyBar">\n  <a href="#enquiry" class="btn btn-primary btn-block" id="stickyCta">Get assessed</a>\n</div>\n\n<script src="../js/form.js"></script>')}"""
     (PUBLIC / "guides").mkdir(exist_ok=True)
     (PUBLIC / "guides" / f"{m['slug']}.html").write_text(page)
     return url
