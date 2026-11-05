@@ -1,0 +1,14 @@
+{
+  "title": "How much can I borrow against commercial property?",
+  "description": "How much you can borrow against commercial property in Australia: LVR caps by property type, a worked serviceability example in dollars, deposit and costs, equity and SMSF.",
+  "published": "2026-11-05",
+  "updated": "2026-11-05",
+  "updated_human": "5 November 2026",
+  "keywords": ["commercial property loan", "LVR", "serviceability", "interest cover ratio", "commercial property deposit", "SMSF commercial property", "Australia"],
+  "related_from": ["commercial-property-finance.html", "warehouse-finance.html", "smsf-commercial-property-loans.html", "office-finance.html", "tools/commercial-loan-calculator.html"],
+  "faq": [
+    {"q": "What LVR can I get on commercial property?", "a": "Many lenders work to roughly 55% to 70% of valuation, depending on property type. Industrial sits at the top of that range and specialised assets such as pubs and service stations at the bottom."},
+    {"q": "Why might I borrow less than the LVR cap allows?", "a": "Serviceability can bind first. If net rent or business earnings do not cover the interest by a common margin such as 1.75 times, the loan is capped by income, not by the property's value."},
+    {"q": "Can I use my home as security for a commercial purchase?", "a": "Yes, using home equity is common, but it ties your home to the business loan and raises your effective LVR. Falls in house prices reduce the equity you can use."}
+  ]
+}
