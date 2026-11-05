@@ -45,7 +45,7 @@ def chrome():
 def fmt(m, key):
     v = m.get(key)
     if not v or v.get("value") in (None, ""):
-        return "—"
+        return "–"
     val = v["value"]
     if isinstance(val, (int, float)) and m.get("dp") is not None:
         val = f"{val:,.{m['dp']}f}"
@@ -126,7 +126,7 @@ def build_page(editions):
                        "url": "https://lambtoncapital.com.au/about.html"},
     }
 
-    title = f"Australian commercial lending conditions, {ed['edition']} — Lambton Capital"
+    title = f"Australian commercial lending conditions, {ed['edition']} | Lambton Capital"
     stats = "".join(
         f'<div class="stat-band-item"><p class="stat">{e(s["value"])}</p>'
         f'<p class="label">{e(s["label"])}</p></div>' for s in ed["headline_stats"])
@@ -218,7 +218,7 @@ def build_page(editions):
   <section>
     <div class="wrap stack">
       <h2 class="h2" id="data">The full data table</h2>
-      <p class="answer-first max-820">Every figure below comes from a public source, linked in the last column, with the period it refers to. Gaps (—) mean the source had not yet published that period.</p>
+      <p class="answer-first max-820">Every figure below comes from a public source, linked in the last column, with the period it refers to. Gaps (–) mean the source had not yet published that period.</p>
       <div class="stack lc-table">{''.join(groups)}</div>
       <p class="body max-820"><a class="btn btn-secondary" href="{CSV_ALL}" download>Download the data (CSV)</a></p>
     </div>
