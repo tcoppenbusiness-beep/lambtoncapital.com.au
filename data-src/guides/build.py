@@ -44,9 +44,9 @@ def chrome():
     body = body.replace('data-depth="0"', 'data-depth="1"')
     for part in ("body", "footer"):
         pass
-    fix = lambda h: re.sub(r'(href|src)="(?!https?:|/|#|mailto:|tel:|\.\./)([^"]+)"', r'\1="../\2"', h)
+    fix = lambda h: re.sub(r'(href|src)="(?!https?:|/|#|mailto:|tel:|\.\./)([^"]+)"', r'\1="../\2"', h).replace('=".././"', '="../"')
     # no enquiry form on guide pages: send the header CTA to the contact page
-    body = fix(body).replace('href="#enquiry"', 'href="../contact.html"')
+    body = fix(body).replace('href="#enquiry"', 'href="../contact"')
     return gtm, body, fix(footer)
 
 
@@ -60,19 +60,19 @@ def patch_nav_and_footer():
         depth = len(f.relative_to(PUBLIC).parts) - 1
         pre = "../" * depth
         s = f.read_text()
-        if f'href="{pre}guides/index.html">Guides</a>' in s:
+        if f'href="{pre}guides/">Guides</a>' in s:
             continue
-        if f'{pre}tools/commercial-loan-calculator.html' not in s:
+        if f'{pre}tools/commercial-loan-calculator' not in s:
             continue
-        guides = f'<a href="{pre}guides/index.html">Guides</a>'
+        guides = f'<a href="{pre}guides/">Guides</a>'
         def add_after_tools(block):
-            pat = r'^([ \t]*)(<a href="' + re.escape(pre) + r'tools/commercial-loan-calculator\.html"[^>]*>Tools</a>)[ \t]*$'
+            pat = r'^([ \t]*)(<a href="' + re.escape(pre) + r'tools/commercial-loan-calculator"[^>]*>Tools</a>)[ \t]*$'
             return re.sub(pat, lambda mm: mm.group(1) + mm.group(2) + "\n" + mm.group(1) + guides, block, count=1, flags=re.M)
         for nav_class in ("site-nav", "mobile-nav"):
             m = re.search(rf'<nav class="{nav_class}".*?</nav>', s, flags=re.S)
             if m:
                 s = s[:m.start()] + add_after_tools(m.group(0)) + s[m.end():]
-        s = s.replace(f'        <a href="{pre}deal-notes.html">Deal notes</a>\n', f'        {guides}\n        <a href="{pre}deal-notes.html">Deal notes</a>\n', 1)
+        s = s.replace(f'        <a href="{pre}deal-notes">Deal notes</a>\n', f'        {guides}\n        <a href="{pre}deal-notes">Deal notes</a>\n', 1)
         f.write_text(s)
         n += 1
     return n
@@ -83,15 +83,15 @@ def build_index(guides):
     cards = "".join(guide_card(g, "../", "h2") for g in sorted(guides, key=lambda g: g["updated"], reverse=True))
     data_cards = (
         '<article class="card card-flush"><img loading="lazy" decoding="async" width="1400" height="788" class="card-img" src="../img/home2.webp" srcset="../img/home2-480.webp 480w, ../img/home2-800.webp 800w, ../img/home2.webp 1400w" sizes="(min-width:901px) 400px, 100vw" alt="Industrial unit exterior"><div class="card-img-body"><p class="label">Quarterly data</p>'
-        '<h2 class="h3" style="margin:0;"><a href="../commercial-lending-conditions.html">Australian commercial lending conditions</a></h2>'
+        '<h2 class="h3" style="margin:0;"><a href="../commercial-lending-conditions">Australian commercial lending conditions</a></h2>'
         '<p class="body-sm">Business lending rates by business size, credit growth and bank commercial property exposures, from RBA and APRA data. CSV included, free to cite.</p></div></article>'
         '<article class="card card-flush"><img loading="lazy" decoding="async" width="800" height="1000" class="card-img" src="../img/cp-brick-commercial-building.webp" srcset="../img/cp-brick-commercial-building-480.webp 480w, ../img/cp-brick-commercial-building.webp 800w" sizes="(min-width:901px) 400px, 100vw" alt="Brick commercial building"><div class="card-img-body"><p class="label">Deal notes</p>'
-        '<h2 class="h3" style="margin:0;"><a href="../deal-notes.html">Deals we arrange, with the numbers</a></h2>'
+        '<h2 class="h3" style="margin:0;"><a href="../deal-notes">Deals we arrange, with the numbers</a></h2>'
         '<p class="body-sm">Anonymised deal structures: loan size, LVR, lender tier and days to settle.</p></div></article>')
     collection = {"@context": "https://schema.org", "@type": "CollectionPage", "name": "Guides and data", "url": f"{SITE}/guides/",
                   "description": "Plain-English guides to commercial property and business finance in Australia, plus Lambton Capital's quarterly lending data.",
                   "publisher": {"@type": "Organization", "@id": f"{SITE}/#org", "name": "Lambton Capital Pty Ltd"},
-                  "hasPart": [{"@type": "Article", "headline": g["title"], "url": f"{SITE}/guides/{g['slug']}.html"} for g in guides]}
+                  "hasPart": [{"@type": "Article", "headline": g["title"], "url": f"{SITE}/guides/{g['slug']}"} for g in guides]}
     page = f"""<!doctype html>
 <html lang="en">
 <head>
@@ -142,7 +142,7 @@ def build_index(guides):
   </section>
   <section>
     <div class="wrap stack">
-      <p class="body-sm max-820">General information only, not credit advice. Got a deal in mind? <a href="../contact.html">Send an early enquiry</a> and we'll reply in writing within two business days.</p>
+      <p class="body-sm max-820">General information only, not credit advice. Got a deal in mind? <a href="../contact">Send an early enquiry</a> and we'll reply in writing within two business days.</p>
     </div>
   </section>
 </main>
@@ -157,7 +157,7 @@ def update_home(guides):
     latest = sorted(guides, key=lambda g: g["updated"], reverse=True)[:3]
     cards = "".join(guide_card(g, "", "h3") for g in latest)
     block = (f'{HOME_START}\n  <section id="guides">\n    <div class="wrap stack-lg">\n      <p class="eyebrow">Read before you borrow</p>\n'
-             f'      <h2 class="h2">Commercial finance guides and lending data.</h2>\n      <p class="body ink-2">Plain-English guides with worked examples, and our quarterly lending data. <a href="guides/index.html">All guides and data</a>.</p>\n'
+             f'      <h2 class="h2">Commercial finance guides and lending data.</h2>\n      <p class="body ink-2">Plain-English guides with worked examples, and our quarterly lending data. <a href="guides/">All guides and data</a>.</p>\n'
              f'      <div class="grid-3">{cards}</div>\n    </div>\n  </section>\n  {HOME_END}')
     if HOME_START in s:
         s = re.sub(re.escape(HOME_START) + r".*?" + re.escape(HOME_END), block, s, flags=re.S)
@@ -179,11 +179,11 @@ def guide_pages():
 
 def build_page(m):
     gtm, body, footer = chrome()
-    url = f"{SITE}/guides/{m['slug']}.html"
+    url = f"{SITE}/guides/{m['slug']}"
     article = {
         "@context": "https://schema.org", "@type": "Article", "headline": m["title"], "description": m["description"],
         "url": url, "datePublished": m["published"], "dateModified": m["updated"], "inLanguage": "en-AU",
-        "author": {"@type": "Person", "@id": f"{SITE}/#founder", "name": "Thomas Coppen", "url": f"{SITE}/about.html"},
+        "author": {"@type": "Person", "@id": f"{SITE}/#founder", "name": "Thomas Coppen", "url": f"{SITE}/about"},
         "publisher": {"@type": "Organization", "@id": f"{SITE}/#org", "name": "Lambton Capital Pty Ltd", "url": f"{SITE}/"},
         "isPartOf": {"@type": "WebSite", "url": f"{SITE}/"}, "keywords": m.get("keywords", []),
         "image": f"{SITE}/img/{m['card_image']['base']}.webp" if m.get("card_image") else f"{SITE}/img/og-lambton-capital.jpg",
@@ -260,7 +260,7 @@ def build_page(m):
 
   <section class="reviewed-section" aria-label="Page review">
     <div class="wrap">
-      <p class="reviewed-by">Written by <a href="../about.html">Thomas Coppen</a>, Founder · Updated <time datetime="{m['updated']}">{esc(updated_human)}</time></p>
+      <p class="reviewed-by">Written by <a href="../about">Thomas Coppen</a>, Founder · Updated <time datetime="{m['updated']}">{esc(updated_human)}</time></p>
     </div>
   </section>
 
@@ -283,7 +283,7 @@ def card_img(g, prefix):
 def guide_card(g, prefix, heading_tag="h2"):
     return (f'<article class="card card-flush">{card_img(g, prefix)}<div class="card-img-body">'
             f'<p class="label">{esc(g.get("kind", "Guide"))} · updated {esc(g["updated_human"])}</p>'
-            f'<{heading_tag} class="h3" style="margin:0;"><a href="{prefix}guides/{g["slug"]}.html">{esc(g["title"])}</a></{heading_tag}>'
+            f'<{heading_tag} class="h3" style="margin:0;"><a href="{prefix}guides/{g["slug"]}">{esc(g["title"])}</a></{heading_tag}>'
             f'<p class="body-sm">{esc(g["description"])}</p></div></article>')
 
 
@@ -311,7 +311,7 @@ def related_block(guides, for_page):
     if not links:
         return None
     prefix = "../" * for_page.count("/")
-    items = "".join(f'<li><a href="{prefix}guides/{g["slug"]}.html">{esc(g["title"])}</a></li>' for g in links)
+    items = "".join(f'<li><a href="{prefix}guides/{g["slug"]}">{esc(g["title"])}</a></li>' for g in links)
     return (f'{BLOCK_START}\n  <section class="section-alt">\n    <div class="wrap stack">\n      <h2 class="h2">Guides</h2>\n'
             f'      <ul class="scan-list max-820">{items}</ul>\n    </div>\n  </section>\n  {BLOCK_END}')
 
@@ -343,7 +343,7 @@ def update_sitemap(guides):
     else:
         s = s.replace("</urlset>", entry + "</urlset>")
     for g in guides:
-        loc = f"{SITE}/guides/{g['slug']}.html"
+        loc = f"{SITE}/guides/{g['slug']}"
         entry = f"  <url><loc>{loc}</loc><lastmod>{g['updated']}</lastmod></url>\n"
         if loc in s:
             s = re.sub(rf"  <url><loc>{re.escape(loc)}</loc><lastmod>[^<]*</lastmod></url>\n", entry, s)
@@ -354,7 +354,7 @@ def update_sitemap(guides):
 
 def update_llms(guides):
     s = (PUBLIC / "llms.txt").read_text()
-    lines = "".join(f"- [{g['title']}]({SITE}/guides/{g['slug']}.html): {g['description']}\n" for g in guides)
+    lines = "".join(f"- [{g['title']}]({SITE}/guides/{g['slug']}): {g['description']}\n" for g in guides)
     section = f"## Guides\n{lines}\n"
     if "## Guides\n" in s:
         s = re.sub(r"## Guides\n.*?\n\n", section, s, flags=re.S)

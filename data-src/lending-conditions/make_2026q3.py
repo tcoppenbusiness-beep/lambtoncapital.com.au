@@ -180,7 +180,7 @@ edition = {
              f"Compared with a year earlier, construction lending was up {abs_y['construction']}% and property purchase lending up {abs_y['purchase_of_property']}%.",
              f"Small businesses took on ${bn(sbx['total_excl_refinancing']['Sep-26'])}b of new fixed term loans, {sb_tot_y}% more than a year earlier, but lending to buy non-residential buildings fell {abs(sb_nr_y)}%.",
          ],
-         "link": {"href": "guides/business-lending-september-quarter-2026.html", "text": "Read the September quarter 2026 note"}},
+         "link": {"href": "guides/business-lending-september-quarter-2026", "text": "Read the September quarter 2026 note"}},
     ],
     "method": ("Each quarter Lambton Capital collects the latest published figures from the Reserve Bank of Australia (RBA), the Australian Prudential Regulation Authority (APRA) and the Australian Bureau of Statistics (ABS), "
                "compares them with the previous quarter and a year earlier, and calculates the measures marked as Lambton Capital calculations. Rates are averages across all reporting lenders, "

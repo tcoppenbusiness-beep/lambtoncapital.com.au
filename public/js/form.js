@@ -628,7 +628,7 @@
     actions.appendChild(bookBtn);
     ty.appendChild(actions);
     }
-    ty.appendChild(el("p", { class: "body-sm", html: '<a href="' + relativeTo("thank-you.html") + '">See the confirmation page</a> · <a href="' + relativeTo("fees.html") + '">How our fees work</a>' }));
+    ty.appendChild(el("p", { class: "body-sm", html: '<a href="' + relativeTo("thank-you") + '">See the confirmation page</a> · <a href="' + relativeTo("fees") + '">How our fees work</a>' }));
 
   }
 
@@ -937,7 +937,7 @@
     var panel = document.querySelector("#enquiry .form-panel");
     if (!panel || panel.querySelector(".form-reassure")) return;
     var p = document.createElement("p"); p.className = "form-reassure";
-    var priv = relativeTo("privacy.html");
+    var priv = relativeTo("privacy");
     p.innerHTML = "<span>About 2 minutes</span><span>No obligation</span><span>No credit check at this stage</span><span><a href=\"" + priv + "\">How we handle your details</a></span>";
     panel.insertBefore(p, panel.firstChild);
   }

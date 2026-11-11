@@ -20,7 +20,7 @@ ROOT = Path(__file__).resolve().parents[2]
 PUBLIC = ROOT / "public"
 EDITIONS = Path(__file__).resolve().parent / "editions"
 PAGE = "commercial-lending-conditions.html"
-URL = f"https://lambtoncapital.com.au/{PAGE}"
+URL = "https://lambtoncapital.com.au/" + PAGE[:-len(".html")]
 CSV_ALL = "data/commercial-lending-conditions.csv"
 
 e = html.escape
@@ -123,7 +123,7 @@ def build_page(editions):
         "dateModified": ed.get("updated", ed["published"]),
         "reviewedBy": {"@type": "Person", "@id": "https://lambtoncapital.com.au/#founder",
                        "name": "Thomas Coppen", "jobTitle": "Founder",
-                       "url": "https://lambtoncapital.com.au/about.html"},
+                       "url": "https://lambtoncapital.com.au/about"},
     }
 
     title = f"Australian commercial lending conditions, {ed['edition']} | Lambton Capital"
@@ -237,7 +237,7 @@ def build_page(editions):
   <section>
     <div class="wrap stack">
       <h2 class="h2" id="cite">Can I use or quote this data?</h2>
-      <p class="answer-first max-820">Yes. The compiled table and Lambton Capital's calculations are free to use under CC BY 4.0. Please cite: Lambton Capital, "Australian commercial lending conditions, {e(ed['edition'])}", {e(pub_human)}, lambtoncapital.com.au/{PAGE}. Underlying series remain the property of their publishers.</p>
+      <p class="answer-first max-820">Yes. The compiled table and Lambton Capital's calculations are free to use under CC BY 4.0. Please cite: Lambton Capital, "Australian commercial lending conditions, {e(ed['edition'])}", {e(pub_human)}, lambtoncapital.com.au/{PAGE[:-5]}. Underlying series remain the property of their publishers.</p>
       <p class="body max-820">Media enquiries: <a href="mailto:thomas@lambtoncapital.com.au">thomas@lambtoncapital.com.au</a>. Next edition: {e(ed['next_update'])}.</p>
       <div class="card stack">
         <p class="label">Editions</p>
@@ -250,7 +250,7 @@ def build_page(editions):
 
   <section>
     <div class="wrap stack">
-      <p class="body-sm max-820">Looking at finance for a commercial property or business? See <a href="commercial-property-finance.html">commercial property finance</a>, <a href="business-finance.html">business finance</a>, or run the numbers with the <a href="tools/commercial-loan-calculator.html">commercial loan calculator</a>.</p>
+      <p class="body-sm max-820">Looking at finance for a commercial property or business? See <a href="commercial-property-finance">commercial property finance</a>, <a href="business-finance">business finance</a>, or run the numbers with the <a href="tools/commercial-loan-calculator">commercial loan calculator</a>.</p>
     </div>
   </section>
 
@@ -258,7 +258,7 @@ def build_page(editions):
 
   <section class="reviewed-section" aria-label="Page review">
     <div class="wrap">
-      <p class="reviewed-by">Compiled and reviewed by <a href="about.html">Thomas Coppen</a>, Founder · Updated <time datetime="{ed.get('updated', ed['published'])}">{e(ed.get('updated_human', pub_human))}</time></p>
+      <p class="reviewed-by">Compiled and reviewed by <a href="about">Thomas Coppen</a>, Founder · Updated <time datetime="{ed.get('updated', ed['published'])}">{e(ed.get('updated_human', pub_human))}</time></p>
     </div>
   </section>
 

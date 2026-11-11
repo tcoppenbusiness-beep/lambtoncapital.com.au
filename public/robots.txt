@@ -1,7 +1,7 @@
 # Search and user-triggered crawlers
 User-agent: *
 Disallow: /lp/
-Disallow: /thank-you.html
+Disallow: /thank-you
 
 # AI search and assistant crawlers : explicitly allowed
 User-agent: GPTBot
@@ -22,6 +22,6 @@ User-agent: Amazonbot
 User-agent: meta-externalagent
 Allow: /
 Disallow: /lp/
-Disallow: /thank-you.html
+Disallow: /thank-you
 
 Sitemap: https://lambtoncapital.com.au/sitemap.xml
