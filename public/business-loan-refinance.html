@@ -285,6 +285,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <section class="section-tight"><div class="wrap">
     <details class="payload-details"><summary>Jump to a section</summary>
     <nav aria-label="On this page"><ul class="scan-list" style="margin:8px 0 0;">
+      <li><a href="#refi-calc">Will refinancing save you money? Run your numbers.</a></li>
       <li><a href="#what-is">What is business loan refinancing?</a></li>
       <li><a href="#vs-property">How is it different from commercial property refinancing?</a></li>
       <li><a href="#when-it-pays">When does refinancing a business loan pay?</a></li>
@@ -325,30 +326,63 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </section>
 
-  <section class="tools-section" id="lvr-check">
+  <section class="tools-section" id="refi-calc">
     <div class="wrap stack-lg">
       <div class="tools-header">
         <span class="eyebrow">Free tool · no sign-up</span>
-        <h2 class="h2">Check how much your property could secure before you talk to anyone.</h2>
-        <p class="lead ink-2 tools-lead">If a property will secure the loan, check the numbers before you talk to anyone.</p>
+        <h2 class="h2">Will refinancing save you money? Run your numbers.</h2>
+        <p class="lead ink-2 tools-lead">These are estimates and general information, not a quote, because rates and fees vary by lender.</p>
       </div>
-      <div class="card tools-card tools-card--wide stack">
-        <svg class="tools-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path d="M8 34V12l12-6 12 6v22" stroke="var(--harbour-2)" stroke-width="2" stroke-linejoin="round"/>
-          <path d="M8 34h24" stroke="var(--harbour-2)" stroke-width="2" stroke-linecap="round"/>
-          <path d="M15 34v-8h10v8" stroke="var(--harbour-2)" stroke-width="2" stroke-linejoin="round"/>
-          <circle cx="16.5" cy="17.5" r="1.75" stroke="var(--harbour-2)" stroke-width="2"/>
-          <circle cx="23.5" cy="22.5" r="1.75" stroke="var(--harbour-2)" stroke-width="2"/>
-          <path d="M24 16l-8 8" stroke="var(--harbour-2)" stroke-width="2" stroke-linecap="round"/>
-        </svg>
-        <h3 class="h3">Commercial loan calculator</h3>
-        <p class="body-sm">Estimate repayments, the maximum you can borrow and the deposit needed for a commercial property, using LVR (loan-to-value ratio, the loan as a % of the property's value).</p>
-        <div class="tools-preview">
-          <p class="body-sm">Example: Industrial · $1.8m purchase → maximum loan $1,260,000 at 70%</p>
-          <p class="ink-2 tools-preview-fine">A guide only. The lender's rules on the day apply</p>
+      <div class="card tools-card tools-card--wide stack" data-refi-calc>
+        <div class="calc-card">
+          <div class="calc-inputs">
+            <div>
+              <label class="field-label" for="refi-balance">Current loan balance ($)</label>
+              <input id="refi-balance" type="number" step="1000" min="0" value="750000" inputmode="decimal" data-refi-balance>
+            </div>
+            <div>
+              <label class="field-label" for="refi-cur-rate">Current interest rate (% p.a.)</label>
+              <input id="refi-cur-rate" type="number" step="0.01" min="0" max="30" value="8.95" inputmode="decimal" data-refi-cur-rate>
+            </div>
+            <div>
+              <label class="field-label" for="refi-cur-years">Years left on current loan</label>
+              <input id="refi-cur-years" type="number" step="0.5" min="0.5" max="30" value="5" inputmode="decimal" data-refi-cur-years>
+            </div>
+            <div>
+              <label class="field-label" for="refi-new-rate">New interest rate (% p.a.)</label>
+              <input id="refi-new-rate" type="number" step="0.01" min="0" max="30" value="7.40" inputmode="decimal" data-refi-new-rate>
+            </div>
+            <div>
+              <label class="field-label" for="refi-new-years">New loan term (years)</label>
+              <input id="refi-new-years" type="number" step="0.5" min="0.5" max="30" value="5" inputmode="decimal" data-refi-new-years>
+            </div>
+            <div>
+              <label class="field-label" for="refi-switching">Switching costs ($)</label>
+              <input id="refi-switching" type="number" step="100" min="0" value="9560" inputmode="decimal" data-refi-switching aria-describedby="refi-switching-note">
+              <p class="calc-hint" id="refi-switching-note">Our itemised example totals $9,560. See the <a href="#costs">cost table</a>.</p>
+            </div>
+            <div>
+              <label class="field-label" for="refi-break">Break costs ($, fixed loans only)</label>
+              <input id="refi-break" type="number" step="100" min="0" value="0" inputmode="decimal" data-refi-break aria-describedby="refi-break-note">
+              <p class="calc-hint" id="refi-break-note">Leave at $0 for a variable loan. See <a href="#break-costs">how break costs work</a>.</p>
+            </div>
+          </div>
+          <div class="calc-result" aria-live="polite">
+            <div class="calc-result-row"><span class="field-label">Current monthly repayment</span><span class="h3" data-refi-cur-pmt>$15,551 / month</span></div>
+            <div class="calc-result-row"><span class="field-label">New monthly repayment</span><span class="h3" data-refi-new-pmt>$14,993 / month</span></div>
+            <div class="calc-result-row"><span class="field-label">Monthly difference</span><span class="h3" data-refi-diff>$558 less / month</span></div>
+            <div class="calc-result-row"><span class="field-label">Time to recover the costs</span><span class="h3" data-refi-recover>About 18 months</span></div>
+            <div class="calc-result-row"><span class="field-label">Interest left on current loan</span><span class="h3" data-refi-cur-int>$183,034</span></div>
+            <div class="calc-result-row"><span class="field-label">Interest on new loan</span><span class="h3" data-refi-new-int>$149,571</span></div>
+            <div class="calc-result-row"><span class="field-label">Net result after costs</span><span class="h3" data-refi-net>$23,904 better off</span></div>
+            <p class="body" data-refi-verdict>On these numbers refinancing pays: costs are recovered in about 18 months and you're about $23,900 better off over the loan.</p>
+            <p class="calc-hint">Single loan, principal and interest, monthly repayments. The new loan equals your current balance. The defaults are an illustration, not a quote or an offer.</p>
+          </div>
         </div>
-        <a href="tools/commercial-loan-calculator" class="btn btn-primary btn-block">Open the loan calculator</a>
+        <hr class="hr">
+        <div class="stack" style="gap:10px;"><p class="h3" style="margin:0;">Want a lender's real numbers on this?</p><p class="body-sm" style="margin:0;">Send us your facilities, balances and rates. We're taking early enquiries ahead of launch, and deal assessments open once our lender panel is confirmed. You'll get a written reply within two business days, with no obligation. General information until we've looked at your figures.</p><p style="margin:0;"><a href="#enquiry" class="btn btn-primary" data-cta="refi_calc">Request my deal assessment</a></p></div>
       </div>
+      <p class="body-sm">Refinancing against property? Check what it could secure with our <a href="tools/commercial-loan-calculator">LVR (loan-to-value ratio) check</a>.</p>
     </div>
   </section>
 
@@ -405,7 +439,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <li>Several facilities rolled into one.</li>
       <li>Business debt that's secured on your home.</li>
     </ul>
-    <p class="body max-820">A typical case is a Hunter manufacturer (illustrative) with a bank term loan, a truck on hire purchase and an overdraft, all with different lenders. Each has its own rate, fees and repayment date. The question is whether one facility would cost less and be simpler to run. The numbers are in the worked example below.</p>
+    <p class="body max-820">A typical case is a regional manufacturer (illustrative) with a bank term loan, a truck on hire purchase and an overdraft, all with different lenders. Each has its own rate, fees and repayment date. The question is whether one facility would cost less and be simpler to run. The numbers are in the worked example below.</p>
   </div></section>
 
   <section class="section-alt" id="vs-property"><div class="wrap stack">
@@ -430,7 +464,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <h2 class="h2">When does refinancing a business loan pay?</h2>
     <p class="answer-first">It pays when the yearly saving beats the one-off switching costs within the time you'll realistically keep the loan. A 0.61-point gap on $750,000 is about $4,575 a year, so $9,560 of costs takes just over two years to recover on rate alone.</p>
     <p class="body max-820">The gap comes from RBA (Reserve Bank of Australia) data, table F7. In August 2026, existing variable-rate small-business loans averaged 7.42%. New variable loans written that month averaged 6.81%. That's 0.61 percentage points, and on $750,000 it's about $4,575 a year in extra interest for staying put.</p>
-    <p class="body max-820">Those figures predate the rate rises of 30 September and 3 November 2026, and the cash rate is now 4.85%. Lenders set their own rates, so check what yours charges today. Our <a href="commercial-lending-conditions">quarterly lending conditions data</a> tracks the averages. Source: <a href="https://www.rba.gov.au/statistics/tables/#interest-rates" rel="noopener">RBA statistical table F7</a>, August 2026. The gap and the dollar figure are Lambton Capital calculations.</p>
+    <p class="body max-820">Those figures predate the rate rises of 30 September and 3 November 2026, and the cash rate is now 4.85%. Lenders set their own rates, so check what yours charges today, and run your own numbers in the <a href="#refi-calc">refinance calculator above</a>. Our <a href="commercial-lending-conditions">quarterly lending conditions data</a> tracks the averages. Source: <a href="https://www.rba.gov.au/statistics/tables/#interest-rates" rel="noopener">RBA statistical table F7</a>, August 2026. The gap and the dollar figure are Lambton Capital calculations.</p>
     <p class="body max-820">Refinancing tends to pay at these moments:</p>
     <ul class="scan-list max-820">
       <li>Your rate no longer reflects the risk. The business is stronger than when you borrowed, but you're still paying the old margin.</li>
@@ -459,7 +493,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   <section id="worked-example"><div class="wrap stack">
     <h2 class="h2">What does consolidating three facilities look like in dollars?</h2>
-    <p class="answer-first">A Hunter manufacturer paying $16,077 a month across three facilities could move to one $750,000 loan at an illustrative 7.40%. Over five years that's $14,993 a month, and about $36,500 less interest after $9,560 of costs. Stretch the term to seven years and the repayment falls further, but you pay about $63,600 more interest than on the five-year term.</p>
+    <p class="answer-first">A manufacturer paying $16,077 a month across three facilities could move to one $750,000 loan at an illustrative 7.40%. Over five years that's $14,993 a month, and about $36,500 less interest after $9,560 of costs. Stretch the term to seven years and the repayment falls further, but you pay about $63,600 more interest than on the five-year term.</p>
     <p class="body max-820">This is an illustration, not a client. Here's what the business owes today.</p>
     <div class="card card-flush table-scroll"><table><thead><tr><th>Existing facility</th><th>Balance</th><th>Rate</th><th>Time left</th><th>Monthly repayment</th></tr></thead><tbody>
       <tr><td>Term loan</td><td>$520,000</td><td>8.60%</td><td>5 years</td><td>$10,694</td></tr>

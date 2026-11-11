@@ -903,6 +903,110 @@
   }
 
   /* ============================================================
+     REFINANCE SAVINGS CALCULATOR ([data-refi-calc])
+     Single loan, principal and interest, monthly repayments.
+     General information only, not a quote.
+     ============================================================ */
+  /* REFI-MATH-START */
+  function refiClamp(v, lo, hi, fallback){
+    var n = parseFloat(v);
+    if (isNaN(n)) n = fallback;
+    return Math.min(hi, Math.max(lo, n));
+  }
+  function refiPmt(principal, ratePct, years){
+    var n = Math.round(years * 12), i = ratePct / 100 / 12;
+    if (principal <= 0 || n <= 0) return 0;
+    if (i === 0) return principal / n;
+    return principal * i / (1 - Math.pow(1 + i, -n));
+  }
+  function refiCompute(raw){
+    var bal = refiClamp(raw.balance, 0, 1e10, 0),
+        curRate = refiClamp(raw.curRate, 0, 30, 0), curYears = refiClamp(raw.curYears, 0.5, 30, 0.5),
+        newRate = refiClamp(raw.newRate, 0, 30, 0), newYears = refiClamp(raw.newYears, 0.5, 30, 0.5),
+        sw = refiClamp(raw.switching, 0, 1e10, 0), brk = refiClamp(raw.breakCosts, 0, 1e10, 0);
+    var curN = Math.round(curYears * 12), newN = Math.round(newYears * 12);
+    var curPmt = refiPmt(bal, curRate, curYears), newPmt = refiPmt(bal, newRate, newYears);
+    var curInt = Math.max(0, curPmt * curN - bal), newInt = Math.max(0, newPmt * newN - bal);
+    var costs = sw + brk, saving = curPmt - newPmt;
+    var recover = saving > 0.005 ? costs / saving : null;
+    var net = curInt - newInt - costs;
+    function about(n){ return fmtMoney(Math.round(n / 100) * 100); }
+    var verdict;
+    if (bal <= 0) verdict = "Enter your loan balance to see the numbers.";
+    else if (saving <= 0.005) {
+      verdict = net > 0
+        ? "Repayments would rise by about " + fmtMoney(-saving) + " a month, but you'd pay about " + about(net) + " less in total because the term is shorter."
+        : "On these numbers it doesn't pay to refinance.";
+    } else if (net <= 0) {
+      verdict = "Lower repayments, but you'd pay about " + about(-net) + " more in total " + (newN > curN ? "because the term is longer." : "because the costs outweigh the interest saved.");
+    } else if (recover > curN) {
+      verdict = "On these numbers it doesn't pay to refinance.";
+    } else if (costs <= 0) {
+      verdict = "On these numbers refinancing pays: there are no costs to recover and you're about " + about(net) + " better off over the loan.";
+    } else if (recover < 24) {
+      verdict = "On these numbers refinancing pays: costs are recovered in about " + Math.max(1, Math.ceil(recover)) + (Math.ceil(recover) <= 1 ? " month" : " months") + " and you're about " + about(net) + " better off over the loan.";
+    } else {
+      verdict = "Refinancing pays, but slowly: costs take about " + Math.ceil(recover) + " months to recover, and you'd be about " + about(net) + " better off over the loan.";
+    }
+    return { bal: bal, curN: curN, newN: newN, curPmt: curPmt, newPmt: newPmt, saving: saving,
+             costs: costs, recover: recover, curInt: curInt, newInt: newInt, net: net, verdict: verdict };
+  }
+  /* REFI-MATH-END */
+
+  function initRefiCalc(root){
+    if (!root) return;
+    function q(a){ return root.querySelector("[" + a + "]"); }
+    var inp = {
+      balance: q("data-refi-balance"), curRate: q("data-refi-cur-rate"), curYears: q("data-refi-cur-years"),
+      newRate: q("data-refi-new-rate"), newYears: q("data-refi-new-years"),
+      switching: q("data-refi-switching"), breakCosts: q("data-refi-break")
+    };
+    var out = {
+      curPmt: q("data-refi-cur-pmt"), newPmt: q("data-refi-new-pmt"), diff: q("data-refi-diff"),
+      recover: q("data-refi-recover"), curInt: q("data-refi-cur-int"), newInt: q("data-refi-new-int"),
+      net: q("data-refi-net"), verdict: q("data-refi-verdict")
+    };
+    for (var k in inp) if (!inp[k]) return;
+    for (var j in out) if (!out[j]) return;
+    var used = false;
+
+    function render(){
+      var raw = {};
+      for (var k in inp) raw[k] = inp[k].value;
+      var r = refiCompute(raw);
+      out.curPmt.textContent = fmtMoney(r.curPmt) + " / month";
+      out.newPmt.textContent = fmtMoney(r.newPmt) + " / month";
+      out.diff.textContent = Math.abs(r.saving) < 0.5 ? "No change"
+        : fmtMoney(Math.abs(r.saving)) + (r.saving > 0 ? " less / month" : " more / month");
+      if (r.bal <= 0) out.recover.textContent = "–";
+      else if (r.recover === null) out.recover.textContent = "Not recovered: repayments go up";
+      else if (r.costs <= 0) out.recover.textContent = "No costs to recover";
+      else out.recover.textContent = "About " + Math.max(1, Math.ceil(r.recover)) + (Math.ceil(r.recover) <= 1 ? " month" : " months");
+      out.curInt.textContent = fmtMoney(r.curInt);
+      out.newInt.textContent = fmtMoney(r.newInt);
+      out.net.textContent = Math.abs(r.net) < 0.5 ? "$0" : fmtMoney(Math.abs(r.net)) + (r.net > 0 ? " better off" : " worse off");
+      out.verdict.textContent = r.verdict;
+    }
+
+    function onInput(){
+      if (!used){ used = true; track("calc_use", { calc: "business_refinance", page_path: pagePath() }); }
+      render();
+    }
+    var limits = { balance: [0, 1e10], curRate: [0, 30], curYears: [0.5, 30], newRate: [0, 30], newYears: [0.5, 30], switching: [0, 1e10], breakCosts: [0, 1e10] };
+    Object.keys(inp).forEach(function(k){
+      inp[k].addEventListener("input", onInput);
+      /* Write the clamped value back once the person leaves the field, not while typing */
+      inp[k].addEventListener("change", function(){
+        if (inp[k].value === "") return;
+        var c = refiClamp(inp[k].value, limits[k][0], limits[k][1], limits[k][0]);
+        if (String(c) !== inp[k].value) inp[k].value = c;
+        render();
+      });
+    });
+    render();
+  }
+
+  /* ============================================================
      STICKY MOBILE BAR
      ============================================================ */
   function initStickyBar(){
@@ -1007,6 +1111,7 @@
     document.querySelectorAll("[data-lvr-extended]").forEach(initExtendedCalc);
     document.querySelectorAll("[data-lvr-gate]").forEach(function(g){ initEmailGate(g); });
     document.querySelectorAll("[data-loan-calc]").forEach(initLoanCalc);
+    document.querySelectorAll("[data-refi-calc]").forEach(initRefiCalc);
 
     /* Single pre-set tile used on the SMSF page sidebar */
     document.querySelectorAll("[data-select-branch]").forEach(function(btn){
