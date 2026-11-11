@@ -282,7 +282,7 @@ def card_img(g, prefix):
 
 def guide_card(g, prefix, heading_tag="h2"):
     return (f'<article class="card card-flush">{card_img(g, prefix)}<div class="card-img-body">'
-            f'<p class="label">Guide · updated {esc(g["updated_human"])}</p>'
+            f'<p class="label">{esc(g.get("kind", "Guide"))} · updated {esc(g["updated_human"])}</p>'
             f'<{heading_tag} class="h3" style="margin:0;"><a href="{prefix}guides/{g["slug"]}.html">{esc(g["title"])}</a></{heading_tag}>'
             f'<p class="body-sm">{esc(g["description"])}</p></div></article>')
 

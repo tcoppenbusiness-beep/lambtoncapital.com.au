@@ -1,0 +1,47 @@
+{
+  "kind": "Event note",
+  "title": "Business lending, September quarter 2026: construction up, property purchases down",
+  "description": "ABS Lending Indicators for the September quarter 2026: business construction lending up 27.6%, property purchase lending down 6.4%, and what changed for small businesses.",
+  "seo_title": "Business lending September quarter 2026: ABS figures | Lambton Capital",
+  "published": "2026-11-11",
+  "updated": "2026-11-11",
+  "updated_human": "11 November 2026",
+  "keywords": [
+    "ABS lending indicators",
+    "business lending",
+    "commercial property lending",
+    "construction finance",
+    "small business lending",
+    "September quarter 2026",
+    "Australia"
+  ],
+  "related_from": [
+    "commercial-lending-conditions.html",
+    "construction-finance.html",
+    "refinance-facility-expiry.html"
+  ],
+  "faq": [
+    {
+      "q": "How much did business construction lending rise in the September quarter 2026?",
+      "a": "New business loan commitments for construction rose 27.6% on the June quarter to $17.2b, and 51.8% on the September quarter 2025, seasonally adjusted (ABS Lending Indicators)."
+    },
+    {
+      "q": "Did lending to buy commercial property fall?",
+      "a": "Business lending to purchase property fell 6.4% on the June quarter to $25.4b, seasonally adjusted, but was 1.5% higher than a year earlier."
+    }
+  ],
+  "card_image": {
+    "base": "construction-commercial",
+    "variants": [800],
+    "width": 2000,
+    "height": 1556,
+    "alt": "Commercial building under construction"
+  },
+  "hero_image": {
+    "base": "bg/commercial-building-under-construction-night",
+    "variants": [800, 1600],
+    "width": 1600,
+    "height": 1245,
+    "alt": "Commercial building under construction at night"
+  }
+}
