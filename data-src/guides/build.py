@@ -156,8 +156,8 @@ def update_home(guides):
     s = f.read_text()
     latest = sorted(guides, key=lambda g: g["updated"], reverse=True)[:3]
     cards = "".join(guide_card(g, "", "h3") for g in latest)
-    block = (f'{HOME_START}\n  <section id="guides">\n    <div class="wrap stack-lg">\n      <p class="eyebrow">Guides and data</p>\n'
-             f'      <h2 class="h2">How it works, with the numbers.</h2>\n      <p class="body ink-2">Plain-English guides with worked examples, and our quarterly lending data. <a href="guides/index.html">All guides and data</a>.</p>\n'
+    block = (f'{HOME_START}\n  <section id="guides">\n    <div class="wrap stack-lg">\n      <p class="eyebrow">Read before you borrow</p>\n'
+             f'      <h2 class="h2">Commercial finance guides and lending data.</h2>\n      <p class="body ink-2">Plain-English guides with worked examples, and our quarterly lending data. <a href="guides/index.html">All guides and data</a>.</p>\n'
              f'      <div class="grid-3">{cards}</div>\n    </div>\n  </section>\n  {HOME_END}')
     if HOME_START in s:
         s = re.sub(re.escape(HOME_START) + r".*?" + re.escape(HOME_END), block, s, flags=re.S)
