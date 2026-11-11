@@ -101,21 +101,48 @@ metrics = [
 # Year-earlier cash rate period label: rate was 3.60% from 13 Aug 2025 until 4 Feb 2026
 metrics[0]["year_ago"] = v(3.60, "Nov 2025")
 
+
+# ABS Lending Indicators, September quarter 2026 (released 11 Nov 2026), read from the primary tables
+abs_x = json.loads((HERE.parent / "event-notes/abs-lending-2026q3/extract.json").read_text())
+ab = abs_x["business_sa_table29_560129"]; sbx = abs_x["small_business_original_table30_560130"]
+ABS_URL = "https://www.abs.gov.au/statistics/economy/finance/lending-indicators/sep-quarter-2026"
+def bn(x): return round(x / 1000, 1)
+def pc(a, b): return round((b / a - 1) * 100, 1)
+def abs_metric(metric, unit_note, d, series):
+    return {"group": "Business lending commitments (ABS)", "metric": metric, "unit": f"$ billion, {unit_note}",
+            "unit_prefix": "$", "unit_suffix": "bn", "dp": 1,
+            "latest": v(bn(d["Sep-26"]), "Sep qtr 2026"),
+            "prev": v(bn(d["Jun-26"]), "Jun qtr 2026") if "Jun-26" in d else v("", ""),
+            "year_ago": v(bn(d["Sep-25"]), "Sep qtr 2025"),
+            "series": series, "source_name": "ABS Lending Indicators", "source_url": ABS_URL}
+metrics += [
+    abs_metric("New business loans for construction", "seasonally adjusted", ab["construction"], "Table 29"),
+    abs_metric("of which non-residential buildings", "seasonally adjusted", ab["construction_non_residential_buildings"], "Table 29"),
+    abs_metric("New business loans to purchase property", "seasonally adjusted", ab["purchase_of_property"], "Table 29"),
+    abs_metric("Small business new fixed term loans, excluding refinancing", "original (compare with a year earlier)", sbx["total_excl_refinancing"], "Table 30"),
+    abs_metric("Small business loans to buy non-residential buildings", "original (compare with a year earlier)", sbx["purchase_non_residential_buildings"], "Table 30"),
+]
+abs_c = {k: pc(ab[k]["Jun-26"], ab[k]["Sep-26"]) for k in ab if isinstance(ab[k], dict)}
+abs_y = {k: pc(ab[k]["Sep-25"], ab[k]["Sep-26"]) for k in ab if isinstance(ab[k], dict)}
+sb_tot_y = pc(sbx["total_excl_refinancing"]["Sep-25"], sbx["total_excl_refinancing"]["Sep-26"])
+sb_nr_y = pc(sbx["purchase_non_residential_buildings"]["Sep-25"], sbx["purchase_non_residential_buildings"]["Sep-26"])
+
 edition = {
     "edition": "Q3 2026", "slug": "2026q3", "published": "2026-11-03", "published_human": "3 November 2026",
+    "updated": "2026-11-11", "updated_human": "11 November 2026",
     "temporal_coverage": "2025-08/2026-11",
     "next_update": "late February 2027 (Q4 2026 edition)",
     "meta_description": (f"Small businesses paid {prem['aug26']} percentage points more than large businesses on variable loans in August 2026, "
-                         f"while lending to large business grew {lb_g['aug26']}% vs {sb_g['aug26']}% for small. Quarterly data from RBA and APRA, with CSV."),
+                         f"while lending to large business grew {lb_g['aug26']}% vs {sb_g['aug26']}% for small. Quarterly data from RBA, APRA and ABS, with CSV."),
     "lead": (f"Small businesses are paying {prem['aug26']} percentage points more than large businesses to borrow, while their share of business lending has slipped. "
-             f"With the cash rate now at {cr['after_3_nov_2026']}% after the fifth rise this year, here is where commercial and business lending stands, from the latest RBA and APRA data."),
+             f"With the cash rate now at {cr['after_3_nov_2026']}% after the fifth rise this year, here is where commercial and business lending stands, from the latest RBA, APRA and ABS data."),
     "headline_stats": [
         {"value": f"{cr['after_3_nov_2026']}%", "label": "RBA cash rate after the 3 Nov 2026 rise"},
         {"value": f"{prem['aug26']} pts", "label": "Extra a small business pays vs a large business, variable loans (Aug 2026)"},
         {"value": f"{sb_g['aug26']}%", "label": f"Growth in small-business lending, year to Aug 2026 (large business: {lb_g['aug26']}%)"},
         {"value": f"${ap['exposures_bn']['jun26']}bn", "label": f"Bank commercial property exposures, Jun 2026 (+{cp_yy}% on a year earlier)"},
     ],
-    "stats_caption": "Sources: RBA statistical tables F7, D1, D14 and media release 2026-30; APRA quarterly ADI statistics. Calculations by Lambton Capital.",
+    "stats_caption": "Sources: RBA statistical tables F7, D1, D14 and media release 2026-30; APRA quarterly ADI statistics; ABS Lending Indicators. Calculations by Lambton Capital.",
     "analysis": [
         {"question": "What are small businesses paying to borrow?",
          "answer": (f"The average rate on existing variable-rate small business loans was {f7['FLRBFOSBV']['aug26']}% in August 2026, "
@@ -146,13 +173,21 @@ edition = {
              f"Approved limits were ${ap['limits_bn']['jun26']}bn, leaving about ${headroom}bn approved but not yet drawn.",
              "APRA publishes the September quarter figures in December 2026; they will be added to the next edition.",
          ]},
+        {"question": "What did lenders commit to business borrowers in the September quarter?",
+         "answer": (f"New business loans for construction rose {abs_c['construction']}% on the June quarter to ${bn(ab['construction']['Sep-26'])}b, "
+                    f"while lending to buy property fell {abs(abs_c['purchase_of_property'])}% to ${bn(ab['purchase_of_property']['Sep-26'])}b (ABS, seasonally adjusted)."),
+         "points": [
+             f"Compared with a year earlier, construction lending was up {abs_y['construction']}% and property purchase lending up {abs_y['purchase_of_property']}%.",
+             f"Small businesses took on ${bn(sbx['total_excl_refinancing']['Sep-26'])}b of new fixed term loans, {sb_tot_y}% more than a year earlier, but lending to buy non-residential buildings fell {abs(sb_nr_y)}%.",
+         ],
+         "link": {"href": "guides/business-lending-september-quarter-2026.html", "text": "Read the September quarter 2026 note"}},
     ],
-    "method": ("Each quarter Lambton Capital collects the latest published figures from the Reserve Bank of Australia (RBA) and the Australian Prudential Regulation Authority (APRA), "
+    "method": ("Each quarter Lambton Capital collects the latest published figures from the Reserve Bank of Australia (RBA), the Australian Prudential Regulation Authority (APRA) and the Australian Bureau of Statistics (ABS), "
                "compares them with the previous quarter and a year earlier, and calculates the measures marked as Lambton Capital calculations. Rates are averages across all reporting lenders, "
                "not quotes. Growth in lending by business size is calculated from the RBA's D14 dollar figures, which are not adjusted for reporting changes, so treat single-month moves with care. "
                "Each figure shows the month or quarter it refers to; sources publish on different timetables, so not every figure covers the same period."),
     "metrics": metrics,
-    "changelog": ["2026-11-03: first edition (Q3 2026)."],
+    "changelog": ["2026-11-03: first edition (Q3 2026).", "2026-11-11: added ABS Lending Indicators business lending commitments for the September quarter 2026 (released 11 November 2026)."],
 }
 (HERE / "editions").mkdir(exist_ok=True)
 (HERE / "editions/2026q3.json").write_text(json.dumps(edition, indent=1, ensure_ascii=False))

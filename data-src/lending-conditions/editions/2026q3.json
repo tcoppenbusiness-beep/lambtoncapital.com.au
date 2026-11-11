@@ -3,10 +3,12 @@
  "slug": "2026q3",
  "published": "2026-11-03",
  "published_human": "3 November 2026",
+ "updated": "2026-11-11",
+ "updated_human": "11 November 2026",
  "temporal_coverage": "2025-08/2026-11",
  "next_update": "late February 2027 (Q4 2026 edition)",
- "meta_description": "Small businesses paid 1.67 percentage points more than large businesses on variable loans in August 2026, while lending to large business grew 14.6% vs 8.8% for small. Quarterly data from RBA and APRA, with CSV.",
- "lead": "Small businesses are paying 1.67 percentage points more than large businesses to borrow, while their share of business lending has slipped. With the cash rate now at 4.85% after the fifth rise this year, here is where commercial and business lending stands, from the latest RBA and APRA data.",
+ "meta_description": "Small businesses paid 1.67 percentage points more than large businesses on variable loans in August 2026, while lending to large business grew 14.6% vs 8.8% for small. Quarterly data from RBA, APRA and ABS, with CSV.",
+ "lead": "Small businesses are paying 1.67 percentage points more than large businesses to borrow, while their share of business lending has slipped. With the cash rate now at 4.85% after the fifth rise this year, here is where commercial and business lending stands, from the latest RBA, APRA and ABS data.",
  "headline_stats": [
   {
    "value": "4.85%",
@@ -25,7 +27,7 @@
    "label": "Bank commercial property exposures, Jun 2026 (+8.3% on a year earlier)"
   }
  ],
- "stats_caption": "Sources: RBA statistical tables F7, D1, D14 and media release 2026-30; APRA quarterly ADI statistics. Calculations by Lambton Capital.",
+ "stats_caption": "Sources: RBA statistical tables F7, D1, D14 and media release 2026-30; APRA quarterly ADI statistics; ABS Lending Indicators. Calculations by Lambton Capital.",
  "analysis": [
   {
    "question": "What are small businesses paying to borrow?",
@@ -60,9 +62,21 @@
     "Approved limits were $541.0bn, leaving about $39.4bn approved but not yet drawn.",
     "APRA publishes the September quarter figures in December 2026; they will be added to the next edition."
    ]
+  },
+  {
+   "question": "What did lenders commit to business borrowers in the September quarter?",
+   "answer": "New business loans for construction rose 27.6% on the June quarter to $17.2b, while lending to buy property fell 6.4% to $25.4b (ABS, seasonally adjusted).",
+   "points": [
+    "Compared with a year earlier, construction lending was up 51.8% and property purchase lending up 1.5%.",
+    "Small businesses took on $15.9b of new fixed term loans, 3.5% more than a year earlier, but lending to buy non-residential buildings fell 7.6%."
+   ],
+   "link": {
+    "href": "guides/business-lending-september-quarter-2026.html",
+    "text": "Read the September quarter 2026 note"
+   }
   }
  ],
- "method": "Each quarter Lambton Capital collects the latest published figures from the Reserve Bank of Australia (RBA) and the Australian Prudential Regulation Authority (APRA), compares them with the previous quarter and a year earlier, and calculates the measures marked as Lambton Capital calculations. Rates are averages across all reporting lenders, not quotes. Growth in lending by business size is calculated from the RBA's D14 dollar figures, which are not adjusted for reporting changes, so treat single-month moves with care. Each figure shows the month or quarter it refers to; sources publish on different timetables, so not every figure covers the same period.",
+ "method": "Each quarter Lambton Capital collects the latest published figures from the Reserve Bank of Australia (RBA), the Australian Prudential Regulation Authority (APRA) and the Australian Bureau of Statistics (ABS), compares them with the previous quarter and a year earlier, and calculates the measures marked as Lambton Capital calculations. Rates are averages across all reporting lenders, not quotes. Growth in lending by business size is calculated from the RBA's D14 dollar figures, which are not adjusted for reporting changes, so treat single-month moves with care. Each figure shows the month or quarter it refers to; sources publish on different timetables, so not every figure covers the same period.",
  "metrics": [
   {
    "group": "Cash rate",
@@ -507,9 +521,125 @@
    "series": "Quarterly ADI Property Exposures",
    "source_name": "APRA quarterly ADI statistics",
    "source_url": "https://www.apra.gov.au/news-and-publications/apra-releases-quarterly-authorised-deposit-taking-institution-statistics-27"
+  },
+  {
+   "group": "Business lending commitments (ABS)",
+   "metric": "New business loans for construction",
+   "unit": "$ billion, seasonally adjusted",
+   "unit_prefix": "$",
+   "unit_suffix": "bn",
+   "dp": 1,
+   "latest": {
+    "value": 17.2,
+    "period": "Sep qtr 2026"
+   },
+   "prev": {
+    "value": 13.4,
+    "period": "Jun qtr 2026"
+   },
+   "year_ago": {
+    "value": 11.3,
+    "period": "Sep qtr 2025"
+   },
+   "series": "Table 29",
+   "source_name": "ABS Lending Indicators",
+   "source_url": "https://www.abs.gov.au/statistics/economy/finance/lending-indicators/sep-quarter-2026"
+  },
+  {
+   "group": "Business lending commitments (ABS)",
+   "metric": "of which non-residential buildings",
+   "unit": "$ billion, seasonally adjusted",
+   "unit_prefix": "$",
+   "unit_suffix": "bn",
+   "dp": 1,
+   "latest": {
+    "value": 5.2,
+    "period": "Sep qtr 2026"
+   },
+   "prev": {
+    "value": 3.3,
+    "period": "Jun qtr 2026"
+   },
+   "year_ago": {
+    "value": 2.8,
+    "period": "Sep qtr 2025"
+   },
+   "series": "Table 29",
+   "source_name": "ABS Lending Indicators",
+   "source_url": "https://www.abs.gov.au/statistics/economy/finance/lending-indicators/sep-quarter-2026"
+  },
+  {
+   "group": "Business lending commitments (ABS)",
+   "metric": "New business loans to purchase property",
+   "unit": "$ billion, seasonally adjusted",
+   "unit_prefix": "$",
+   "unit_suffix": "bn",
+   "dp": 1,
+   "latest": {
+    "value": 25.4,
+    "period": "Sep qtr 2026"
+   },
+   "prev": {
+    "value": 27.1,
+    "period": "Jun qtr 2026"
+   },
+   "year_ago": {
+    "value": 25.0,
+    "period": "Sep qtr 2025"
+   },
+   "series": "Table 29",
+   "source_name": "ABS Lending Indicators",
+   "source_url": "https://www.abs.gov.au/statistics/economy/finance/lending-indicators/sep-quarter-2026"
+  },
+  {
+   "group": "Business lending commitments (ABS)",
+   "metric": "Small business new fixed term loans, excluding refinancing",
+   "unit": "$ billion, original (compare with a year earlier)",
+   "unit_prefix": "$",
+   "unit_suffix": "bn",
+   "dp": 1,
+   "latest": {
+    "value": 15.9,
+    "period": "Sep qtr 2026"
+   },
+   "prev": {
+    "value": 14.0,
+    "period": "Jun qtr 2026"
+   },
+   "year_ago": {
+    "value": 15.4,
+    "period": "Sep qtr 2025"
+   },
+   "series": "Table 30",
+   "source_name": "ABS Lending Indicators",
+   "source_url": "https://www.abs.gov.au/statistics/economy/finance/lending-indicators/sep-quarter-2026"
+  },
+  {
+   "group": "Business lending commitments (ABS)",
+   "metric": "Small business loans to buy non-residential buildings",
+   "unit": "$ billion, original (compare with a year earlier)",
+   "unit_prefix": "$",
+   "unit_suffix": "bn",
+   "dp": 1,
+   "latest": {
+    "value": 1.9,
+    "period": "Sep qtr 2026"
+   },
+   "prev": {
+    "value": 2.0,
+    "period": "Jun qtr 2026"
+   },
+   "year_ago": {
+    "value": 2.0,
+    "period": "Sep qtr 2025"
+   },
+   "series": "Table 30",
+   "source_name": "ABS Lending Indicators",
+   "source_url": "https://www.abs.gov.au/statistics/economy/finance/lending-indicators/sep-quarter-2026"
   }
  ],
  "changelog": [
-  "2026-11-03: first edition (Q3 2026)."
+  "2026-11-03: first edition (Q3 2026).",
+  "2026-11-11: added ABS Lending Indicators business lending commitments for the September quarter 2026 (released 11 November 2026)."
  ]
 }

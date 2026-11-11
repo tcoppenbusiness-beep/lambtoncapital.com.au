@@ -4,22 +4,79 @@
  "read": "2026-11-11 via browser pane",
  "units": "$ million unless stated",
  "business_sa_table29_560129": {
-  "construction": {"Sep-25": 11307.1, "Jun-26": 13449.1, "Sep-26": 17162.7},
-  "construction_non_residential_buildings": {"Sep-25": 2799.0, "Jun-26": 3274.8, "Sep-26": 5157.2},
-  "construction_dwellings": {"Sep-25": 5340.1, "Jun-26": 6760.8, "Sep-26": 8317.3},
-  "purchase_of_property": {"Sep-25": 25007.6, "Jun-26": 27121.4, "Sep-26": 25374.9},
+  "construction": {
+   "Sep-25": 11307.1,
+   "Jun-26": 13449.1,
+   "Sep-26": 17162.7
+  },
+  "construction_non_residential_buildings": {
+   "Sep-25": 2799.0,
+   "Jun-26": 3274.8,
+   "Sep-26": 5157.2
+  },
+  "construction_dwellings": {
+   "Sep-25": 5340.1,
+   "Jun-26": 6760.8,
+   "Sep-26": 8317.3
+  },
+  "purchase_of_property": {
+   "Sep-25": 25007.6,
+   "Jun-26": 27121.4,
+   "Sep-26": 25374.9
+  },
   "page_headline": "Construction $17.2b, +27.6% q/q, +51.8% y/y; Purchase of property $25.4b, -6.4% q/q, +1.5% y/y"
  },
  "small_business_original_table30_560130": {
-  "total_excl_refinancing": {"Sep-25": 15405.3, "Sep-26": 15944.3},
-  "purchase_of_property": {"Sep-25": 6578.3, "Sep-26": 7431.9},
-  "purchase_of_dwellings": {"Sep-25": 3807.8, "Sep-26": 5004.8},
-  "purchase_non_residential_buildings": {"Sep-25": 2023.4, "Sep-26": 1868.7},
-  "purchase_industrial_buildings": {"Sep-25": 657.9, "Sep-26": 563.4},
-  "plant_and_equipment": {"Sep-25": 5261.4, "Sep-26": 5400.8},
-  "working_capital": {"Sep-25": 828.3, "Sep-26": 781.2},
-  "external_refinancing": {"Sep-25": 2173.0, "Sep-26": 1679.3},
+  "total_excl_refinancing": {
+   "Sep-25": 15405.3,
+   "Sep-26": 15944.3,
+   "Jun-26": 14002.1
+  },
+  "purchase_of_property": {
+   "Sep-25": 6578.3,
+   "Sep-26": 7431.9
+  },
+  "purchase_of_dwellings": {
+   "Sep-25": 3807.8,
+   "Sep-26": 5004.8
+  },
+  "purchase_non_residential_buildings": {
+   "Sep-25": 2023.4,
+   "Sep-26": 1868.7,
+   "Jun-26": 1975.1
+  },
+  "purchase_industrial_buildings": {
+   "Sep-25": 657.9,
+   "Sep-26": 563.4
+  },
+  "plant_and_equipment": {
+   "Sep-25": 5261.4,
+   "Sep-26": 5400.8
+  },
+  "working_capital": {
+   "Sep-25": 828.3,
+   "Sep-26": 781.2
+  },
+  "external_refinancing": {
+   "Sep-25": 2173.0,
+   "Sep-26": 1679.3
+  },
   "note": "Original series: compare year on year only"
  },
- "housing_sa_value_$b": {"total": {"Sep-26": 81.157, "qoq": -15.5, "yoy": -18.1}, "investor": {"Sep-26": 24.705, "qoq": -32.3, "yoy": -38.1}, "owner_occupier": {"Sep-26": 56.453, "qoq": -5.3}}
+ "housing_sa_value_$b": {
+  "total": {
+   "Sep-26": 81.157,
+   "qoq": -15.5,
+   "yoy": -18.1
+  },
+  "investor": {
+   "Sep-26": 24.705,
+   "qoq": -32.3,
+   "yoy": -38.1
+  },
+  "owner_occupier": {
+   "Sep-26": 56.453,
+   "qoq": -5.3
+  }
+ }
 }

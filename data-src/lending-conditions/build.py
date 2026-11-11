@@ -94,7 +94,7 @@ def build_page(editions):
         "creator": {"@type": "Organization", "@id": "https://lambtoncapital.com.au/#org", "name": "Lambton Capital Pty Ltd", "url": "https://lambtoncapital.com.au/"},
         "publisher": {"@type": "Organization", "@id": "https://lambtoncapital.com.au/#org", "name": "Lambton Capital Pty Ltd", "url": "https://lambtoncapital.com.au/"},
         "datePublished": editions[0]["published"],
-        "dateModified": ed["published"],
+        "dateModified": ed.get("updated", ed["published"]),
         "temporalCoverage": ed["temporal_coverage"],
         "spatialCoverage": {"@type": "Place", "name": "Australia"},
         "license": "https://creativecommons.org/licenses/by/4.0/",
@@ -120,7 +120,7 @@ def build_page(editions):
     }
     webpage = {
         "@context": "https://schema.org", "@type": "WebPage", "url": URL,
-        "dateModified": ed["published"],
+        "dateModified": ed.get("updated", ed["published"]),
         "reviewedBy": {"@type": "Person", "@id": "https://lambtoncapital.com.au/#founder",
                        "name": "Thomas Coppen", "jobTitle": "Founder",
                        "url": "https://lambtoncapital.com.au/about.html"},
@@ -148,6 +148,7 @@ def build_page(editions):
         f'<section class="{"section-alt" if i % 2 == 0 else ""}"><div class="wrap stack">'
         f'<h2 class="h2">{e(a["question"])}</h2><p class="answer-first max-820">{e(a["answer"])}</p>'
         + (f'<ul class="scan-list max-820">{"".join(f"<li>{e(b)}</li>" for b in a.get("points", []))}</ul>' if a.get("points") else "")
+        + (f'<p class="body max-820"><a href="{e(a["link"]["href"])}">{e(a["link"]["text"])}</a></p>' if a.get("link") else "")
         + '</div></section>'
         for i, a in enumerate(ed["analysis"]))
 
@@ -257,7 +258,7 @@ def build_page(editions):
 
   <section class="reviewed-section" aria-label="Page review">
     <div class="wrap">
-      <p class="reviewed-by">Compiled and reviewed by <a href="about.html">Thomas Coppen</a>, Founder · Updated <time datetime="{ed['published']}">{e(pub_human)}</time></p>
+      <p class="reviewed-by">Compiled and reviewed by <a href="about.html">Thomas Coppen</a>, Founder · Updated <time datetime="{ed.get('updated', ed['published'])}">{e(ed.get('updated_human', pub_human))}</time></p>
     </div>
   </section>
 
