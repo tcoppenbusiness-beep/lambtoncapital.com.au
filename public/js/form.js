@@ -979,7 +979,8 @@
       out.diff.textContent = Math.abs(r.saving) < 0.5 ? "No change"
         : fmtMoney(Math.abs(r.saving)) + (r.saving > 0 ? " less / month" : " more / month");
       if (r.bal <= 0) out.recover.textContent = "–";
-      else if (r.recover === null) out.recover.textContent = "Not recovered: repayments go up";
+      else if (r.recover === null) out.recover.textContent = r.saving < -0.005 ? "Not recovered: repayments go up" : "No monthly saving";
+      else if (r.net < 0) out.recover.textContent = "Not a real saving: you pay more in total";
       else if (r.costs <= 0) out.recover.textContent = "No costs to recover";
       else out.recover.textContent = "About " + Math.max(1, Math.ceil(r.recover)) + (Math.ceil(r.recover) <= 1 ? " month" : " months");
       out.curInt.textContent = fmtMoney(r.curInt);
