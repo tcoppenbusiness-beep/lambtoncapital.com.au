@@ -692,3 +692,9 @@ img, video, svg{ max-width:100%; }
 .calc-urgent{ color:#9A3412; font-weight:600; }
 .calc-result-row .h3{ text-align:right; }
 .calc-result [hidden]{ display:none !important; }
+
+/* How it works: photo shown at its natural shape (no stretch-to-fit crop); landscape crop on smaller screens */
+.how-with-image .how-image--natural{ align-self:center; }
+.how-with-image .how-image--natural picture{ display:block; }
+.how-with-image .how-image--natural img{ height:auto; min-height:0; object-fit:contain; }
+@media (max-width:1023px){ .how-with-image .how-image--natural img{ height:auto; } }
