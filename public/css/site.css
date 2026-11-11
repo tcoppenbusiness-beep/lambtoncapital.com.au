@@ -695,6 +695,7 @@ img, video, svg{ max-width:100%; }
 
 /* How it works: photo shown at its natural shape (no stretch-to-fit crop); landscape crop on smaller screens */
 .how-with-image .how-image--natural{ align-self:center; }
+@media (min-width:1024px){ .how-with-image .how-image--natural{ flex:0 0 540px; } }
 .how-with-image .how-image--natural picture{ display:block; }
 .how-with-image .how-image--natural img{ height:auto; min-height:0; object-fit:contain; }
 @media (max-width:1023px){ .how-with-image .how-image--natural img{ height:auto; } }
