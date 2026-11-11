@@ -636,6 +636,10 @@ img{ height:auto; }
 .section-photo .scan-list strong{ color:#FFFFFF; }
 .section-photo .scan-list li::before{ background:var(--amber); }
 .section-photo a{ color:#9FD0E6; }
+.section-photo .card .body,
+.section-photo .card .body-sm,
+.section-photo .card .ink-2{ color:var(--ink-2); }
+.section-photo .card .h3{ color:var(--ink); }
 @media (max-width:720px){
   .section-photo{ padding:56px 0; }
   .section-photo-tint{ background:rgba(15,42,56,0.84); }
