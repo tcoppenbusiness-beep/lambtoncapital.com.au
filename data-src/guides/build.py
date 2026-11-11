@@ -207,7 +207,7 @@ def build_page(m):
         band = (f'<div class="guide-hero-media"><img src="../img/{hi["base"]}-{hi["variants"][-1]}.webp" srcset="{srcset}" sizes="(min-width:1200px) 1200px, 100vw" '
                 f'width="{hi["width"]}" height="{hi["height"]}" alt="{esc(hi["alt"])}" fetchpriority="high" decoding="async"></div>')
         m["body"] = m["body"].replace("</section>", "</section>\n" + band, 1)
-    rel = re.search(r'<section[^>]*><div class="wrap stack">\s*<h2 class="h2">Related</h2>', m["body"])
+    rel = re.search(r'<section[^>]*>\s*(?:<img[^>]*>\s*<div class="section-photo-tint"[^>]*></div>\s*)?<div class="wrap stack[^"]*">\s*<h2 class="h2">Related</h2>', m["body"])
     body_with_pref = (m["body"][:rel.start()] + PREF_SOURCE + "\n" + m["body"][rel.start():]) if rel else m["body"] + PREF_SOURCE
     page = f"""<!doctype html>
 <html lang="en">
@@ -289,6 +289,11 @@ def guide_card(g, prefix, heading_tag="h2"):
 
 def photo_sections(body, g):
     """Turn the sections named in meta photo_sections into photo-backed sections (site pattern)."""
+    ids = [x[1] for x in re.findall(r'<section( class="[^"]*")? id="([^"]+)"', body)]
+    photo = {ps["id"] for ps in g.get("photo_sections", [])}
+    for x, y in zip(ids, ids[1:]):
+        if x in photo and y in photo:
+            sys.exit(f"{g.get('slug')}: photo sections '{x}' and '{y}' are next to each other. Separate them with a plain section.")
     for ps in g.get("photo_sections", []):
         sid, im, alt = ps["id"], ps["image"], ps["alt"]
         w, h = ps.get("width", 1600), ps.get("height", 1066)
