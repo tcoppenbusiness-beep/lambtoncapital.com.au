@@ -259,16 +259,32 @@
     span.innerHTML = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">' + d + '</svg>';
     return span;
   }
+  /* Optional per-page tile set: data-tile-options='[{"label":"Term loan","branch":"Refinance or facility expiry","answers":{"reason":["Combine loans into one"]}}]'
+     Each option shows its own label but starts the named existing branch (and can pre-fill answers with
+     values that exist in that branch). Without the attribute the default seven tiles are used. */
+  function heroTileOptions(container){
+    var raw = container.getAttribute("data-tile-options");
+    if (raw){
+      try{
+        var parsed = JSON.parse(raw);
+        var ok = parsed.filter(function(o){ return o && o.label && BRANCH_KEY[o.branch]; });
+        if (ok.length) return ok;
+      }catch(e){ /* fall through to defaults */ }
+    }
+    return HERO_TILES.map(function(label){ return { label: label, branch: label }; });
+  }
   function renderHeroTilesInto(container){
     if (!container) return;
     container.innerHTML = "";
-    var group = el("div", { class: "tile-group", role: "radiogroup", "aria-label": "What is the finance for?" });
-    HERO_TILES.forEach(function(label){
-      var btn = makeTileButton(label, state.branch === label, function(){ selectBranch(label); });
-      var ic = tileIcon(label); if (ic) btn.insertBefore(ic, btn.firstChild);
+    var labelText = container.getAttribute("data-label") || "What is the finance for?";
+    var group = el("div", { class: "tile-group", role: "radiogroup", "aria-label": labelText });
+    heroTileOptions(container).forEach(function(opt){
+      var custom = opt.label !== opt.branch;
+      var checked = custom ? (state.heroChoice === opt.label && state.branch === opt.branch) : (state.branch === opt.branch);
+      var btn = makeTileButton(opt.label, checked, function(){ selectBranch(opt.branch, opt.answers, opt.label); });
+      var ic = tileIcon(opt.branch); if (ic) btn.insertBefore(ic, btn.firstChild);
       group.appendChild(btn);
     });
-    var labelText = container.getAttribute("data-label") || "What is the finance for?";
     container.appendChild(el("div", { class: "label", style: "margin-bottom:12px;", text: labelText }));
     container.appendChild(group);
   }
@@ -278,12 +294,13 @@
     groups.forEach(renderHeroTilesInto);
   }
 
-  function selectBranch(label){
+  function selectBranch(label, answers, choice){
     state.branch = label;
+    state.heroChoice = choice || label;
     state.step = 2;
-    state.answers = {};
+    state.answers = answers ? JSON.parse(JSON.stringify(answers)) : {};
     safeSessionSet();
-    track("enquiry_start", { branch: label, page_path: pagePath() });
+    track("enquiry_start", { branch: label, hero_choice: state.heroChoice, page_path: pagePath() });
     renderAll();
     var target = document.getElementById("enquiry");
     if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });

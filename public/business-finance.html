@@ -62,6 +62,54 @@
  }
 }
 </script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "What does business finance cost through Lambton Capital?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Our fee is $0 on standard deals (Streamline), 1.25% with a $5,000 minimum for several companies or trusts, SMSF (self-managed super fund) or lenders that aren't banks (Structured), and 1.75% for past credit problems, development or private lenders (Specialist). It's payable at settlement only, with no engagement fee. Most business finance falls under Streamline or Structured."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How long does business finance take to settle?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Typically 2 to 8 weeks. That's an indicative range only, and each lender sets its own limits."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Do I need property as security?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Not always. Most facilities are secured by property, other assets, a general security agreement (the lender's claim over the business's assets if the loan isn't repaid), or a mix. A facility secured by property or by a general security agreement is usually priced more favourably than an unsecured one."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "What do lenders ask for?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Financial statements and tax returns for the most recent two years, recent BAS (Business Activity Statements, your quarterly GST returns) and business bank statements, aged debtor and creditor listings where relevant, and details of any assets offered as security, including existing loans."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "What does business finance cover?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "It funds running or growing a trading business, separate from a property purchase. That spans short-term cash flow support, buying another business, restructuring existing debt, and longer-term equipment or growth capital."
+   }
+  }
+ ]
+}
+</script>
 </head>
 <body data-depth="0">
 <!-- Google Tag Manager (noscript) -->
@@ -165,22 +213,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <main id="main">
 
-  <section class="hero-home hero-service">
+  <section class="hero-home">
     <img fetchpriority="high" decoding="async" width="1400" height="787" src="img/business.webp" srcset="img/business-800.webp 800w, img/business.webp 1400w" sizes="100vw" alt="Business owner working on a laptop in a warehouse office">
     <div class="hero-home-tint" aria-hidden="true"></div>
-    <div class="wrap hero-home-inner hero-split">
-      <div class="hero-split-copy">
+    <div class="wrap hero-home-inner">
       <p class="eyebrow">Business finance · Australia-wide</p>
-      <h1 class="h-display">Business finance</h1>
+      <h1 class="h-display">Business finance from $500k to $5m. $0 broker fee on standard deals.</h1>
       <p class="lead">Working capital, business acquisition, restructure, term loans, overdrafts and trade or debtor finance, arranged across a panel of banks and non-banks.</p>
-      </div>
-      <div class="card stack hero-ask">
-        <p class="h3 hero-ask-title">Ask about this loan</p>
-        <button type="button" class="tile selected" data-select-branch="Working capital or debt restructure" aria-checked="true">
-          <span class="tile-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5M4 19h16M8 15l4-5 3 3 5-6M17 7h3v3"/></svg></span><span>Working capital or debt restructure</span>
-        </button>
-        <a href="#enquiry" class="btn btn-primary" data-cta="hero">Continue</a>
-      </div>
+      <div class="hero-home-tiles" data-hero-tiles data-label="What is the finance for?" data-tile-options='[{"label":"Working capital","branch":"Working capital or debt restructure","answers":{"purpose":["Cash-flow gap"]}},{"label":"Buy a business","branch":"Buy a business"},{"label":"Refinance existing business debt","branch":"Refinance or facility expiry"},{"label":"Equipment or vehicles","branch":"Equipment or vehicles"},{"label":"Debt restructure","branch":"Working capital or debt restructure","answers":{"purpose":["Consolidate debts"]}},{"label":"Something else","branch":"Something else"}]'></div>
+      <p class="hero-home-trust">Fees published below · Newcastle-based, working Australia-wide</p>
     </div>
   </section>
 
@@ -199,49 +240,55 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </section>
 
-  <section>
+  <section class="section-dark fee-band" aria-labelledby="fees-heading">
     <div class="wrap stack">
-      <h2 class="h2">What does business finance cover?</h2>
-      <p class="answer-first">Business finance funds running or growing a trading business, separate from a <a href="commercial-property-finance">property purchase</a>.</p>
-      <ul class="scan-list">
-        <li><strong>What it spans.</strong> Short-term cash flow support, <a href="business-acquisition-finance">buying another business</a>, restructuring existing debt, and longer-term equipment or growth capital.</li>
-        <li><strong>How it's secured.</strong> Most facilities (the loans or credit lines themselves) are secured by property, other assets, a general security agreement (the lender's claim over the business's assets if the loan isn't repaid), or a mix.</li>
-        <li><strong>Right structure.</strong> It depends on what the money is for and how the business is trading.</li>
-        <li><strong>Facility expiring?</strong> If that, rather than new funding, is the driver, see <a href="commercial-refinance">commercial loan refinance</a>. To replace existing term loans, equipment finance or an overdraft, see <a href="business-loan-refinance">business loan refinancing</a>.</li>
-      </ul>
-      <div class="grid-3">
-        <div class="card stack">
-          <h3 class="h3">Working capital</h3>
-          <p class="body-sm">Short-term funding for stock, wages or a seasonal cash gap, usually a limit you can draw on, repay and draw again.</p>
+      <p class="label" id="fees-heading"><strong>Our broker fees</strong>&nbsp;·&nbsp;Payable at settlement only · No engagement fee</p>
+      <div class="fee-cols">
+        <div class="fee-col">
+          <p class="label">Streamline</p>
+          <p class="stat">$0</p>
+          <p class="body-sm">Standard purchases and refinances.</p>
         </div>
-        <div class="card stack">
-          <h3 class="h3">Business acquisition</h3>
-          <p class="body-sm">Funding to buy an existing business, a competitor, or a franchise.</p>
+        <div class="fee-col">
+          <p class="label">Structured</p>
+          <p class="stat">1.25%</p>
+          <p class="body-sm">Min $5,000 · several companies or trusts, SMSF (self-managed super fund), or lenders that aren't banks.</p>
         </div>
-        <div class="card stack">
-          <h3 class="h3">Debt restructure</h3>
-          <p class="body-sm">Combining several loans into one, on better terms or with longer to repay.</p>
-        </div>
-        <div class="card stack">
-          <h3 class="h3">Term loans</h3>
-          <p class="body-sm">A loan for a fixed amount, repaid over a set period, for equipment, fit-out or a defined growth project.</p>
-        </div>
-        <div class="card stack">
-          <h3 class="h3">Overdrafts</h3>
-          <p class="body-sm">A credit limit backed by the business or a property, which you draw on as trading needs it.</p>
-        </div>
-        <div class="card stack">
-          <h3 class="h3">Trade &amp; debtor finance</h3>
-          <p class="body-sm">Borrowing against unpaid customer invoices or imported stock, so cash flow doesn't wait on payment terms.</p>
+        <div class="fee-col">
+          <p class="label">Specialist</p>
+          <p class="stat">1.75%</p>
+          <p class="body-sm">Past credit problems, development, private lenders.</p>
         </div>
       </div>
+      <p class="body-sm">Most business finance falls under Streamline or Structured depending on the assets offered as security and the type of lender. See the <a href="fees">full fee schedule</a> for worked examples and when each tier applies.</p>
     </div>
   </section>
 
-  <section class="section-alt">
-    <div class="wrap stack">
-      <h2 class="h2">How do lenders decide between an overdraft, a term loan and trade finance?</h2>
-      <p class="body max-820">The facility is tailored to match what is actually being funded. An overdraft is suitable for a cash flow gap that occurs intermittently; a term loan is appropriate for a one-off purchase which has a clear repayment date; trade or debtor finance is suitable for a business that is waiting for invoices or has import stock rather than one that is generally short of cash. Lenders also take into account a company's trading history, the amount of debt it already has, and the type of security being offered. A facility secured by property, or by a general security agreement (a claim over the business's assets), is usually priced more favourably than an unsecured one.</p>
+
+  <section class="tools-section" id="lvr-check">
+    <div class="wrap stack-lg">
+      <div class="tools-header">
+        <span class="eyebrow">Free tool · no sign-up</span>
+        <h2 class="h2">Check what a property could secure before you talk to anyone.</h2>
+        <p class="lead ink-2 tools-lead">If a property will secure the loan, check the numbers before you talk to anyone.</p>
+      </div>
+      <div class="card tools-card tools-card--wide stack">
+        <svg class="tools-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M8 34V12l12-6 12 6v22" stroke="var(--harbour-2)" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M8 34h24" stroke="var(--harbour-2)" stroke-width="2" stroke-linecap="round"/>
+          <path d="M15 34v-8h10v8" stroke="var(--harbour-2)" stroke-width="2" stroke-linejoin="round"/>
+          <circle cx="16.5" cy="17.5" r="1.75" stroke="var(--harbour-2)" stroke-width="2"/>
+          <circle cx="23.5" cy="22.5" r="1.75" stroke="var(--harbour-2)" stroke-width="2"/>
+          <path d="M24 16l-8 8" stroke="var(--harbour-2)" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <h3 class="h3">Commercial LVR check</h3>
+        <p class="body-sm">Estimate the most a lender will lend against a property, using the LVR (loan-to-value ratio, the loan as a percentage of the property's value), by property type.</p>
+        <div class="tools-preview">
+          <p class="body-sm">Example: Industrial · $1.8m purchase → maximum loan $1,260,000 at 70%</p>
+          <p class="ink-2 tools-preview-fine">A guide only. The lender's rules on the day apply</p>
+        </div>
+        <a href="tools/commercial-loan-calculator" class="btn btn-primary btn-block">Open the loan calculator</a>
+      </div>
     </div>
   </section>
 
@@ -297,26 +344,102 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <section class="section-alt">
     <div class="wrap stack-lg">
       <h2 class="h2">How it works</h2>
-      <div class="grid-3">
-        <div class="card stack how-card" style="gap:16px;">
-          <p class="stat" style="color:var(--harbour-2);">1</p>
-          <hr class="hr">
-          <h3 class="h3">Tell us the deal</h3>
-          <p class="body">What the finance is for, entity, timeframe, in five short steps with no login.</p>
-        </div>
-        <div class="card stack how-card" style="gap:16px;">
-          <p class="stat" style="color:var(--harbour-2);">2</p>
-          <hr class="hr">
-          <h3 class="h3">Assessment and lender shortlist</h3>
-          <p class="body">A written reply within two business days.</p>
-        </div>
-        <div class="card stack how-card" style="gap:16px;">
-          <p class="stat" style="color:var(--harbour-2);">3</p>
-          <hr class="hr">
-          <h3 class="h3">One broker to settlement</h3>
-          <p class="body">One point of contact end to end. Fees only at settlement.</p>
+      <div class="how-with-image">
+        <div class="how-image"><img loading="lazy" decoding="async" width="1400" height="933" src="img/bg/business-owner-workshop-machinery-1600.webp" srcset="img/bg/business-owner-workshop-machinery-800.webp 800w, img/bg/business-owner-workshop-machinery-1600.webp 1400w" sizes="(min-width:1024px) 400px, 100vw" alt="Business owner working in a workshop with machinery"></div>
+        <div class="how-steps">
+          <div class="card stack how-card" style="gap:16px;">
+            <p class="stat" style="color:var(--harbour-2);">1</p>
+            <hr class="hr">
+            <h3 class="h3">Tell us the deal</h3>
+            <p class="body">What the finance is for, entity, timeframe, in five short steps with no login.</p>
+          </div>
+          <div class="card stack how-card" style="gap:16px;">
+            <p class="stat" style="color:var(--harbour-2);">2</p>
+            <hr class="hr">
+            <h3 class="h3">Assessment and lender shortlist</h3>
+            <p class="body">A written reply within two business days.</p>
+          </div>
+          <div class="card stack how-card" style="gap:16px;">
+            <p class="stat" style="color:var(--harbour-2);">3</p>
+            <hr class="hr">
+            <h3 class="h3">One broker to settlement</h3>
+            <p class="body">One point of contact end to end. Fees only at settlement.</p>
+          </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section class="section-alt" id="by-need">
+    <div class="wrap stack-lg">
+      <div class="stack">
+        <p class="eyebrow">Finance by what you need</p>
+        <h2 class="h2">What do you need it for?</h2>
+      </div>
+      <div class="grid-3 pt-grid">
+        <a class="card stack pt-card" href="#enquiry">
+          <h3 class="h3">Working capital</h3>
+          <p class="body-sm">Short-term funding for stock, wages or a seasonal cash gap, usually a limit you can draw on, repay and draw again.</p>
+          <span class="pt-more">Start your enquiry &rarr;</span>
+        </a>
+        <a class="card stack pt-card" href="business-acquisition-finance">
+          <h3 class="h3">Business acquisition</h3>
+          <p class="body-sm">Funding to buy an existing business, a competitor, or a franchise.</p>
+          <span class="pt-more">See how it's financed &rarr;</span>
+        </a>
+        <a class="card stack pt-card" href="commercial-debt-restructure">
+          <h3 class="h3">Debt restructure</h3>
+          <p class="body-sm">Combining several loans into one, on better terms or with longer to repay.</p>
+          <span class="pt-more">See how it's financed &rarr;</span>
+        </a>
+        <a class="card stack pt-card" href="business-loan-refinance">
+          <h3 class="h3">Business loan refinancing</h3>
+          <p class="body-sm">Replacing existing term loans, equipment finance or an overdraft.</p>
+          <span class="pt-more">See how it's financed &rarr;</span>
+        </a>
+        <a class="card stack pt-card" href="#enquiry">
+          <h3 class="h3">Term loans</h3>
+          <p class="body-sm">A loan for a fixed amount, repaid over a set period, for equipment, fit-out or a defined growth project.</p>
+          <span class="pt-more">Start your enquiry &rarr;</span>
+        </a>
+        <a class="card stack pt-card" href="#enquiry">
+          <h3 class="h3">Overdrafts</h3>
+          <p class="body-sm">A credit limit backed by the business or a property, which you draw on as trading needs it.</p>
+          <span class="pt-more">Start your enquiry &rarr;</span>
+        </a>
+        <a class="card stack pt-card" href="#enquiry">
+          <h3 class="h3">Trade &amp; debtor finance</h3>
+          <p class="body-sm">Borrowing against unpaid customer invoices or imported stock, so cash flow doesn't wait on payment terms.</p>
+          <span class="pt-more">Start your enquiry &rarr;</span>
+        </a>
+        <a class="card stack pt-card" href="asset-equipment-finance">
+          <h3 class="h3">Equipment or vehicles</h3>
+          <p class="body-sm">Longer-term equipment or growth capital.</p>
+          <span class="pt-more">See how it's financed &rarr;</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap stack">
+      <h2 class="h2">What does business finance cover?</h2>
+      <p class="answer-first">Business finance funds running or growing a trading business, separate from a <a href="commercial-property-finance">property purchase</a>.</p>
+      <ul class="scan-list">
+        <li><strong>What it spans.</strong> Short-term cash flow support, <a href="business-acquisition-finance">buying another business</a>, restructuring existing debt, and longer-term equipment or growth capital.</li>
+        <li><strong>How it's secured.</strong> Most facilities (the loans or credit lines themselves) are secured by property, other assets, a general security agreement (the lender's claim over the business's assets if the loan isn't repaid), or a mix.</li>
+        <li><strong>Right structure.</strong> It depends on what the money is for and how the business is trading.</li>
+        <li><strong>Facility expiring?</strong> If that, rather than new funding, is the driver, see <a href="commercial-refinance">commercial loan refinance</a>. To replace existing term loans, equipment finance or an overdraft, see <a href="business-loan-refinance">business loan refinancing</a>.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section-photo" id="overdraft-term-trade">
+    <img src="img/bg/industrial-estate-warehouses-1600.webp" srcset="img/bg/industrial-estate-warehouses-800.webp 800w, img/bg/industrial-estate-warehouses-1600.webp 1600w" sizes="100vw" alt="Industrial estate with warehouses" loading="lazy" decoding="async" width="1600" height="1066">
+    <div class="section-photo-tint" aria-hidden="true"></div>
+    <div class="wrap stack section-photo-inner">
+      <h2 class="h2">How do lenders decide between an overdraft, a term loan and trade finance?</h2>
+      <p class="body max-820">The facility is tailored to match what is actually being funded. An overdraft is suitable for a cash flow gap that occurs intermittently; a term loan is appropriate for a one-off purchase which has a clear repayment date; trade or debtor finance is suitable for a business that is waiting for invoices or has import stock rather than one that is generally short of cash. Lenders also take into account a company's trading history, the amount of debt it already has, and the type of security being offered. A facility secured by property, or by a general security agreement (a claim over the business's assets), is usually priced more favourably than an unsecured one.</p>
     </div>
   </section>
 
@@ -331,58 +454,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </ul>
     </div>
   </section>
-
-  <section class="tools-section">
-    <div class="wrap stack-lg">
-      <div class="tools-header">
-        <span class="eyebrow">Free tool · no sign-up</span>
-        <h2 class="h2">Related tool</h2>
-        <p class="lead ink-2 tools-lead">If a property will secure the loan, check the numbers before you talk to anyone.</p>
-      </div>
-      <div class="card tools-card tools-card--wide stack">
-        <svg class="tools-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path d="M8 34V12l12-6 12 6v22" stroke="var(--harbour-2)" stroke-width="2" stroke-linejoin="round"/>
-          <path d="M8 34h24" stroke="var(--harbour-2)" stroke-width="2" stroke-linecap="round"/>
-          <path d="M15 34v-8h10v8" stroke="var(--harbour-2)" stroke-width="2" stroke-linejoin="round"/>
-          <circle cx="16.5" cy="17.5" r="1.75" stroke="var(--harbour-2)" stroke-width="2"/>
-          <circle cx="23.5" cy="22.5" r="1.75" stroke="var(--harbour-2)" stroke-width="2"/>
-          <path d="M24 16l-8 8" stroke="var(--harbour-2)" stroke-width="2" stroke-linecap="round"/>
-        </svg>
-        <h3 class="h3">Commercial LVR check</h3>
-        <p class="body-sm">Estimate the most a lender will lend against a property, using the LVR (loan-to-value ratio, the loan as a percentage of the property's value), by property type.</p>
-        <div class="tools-preview">
-          <p class="body-sm">Example: Industrial · $1.8m purchase → maximum loan $1,260,000 at 70%</p>
-          <p class="ink-2 tools-preview-fine">A guide only. The lender's rules on the day apply</p>
-        </div>
-        <a href="tools/commercial-loan-calculator" class="btn btn-primary btn-block">Open the loan calculator</a>
-      </div>
-    </div>
-  </section>
-
-  <section class="section-dark fee-band" aria-labelledby="fees-heading">
-    <div class="wrap stack">
-      <p class="label" id="fees-heading"><strong>Our broker fees</strong>&nbsp;·&nbsp;Payable at settlement only · No engagement fee</p>
-      <div class="fee-cols">
-        <div class="fee-col">
-          <p class="label">Streamline</p>
-          <p class="stat">$0</p>
-          <p class="body-sm">Standard purchases and refinances.</p>
-        </div>
-        <div class="fee-col">
-          <p class="label">Structured</p>
-          <p class="stat">1.25%</p>
-          <p class="body-sm">Min $5,000 · several companies or trusts, SMSF (self-managed super fund), or lenders that aren't banks.</p>
-        </div>
-        <div class="fee-col">
-          <p class="label">Specialist</p>
-          <p class="stat">1.75%</p>
-          <p class="body-sm">Past credit problems, development, private lenders.</p>
-        </div>
-      </div>
-      <p class="body-sm">Most business finance falls under Streamline or Structured depending on the assets offered as security and the type of lender. See the <a href="fees">full fee schedule</a> for worked examples and when each tier applies.</p>
-    </div>
-  </section>
-
 
   <section id="lenders">
     <div class="wrap stack">
@@ -401,6 +472,32 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </section>
 
+  <section id="faq">
+    <div class="wrap">
+      <h2 class="h2" style="margin-bottom:16px;">Frequently asked</h2>
+      <details class="faq-item">
+        <summary>What does business finance cost through Lambton Capital?<svg class="icon faq-icon-plus" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg><svg class="icon faq-icon-minus" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16"/></svg></summary>
+        <p>Our fee is $0 on standard deals (Streamline), 1.25% with a $5,000 minimum for several companies or trusts, SMSF (self-managed super fund) or lenders that aren't banks (Structured), and 1.75% for past credit problems, development or private lenders (Specialist). It's payable at settlement only, with no engagement fee. Most business finance falls under Streamline or Structured.</p>
+      </details>
+      <details class="faq-item">
+        <summary>How long does business finance take to settle?<svg class="icon faq-icon-plus" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg><svg class="icon faq-icon-minus" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16"/></svg></summary>
+        <p>Typically 2 to 8 weeks. That's an indicative range only, and each lender sets its own limits.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Do I need property as security?<svg class="icon faq-icon-plus" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg><svg class="icon faq-icon-minus" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16"/></svg></summary>
+        <p>Not always. Most facilities are secured by property, other assets, a general security agreement (the lender's claim over the business's assets if the loan isn't repaid), or a mix. A facility secured by property or by a general security agreement is usually priced more favourably than an unsecured one.</p>
+      </details>
+      <details class="faq-item">
+        <summary>What do lenders ask for?<svg class="icon faq-icon-plus" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg><svg class="icon faq-icon-minus" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16"/></svg></summary>
+        <p>Financial statements and tax returns for the most recent two years, recent BAS (Business Activity Statements, your quarterly GST returns) and business bank statements, aged debtor and creditor listings where relevant, and details of any assets offered as security, including existing loans.</p>
+      </details>
+      <details class="faq-item">
+        <summary>What does business finance cover?<svg class="icon faq-icon-plus" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg><svg class="icon faq-icon-minus" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16"/></svg></summary>
+        <p>It funds running or growing a trading business, separate from a property purchase. That spans short-term cash flow support, buying another business, restructuring existing debt, and longer-term equipment or growth capital.</p>
+      </details>
+    </div>
+  </section>
+
   <section class="section-border-top" id="enquiry">
     <div class="wrap form-panel">
       <p class="prelaunch-note"><strong>Now taking early enquiries.</strong> Deal assessments open once our lender panel is confirmed. Early enquiries are contacted first.</p>
@@ -411,6 +508,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div id="thankyou" class="thankyou" style="display:none;"></div>
     </div>
   </section>
+
+
+<!-- guides:related -->
+  <section class="section-alt">
+    <div class="wrap stack">
+      <h2 class="h2">Guides</h2>
+      <ul class="scan-list max-820"><li><a href="guides/business-lending-september-quarter-2026">Business lending, September quarter 2026: construction up, property purchases down</a></li></ul>
+    </div>
+  </section>
+  <!-- /guides:related -->
 
 </main>
 
