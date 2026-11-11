@@ -47,7 +47,7 @@
 - [Australian commercial lending conditions (quarterly)](https://lambtoncapital.com.au/commercial-lending-conditions): business lending rates by business size, credit growth, bank commercial property exposures, from RBA and APRA data; CSV at https://lambtoncapital.com.au/data/commercial-lending-conditions.csv; free to cite under CC BY 4.0
 
 ## Guides
-- [Business lending, September quarter 2026: construction up, property purchases down](https://lambtoncapital.com.au/guides/business-lending-september-quarter-2026): ABS Lending Indicators for the September quarter 2026: business construction lending up 27.6%, property purchase lending down 6.4%, and what changed for small businesses.
+- [Business lending, September quarter 2026: construction up, property purchases down](https://lambtoncapital.com.au/guides/business-lending-september-quarter-2026): ABS Lending Indicators, September quarter 2026: business construction lending up 27.6%, property purchase lending down 6.4%, and what changed.
 - [How much can I borrow against commercial property?](https://lambtoncapital.com.au/guides/how-much-can-i-borrow-commercial-property): Loan-to-value caps by property type, a worked serviceability example in dollars, deposit and costs, home equity and super fund borrowing, for Australia.
 
 ## Tools

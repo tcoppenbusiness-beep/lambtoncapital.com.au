@@ -160,7 +160,7 @@ def build_page(editions):
     pub_human = ed["published_human"]
 
     page = f"""<!doctype html>
-<html lang="en">
+<html lang="en-AU">
 <head>
 {gtm}
 <meta charset="utf-8">
@@ -179,6 +179,7 @@ def build_page(editions):
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:type" content="article">
+<meta property="og:locale" content="en_AU">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preload" href="/fonts/ibm-plex-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/ibm-plex-serif-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>

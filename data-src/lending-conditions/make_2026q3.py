@@ -132,8 +132,8 @@ edition = {
     "updated": "2026-11-11", "updated_human": "11 November 2026",
     "temporal_coverage": "2025-08/2026-11",
     "next_update": "late February 2027 (Q4 2026 edition)",
-    "meta_description": (f"Small businesses paid {prem['aug26']} percentage points more than large businesses on variable loans in August 2026, "
-                         f"while lending to large business grew {lb_g['aug26']}% vs {sb_g['aug26']}% for small. Quarterly data from RBA, APRA and ABS, with CSV."),
+    "meta_description": (f"Small businesses paid {prem['aug26']} percentage points more than large businesses on variable loans in August 2026. "
+                         f"Quarterly RBA, APRA and ABS data, with CSV."),
     "lead": (f"Small businesses are paying {prem['aug26']} percentage points more than large businesses to borrow, while their share of business lending has slipped. "
              f"With the cash rate now at {cr['after_3_nov_2026']}% after the fifth rise this year, here is where commercial and business lending stands, from the latest RBA, APRA and ABS data."),
     "headline_stats": [

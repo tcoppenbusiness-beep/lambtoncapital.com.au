@@ -93,7 +93,7 @@ def build_index(guides):
                   "publisher": {"@type": "Organization", "@id": f"{SITE}/#org", "name": "Lambton Capital Pty Ltd"},
                   "hasPart": [{"@type": "Article", "headline": g["title"], "url": f"{SITE}/guides/{g['slug']}"} for g in guides]}
     page = f"""<!doctype html>
-<html lang="en">
+<html lang="en-AU">
 <head>
 {gtm}
 <meta charset="utf-8">
@@ -103,13 +103,14 @@ def build_index(guides):
 <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
 <link rel="manifest" href="/site.webmanifest">
 <meta name="theme-color" content="#0F2A38">
-<title>Guides and data | Lambton Capital</title>
+<title>Commercial finance guides and data | Lambton Capital</title>
 <meta name="description" content="Plain-English guides to commercial property and business finance in Australia, with worked examples, plus our quarterly lending data and deal notes.">
 <link rel="canonical" href="{SITE}/guides/">
-<meta property="og:title" content="Guides and data | Lambton Capital">
+<meta property="og:title" content="Commercial finance guides and data | Lambton Capital">
 <meta property="og:description" content="Plain-English guides to commercial property and business finance in Australia, with worked examples, plus our quarterly lending data and deal notes.">
 <meta property="og:image" content="{SITE}/img/og-lambton-capital.jpg">
 <meta property="og:type" content="website">
+<meta property="og:locale" content="en_AU">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preload" href="/fonts/ibm-plex-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/ibm-plex-serif-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
@@ -199,6 +200,11 @@ def build_page(m):
             f'<details class="faq-item"><summary>{esc(f["q"])}<span class="faq-icon-plus">+</span><span class="faq-icon-minus">−</span></summary><p>{esc(f["a"])}</p></details>'
             for f in m["faq"])
         faq_html = f'<section><div class="wrap stack"><h2 class="h2">Frequently asked</h2><div class="stack" style="gap:0;">{items}</div></div></section>'
+    faq_ld = ""
+    if m.get("faq"):
+        faq_schema = {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
+            {"@type": "Question", "name": f["q"], "acceptedAnswer": {"@type": "Answer", "text": f["a"]}} for f in m["faq"]]}
+        faq_ld = '<script type="application/ld+json">\n' + json.dumps(faq_schema, indent=1, ensure_ascii=False) + '\n</script>\n'
     updated_human = m["updated_human"]
     m["body"] = photo_sections(m["body"], m)
     hi = m.get("hero_image")
@@ -210,7 +216,7 @@ def build_page(m):
     rel = re.search(r'<section[^>]*>\s*(?:<img[^>]*>\s*<div class="section-photo-tint"[^>]*></div>\s*)?<div class="wrap stack[^"]*">\s*<h2 class="h2">Related</h2>', m["body"])
     body_with_pref = (m["body"][:rel.start()] + PREF_SOURCE + "\n" + m["body"][rel.start():]) if rel else m["body"] + PREF_SOURCE
     page = f"""<!doctype html>
-<html lang="en">
+<html lang="en-AU">
 <head>
 {gtm}
 <meta charset="utf-8">
@@ -227,6 +233,7 @@ def build_page(m):
 <meta property="og:description" content="{esc(m['description'])}">
 <meta property="og:image" content="{SITE}/img/{m['card_image']['base'] + '.webp' if m.get('card_image') else 'og-lambton-capital.jpg'}">
 <meta property="og:type" content="article">
+<meta property="og:locale" content="en_AU">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preload" href="/fonts/ibm-plex-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/ibm-plex-serif-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
@@ -239,7 +246,7 @@ def build_page(m):
 <script type="application/ld+json">
 {json.dumps(breadcrumb, indent=1)}
 </script>
-</head>
+{faq_ld}</head>
 {body}
 
 <main id="main">
