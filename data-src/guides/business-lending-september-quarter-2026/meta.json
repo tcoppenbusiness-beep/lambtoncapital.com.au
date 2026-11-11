@@ -32,16 +32,37 @@
   ],
   "card_image": {
     "base": "construction-commercial",
-    "variants": [800],
+    "variants": [
+      800
+    ],
     "width": 2000,
     "height": 1556,
     "alt": "Commercial building under construction"
   },
   "hero_image": {
     "base": "bg/commercial-building-under-construction-night",
-    "variants": [800, 1600],
+    "variants": [
+      800,
+      1600
+    ],
     "width": 1600,
     "height": 1245,
     "alt": "Commercial building under construction at night"
-  }
+  },
+  "photo_sections": [
+    {
+      "id": "small-business",
+      "image": "heritage-shopfronts-strip-shops",
+      "width": 1600,
+      "height": 1128,
+      "alt": "Strip of heritage shopfronts, the kind of premises small businesses buy"
+    },
+    {
+      "id": "what-it-means",
+      "image": "freestanding-commercial-building",
+      "width": 1400,
+      "height": 788,
+      "alt": "Freestanding commercial building with parking out front"
+    }
+  ]
 }
