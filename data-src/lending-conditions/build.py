@@ -251,7 +251,7 @@ def build_page(editions):
 
   <section>
     <div class="wrap stack">
-      <p class="body-sm max-820">Looking at finance for a commercial property or business? See <a href="commercial-property-finance">commercial property finance</a>, <a href="business-finance">business finance</a>, or run the numbers with the <a href="tools/commercial-loan-calculator">commercial loan calculator</a>.</p>
+      <p class="body-sm max-820">Looking at finance for a commercial property or business? See <a href="commercial-property-finance">commercial property finance</a>, <a href="business-finance">business finance</a>, or run the numbers with the <a href="tools/commercial-loan-calculator">commercial loan calculator</a>. If you are weighing a <a href="commercial-refinance">commercial property loan refinance</a>, <a href="construction-finance">commercial construction loans</a> or <a href="business-loan-refinance">business loan refinancing</a>, those pages explain how each works.</p>
     </div>
   </section>
 

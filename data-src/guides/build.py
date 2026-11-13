@@ -143,7 +143,7 @@ def build_index(guides):
   </section>
   <section>
     <div class="wrap stack">
-      <p class="body-sm max-820">General information only, not credit advice. Got a deal in mind? <a href="../contact">Send an early enquiry</a> and we'll reply in writing within two business days.</p>
+      <p class="body-sm max-820">General information only, not credit advice. Looking at a specific loan? See <a href="../commercial-refinance">commercial property loan refinance</a>, <a href="../construction-finance">commercial construction loans</a> and <a href="../business-loan-refinance">business loan refinancing</a>, or the hubs for <a href="../commercial-property-finance">commercial property loans</a> and <a href="../business-finance">business loans</a>. Got a deal in mind? <a href="../contact">Send an early enquiry</a> and we'll reply in writing within two business days.</p>
     </div>
   </section>
 </main>
