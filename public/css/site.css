@@ -699,3 +699,13 @@ img, video, svg{ max-width:100%; }
 .how-with-image .how-image--natural picture{ display:block; }
 .how-with-image .how-image--natural img{ height:auto; min-height:0; object-fit:contain; }
 @media (max-width:1023px){ .how-with-image .how-image--natural img{ height:auto; } }
+
+/* Three-group menu: dropdown panel anchored to the nav (not the button), three columns; footer link columns wrap cleanly */
+.site-nav{ position:relative; }
+.nav-dd{ position:static; }
+.nav-dd-menu{ min-width:0; left:0 !important; }
+.nav-dd-col{ min-width:240px; }
+.footer-cols{ grid-template-columns:1fr 1fr; }
+@media (max-width:479px){ .footer-cols{ grid-template-columns:1fr; } }
+@media (min-width:768px){ .footer-cols{ grid-template-columns:repeat(3,1fr); } .footer-col:first-child{ display:flex; } }
+@media (min-width:1200px){ .footer-cols{ grid-template-columns:1.2fr 1.3fr 1.2fr 1fr 1fr 1fr; } }
