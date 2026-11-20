@@ -3,24 +3,24 @@
  "slug": "2026q3",
  "published": "2026-11-03",
  "published_human": "3 November 2026",
- "updated": "2026-11-11",
- "updated_human": "11 November 2026",
- "temporal_coverage": "2025-08/2026-11",
+ "updated": "2026-11-20",
+ "updated_human": "20 November 2026",
+ "temporal_coverage": "2025-09/2026-11",
  "next_update": "late February 2027 (Q4 2026 edition)",
- "meta_description": "Small businesses paid 1.67 percentage points more than large businesses on variable loans in August 2026. Quarterly RBA, APRA and ABS data, with CSV.",
- "lead": "Small businesses are paying 1.67 percentage points more than large businesses to borrow, while their share of business lending has slipped. With the cash rate now at 4.85% after the fifth rise this year, here is where commercial and business lending stands, from the latest RBA, APRA and ABS data.",
+ "meta_description": "Small businesses paid 1.56 percentage points more than large businesses on variable loans in September 2026. Quarterly RBA, APRA and ABS data, with CSV.",
+ "lead": "Small businesses are paying 1.56 percentage points more than large businesses to borrow, while their share of business lending has slipped. With the cash rate now at 4.85% after the fifth rise this year, here is where commercial and business lending stands, from the latest RBA, APRA and ABS data.",
  "headline_stats": [
   {
    "value": "4.85%",
    "label": "RBA cash rate after the 3 Nov 2026 rise"
   },
   {
-   "value": "1.67 pts",
-   "label": "Extra a small business pays vs a large business, variable loans (Aug 2026)"
+   "value": "1.56 pts",
+   "label": "Extra a small business pays vs a large business, variable loans (Sep 2026)"
   },
   {
-   "value": "8.8%",
-   "label": "Growth in small-business lending, year to Aug 2026 (large business: 14.6%)"
+   "value": "8.7%",
+   "label": "Growth in small-business lending, year to Sep 2026 (large business: 14.6%)"
   },
   {
    "value": "$501.6bn",
@@ -31,27 +31,28 @@
  "analysis": [
   {
    "question": "What are small businesses paying to borrow?",
-   "answer": "The average rate on existing variable-rate small business loans was 7.42% in August 2026, up 0.66 points on a year earlier. Large businesses paid 5.75%.",
+   "answer": "The average rate on existing variable-rate small business loans was 7.43% in September 2026, up 0.71 points on a year earlier. Large businesses paid 5.87%.",
    "points": [
-    "On new variable loans written in August, small businesses paid 6.81% against 5.67% for large businesses.",
-    "Small business loans secured by a home averaged 6.99%, about 0.48 points below the small business average of 7.47%. About 49% of small business lending is secured by a home (RBA D14, August 2026).",
-    "These figures predate the 30 September and 3 November rises (0.50 points in total). If both were passed on in full, the average existing variable small business rate would be about 7.92%. This is arithmetic, not a forecast or an RBA figure; lenders set their own rates."
+    "On new variable loans written in September, small businesses paid 7.14% against 5.88% for large businesses.",
+    "Small business loans secured by a home averaged 7.03%, about 0.45 points below the small business average of 7.48%. About 49% of small business lending is secured by a home (RBA D14, September 2026).",
+    "These September figures largely predate the rises announced on 29 September and 3 November (0.50 points in total): the first took effect on 30 September, the last day of the month. If both were passed on in full, the average existing variable small business rate would be about 7.93%. This is arithmetic, not a forecast or an RBA figure; lenders set their own rates."
    ]
   },
   {
    "question": "How big is the small-business premium, and is it changing?",
-   "answer": "Small businesses paid 1.67 percentage points more than large businesses on existing variable loans in August 2026, compared with 1.65 points a year earlier. On a $1 million loan, that gap is about $16,700 a year in extra interest.",
+   "answer": "Small businesses paid 1.56 percentage points more than large businesses on existing variable loans in September 2026, compared with 1.67 points a year earlier. On a $1 million loan, that gap is about $15,600 a year in extra interest.",
    "points": [
-    "The premium has barely moved: over the year to August, small business variable rates rose 0.66 points and large business rates 0.64 points, while the cash rate rose 0.75 points. Lenders passed rate rises on to both groups at about the same speed.",
-    "On new loans the gap is narrower and moves around month to month: 1.14 points in August 2026, 1.00 in June and 1.20 a year earlier."
+    "All of the narrowing came in September: the large business rate rose 0.12 points in the month and the small business rate 0.01, narrowing the premium from 1.67 points in August. Over the year to September, small business variable rates rose 0.71 points and large business rates 0.82 points; the cash rate rose 0.75 points over the same period, before the increase that took effect on 30 September.",
+    "One month is not a trend; the next edition will show whether the narrower gap holds.",
+    "On new loans the gap is narrower and moves around month to month: 1.26 points in September 2026, 1.00 in June and 1.42 a year earlier."
    ]
   },
   {
    "question": "Is credit flowing to small business?",
-   "answer": "Less than the headline suggests. Business credit grew 11.3% in the year to September 2026, well ahead of housing credit at 7.0%. But lending to large businesses grew 14.6% in the year to August, against 8.8% for small businesses.",
+   "answer": "Less than the headline suggests. Business credit grew 11.3% in the year to September 2026, well ahead of housing credit at 7.0%. But lending to large businesses grew 14.6% in the year to September, against 8.7% for small businesses.",
    "points": [
-    "In dollar terms, large business lending rose about $107.3bn over the year to August 2026; small business lending rose about $16.9bn.",
-    "Small businesses' share of business lending in RBA table D14 slipped from 13.2% to 12.8% over the year to August 2026.",
+    "In dollar terms, large business lending rose about $108.8bn over the year to September 2026; small business lending rose about $17.0bn.",
+    "Small businesses' share of business lending in RBA table D14 slipped from 13.2% to 12.8% over the year to September 2026.",
     "The size breakdown covers lenders that report business lending by borrower size; lending by non-bank lenders is only partly captured."
    ]
   },
@@ -107,16 +108,16 @@
    "unit_suffix": "%",
    "dp": 2,
    "latest": {
-    "value": 7.42,
-    "period": "Aug 2026"
+    "value": 7.43,
+    "period": "Sep 2026"
    },
    "prev": {
     "value": 7.41,
     "period": "Jun 2026"
    },
    "year_ago": {
-    "value": 6.76,
-    "period": "Aug 2025"
+    "value": 6.72,
+    "period": "Sep 2025"
    },
    "series": "RBA F7, FLRBFOSBV",
    "source_name": "RBA statistical table F7",
@@ -129,16 +130,16 @@
    "unit_suffix": "%",
    "dp": 2,
    "latest": {
-    "value": 7.47,
-    "period": "Aug 2026"
+    "value": 7.48,
+    "period": "Sep 2026"
    },
    "prev": {
     "value": 7.45,
     "period": "Jun 2026"
    },
    "year_ago": {
-    "value": 6.9,
-    "period": "Aug 2025"
+    "value": 6.87,
+    "period": "Sep 2025"
    },
    "series": "RBA F7, FLRBFOSBT",
    "source_name": "RBA statistical table F7",
@@ -151,16 +152,16 @@
    "unit_suffix": "%",
    "dp": 2,
    "latest": {
-    "value": 6.99,
-    "period": "Aug 2026"
+    "value": 7.03,
+    "period": "Sep 2026"
    },
    "prev": {
     "value": 6.98,
     "period": "Jun 2026"
    },
    "year_ago": {
-    "value": 6.33,
-    "period": "Aug 2025"
+    "value": 6.3,
+    "period": "Sep 2025"
    },
    "series": "RBA F7, FLRBFOSBR",
    "source_name": "RBA statistical table F7",
@@ -173,16 +174,16 @@
    "unit_suffix": "%",
    "dp": 2,
    "latest": {
-    "value": 6.18,
-    "period": "Aug 2026"
+    "value": 6.26,
+    "period": "Sep 2026"
    },
    "prev": {
     "value": 6.15,
     "period": "Jun 2026"
    },
    "year_ago": {
-    "value": 5.48,
-    "period": "Aug 2025"
+    "value": 5.43,
+    "period": "Sep 2025"
    },
    "series": "RBA F7, FLRBFOMBV",
    "source_name": "RBA statistical table F7",
@@ -195,16 +196,16 @@
    "unit_suffix": "%",
    "dp": 2,
    "latest": {
-    "value": 5.75,
-    "period": "Aug 2026"
+    "value": 5.87,
+    "period": "Sep 2026"
    },
    "prev": {
     "value": 5.72,
     "period": "Jun 2026"
    },
    "year_ago": {
-    "value": 5.11,
-    "period": "Aug 2025"
+    "value": 5.05,
+    "period": "Sep 2025"
    },
    "series": "RBA F7, FLRBFOLBV",
    "source_name": "RBA statistical table F7",
@@ -217,16 +218,16 @@
    "unit_suffix": "%",
    "dp": 2,
    "latest": {
-    "value": 6.81,
-    "period": "Aug 2026"
+    "value": 7.14,
+    "period": "Sep 2026"
    },
    "prev": {
     "value": 6.67,
     "period": "Jun 2026"
    },
    "year_ago": {
-    "value": 6.31,
-    "period": "Aug 2025"
+    "value": 6.49,
+    "period": "Sep 2025"
    },
    "series": "RBA F7, FLRBFNSBV",
    "source_name": "RBA statistical table F7",
@@ -239,16 +240,16 @@
    "unit_suffix": "%",
    "dp": 2,
    "latest": {
-    "value": 5.67,
-    "period": "Aug 2026"
+    "value": 5.88,
+    "period": "Sep 2026"
    },
    "prev": {
     "value": 5.67,
     "period": "Jun 2026"
    },
    "year_ago": {
-    "value": 5.11,
-    "period": "Aug 2025"
+    "value": 5.07,
+    "period": "Sep 2025"
    },
    "series": "RBA F7, FLRBFNLBV",
    "source_name": "RBA statistical table F7",
@@ -262,16 +263,16 @@
    "dp": 2,
    "unit_prefix": "",
    "latest": {
-    "value": 1.67,
-    "period": "Aug 2026"
+    "value": 1.56,
+    "period": "Sep 2026"
    },
    "prev": {
     "value": 1.69,
     "period": "Jun 2026"
    },
    "year_ago": {
-    "value": 1.65,
-    "period": "Aug 2025"
+    "value": 1.67,
+    "period": "Sep 2025"
    },
    "series": "FLRBFOSBV − FLRBFOLBV",
    "source_name": "Lambton Capital, from RBA F7",
@@ -285,16 +286,16 @@
    "dp": 2,
    "unit_prefix": "",
    "latest": {
-    "value": 1.14,
-    "period": "Aug 2026"
+    "value": 1.26,
+    "period": "Sep 2026"
    },
    "prev": {
     "value": 1.0,
     "period": "Jun 2026"
    },
    "year_ago": {
-    "value": 1.2,
-    "period": "Aug 2025"
+    "value": 1.42,
+    "period": "Sep 2025"
    },
    "series": "FLRBFNSBV − FLRBFNLBV",
    "source_name": "Lambton Capital, from RBA F7",
@@ -308,8 +309,8 @@
    "dp": 2,
    "unit_prefix": "",
    "latest": {
-    "value": 0.48,
-    "period": "Aug 2026"
+    "value": 0.45,
+    "period": "Sep 2026"
    },
    "prev": {
     "value": 0.47,
@@ -317,7 +318,7 @@
    },
    "year_ago": {
     "value": 0.57,
-    "period": "Aug 2025"
+    "period": "Sep 2025"
    },
    "series": "FLRBFOSBT − FLRBFOSBR",
    "source_name": "Lambton Capital, from RBA F7",
@@ -331,16 +332,16 @@
    "dp": 0,
    "unit_prefix": "$",
    "latest": {
-    "value": 16700,
-    "period": "Aug 2026"
+    "value": 15600,
+    "period": "Sep 2026"
    },
    "prev": {
     "value": 16900,
     "period": "Jun 2026"
    },
    "year_ago": {
-    "value": 16500,
-    "period": "Aug 2025"
+    "value": 16700,
+    "period": "Sep 2025"
    },
    "series": "Premium on existing variable loans × $1m",
    "source_name": "Lambton Capital, from RBA F7",
@@ -354,8 +355,8 @@
    "dp": 1,
    "unit_prefix": "",
    "latest": {
-    "value": 8.8,
-    "period": "Aug 2026"
+    "value": 8.7,
+    "period": "Sep 2026"
    },
    "prev": {
     "value": 8.3,
@@ -375,7 +376,7 @@
    "unit_prefix": "",
    "latest": {
     "value": 14.6,
-    "period": "Aug 2026"
+    "period": "Sep 2026"
    },
    "prev": {
     "value": 14.5,
@@ -438,16 +439,16 @@
    "unit_suffix": "bn",
    "dp": 1,
    "latest": {
-    "value": 209.8,
-    "period": "Aug 2026"
+    "value": 211.8,
+    "period": "Sep 2026"
    },
    "prev": {
     "value": 208.0,
     "period": "Jun 2026"
    },
    "year_ago": {
-    "value": 192.9,
-    "period": "Aug 2025"
+    "value": 194.8,
+    "period": "Sep 2025"
    },
    "series": "RBA D14, DLBOST",
    "source_name": "RBA statistical table D14",
@@ -461,16 +462,16 @@
    "unit_suffix": "bn",
    "dp": 1,
    "latest": {
-    "value": 841.5,
-    "period": "Aug 2026"
+    "value": 852.6,
+    "period": "Sep 2026"
    },
    "prev": {
     "value": 820.6,
     "period": "Jun 2026"
    },
    "year_ago": {
-    "value": 734.2,
-    "period": "Aug 2025"
+    "value": 743.9,
+    "period": "Sep 2025"
    },
    "series": "RBA D14, DLBOLT",
    "source_name": "RBA statistical table D14",
@@ -640,6 +641,7 @@
  ],
  "changelog": [
   "2026-11-03: first edition (Q3 2026).",
-  "2026-11-11: added ABS Lending Indicators business lending commitments for the September quarter 2026 (released 11 November 2026)."
+  "2026-11-11: added ABS Lending Indicators business lending commitments for the September quarter 2026 (released 11 November 2026).",
+  "2026-11-20: RBA F7 lending rates and D14 lending by business size moved from August to September 2026 (F7 published 6 November, D14 12 November 2026); premium, growth and share calculations recomputed. RBA D1 (September 2026), APRA (June quarter 2026) and the cash rate (4.85%) unchanged: no newer release yet."
  ]
 }
