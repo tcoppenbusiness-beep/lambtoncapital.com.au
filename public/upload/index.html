@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="referrer" content="no-referrer">
+<title>Upload your documents | Lambton Capital</title>
+<style>
+  :root { --navy: #0f2a3d; --navy-2: #1e4b63; --gold: #e0a526; --gold-tint: #fbebc8; --ink: #131c26; --ink-2: #4f5b65; --rule: #d6dbd9; --ground: #f7f8f6; --ok: #2e7d4f; --ok-tint: #e3f1e8; --bad: #b3261e; --bad-tint: #f8e4e2; }
+  * { box-sizing: border-box; }
+  html { font-size: 16px; }
+  body { margin: 0; background: var(--ground); color: var(--ink); font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; line-height: 1.55; }
+  h1, h2 { font-family: "Source Serif 4", "Source Serif Pro", Georgia, serif; font-weight: 600; color: var(--navy); line-height: 1.25; margin: 0; }
+  h1 { font-size: 1.75rem; } h2 { font-size: 1.25rem; margin-bottom: 8px; }
+  header { background: var(--navy); color: #fff; padding: 16px 20px; border-bottom: 4px solid var(--gold); }
+  header .brand { max-width: 720px; margin: 0 auto; font-family: "Source Serif 4", "Source Serif Pro", Georgia, serif; font-size: 1.25rem; font-weight: 600; letter-spacing: 0.01em; }
+  main { max-width: 720px; margin: 0 auto; padding: 24px 20px 56px; }
+  p { margin: 0 0 12px; }
+  .lead { color: var(--ink-2); font-size: 1.0625rem; }
+  .card { background: #fff; border: 1px solid var(--rule); border-radius: 10px; padding: 18px 18px 8px; margin: 20px 0; }
+  .item { display: grid; grid-template-columns: 1fr auto; gap: 8px 14px; align-items: center; padding: 14px 0; border-top: 1px solid var(--rule); }
+  .item:first-of-type { border-top: 0; }
+  .item-name { font-weight: 600; }
+  .item-sub { grid-column: 1 / -1; margin: 0; }
+  .muted { color: var(--ink-2); font-size: 0.9375rem; }
+  .btn { font: inherit; font-weight: 600; min-height: 44px; padding: 8px 18px; border-radius: 8px; border: 2px solid var(--navy); background: var(--navy); color: #fff; cursor: pointer; }
+  .btn:hover { background: var(--navy-2); border-color: var(--navy-2); }
+  .btn.alt { background: #fff; color: var(--navy); }
+  .btn.alt:hover { background: var(--ground); }
+  .btn:disabled { opacity: 0.55; cursor: not-allowed; }
+  :focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+  .tag { display: inline-block; font-size: 0.875rem; font-weight: 600; padding: 2px 10px; border-radius: 999px; background: var(--gold-tint); color: var(--ink); }
+  .tag.ok { background: var(--ok-tint); color: var(--ok); }
+  .files { list-style: none; margin: 0; padding: 0; grid-column: 1 / -1; }
+  .file { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; padding: 8px 0; font-size: 0.9375rem; }
+  .file .name { overflow-wrap: anywhere; }
+  .bar { grid-column: 1 / -1; height: 8px; background: #e6eae8; border-radius: 4px; overflow: hidden; }
+  .bar > span { display: block; height: 100%; width: 0; background: var(--navy-2); transition: width 0.15s linear; }
+  .file.done .bar > span { background: var(--ok); }
+  .file.fail .bar > span { background: var(--bad); }
+  .state { font-weight: 600; }
+  .file.done .state { color: var(--ok); } .file.fail .state { color: var(--bad); }
+  .msg { padding: 12px 14px; border-radius: 8px; margin: 16px 0; border: 1px solid; }
+  .msg.bad { background: var(--bad-tint); border-color: var(--bad); color: var(--bad); }
+  .msg.info { background: var(--gold-tint); border-color: var(--gold); }
+  .privacy { font-size: 0.9375rem; color: var(--ink-2); border-left: 4px solid var(--gold); padding: 2px 0 2px 14px; margin: 24px 0; }
+  .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  noscript p { padding: 12px; background: var(--gold-tint); }
+  a { color: var(--navy-2); }
+  footer { max-width: 720px; margin: 0 auto; padding: 0 20px 40px; color: var(--ink-2); font-size: 0.875rem; }
+  @media (max-width: 520px) { .item { grid-template-columns: 1fr; } .btn { width: 100%; } h1 { font-size: 1.5rem; } }
+  @media (prefers-reduced-motion: reduce) { .bar > span { transition: none; } }
+</style>
+</head>
+<body>
+<header><div class="brand">Lambton Capital</div></header>
+<main id="main">
+  <noscript><p>This page needs JavaScript to upload files. Please turn it on, or email your documents to <a href="mailto:hello@lambtoncapital.com.au">hello@lambtoncapital.com.au</a>.</p></noscript>
+  <div id="app" aria-busy="true"><p class="lead" role="status">Checking your link…</p></div>
+  <p class="privacy">Files go straight to Lambton Capital's secure document store in Sydney. Please don't upload driver licences, passports or tax file numbers. We'll ask for identity checks another way.</p>
+</main>
+<footer>Questions? Email <a href="mailto:hello@lambtoncapital.com.au">hello@lambtoncapital.com.au</a> and we'll get back to you.</footer>
+
+<script>
+(function () {
+  'use strict';
+  var API = 'https://elzwgdzmsihwzjrbasct.supabase.co/functions/v1/client-upload';
+  var MAX_BYTES = 25 * 1024 * 1024;
+  var ALLOWED = ['pdf', 'jpg', 'jpeg', 'png', 'heic', 'xlsx', 'xls', 'csv', 'docx', 'doc'];
+  var FORBIDDEN = /(passport|licen[cs]e|drivers?[-_ ]?lic|tfn|tax[-_ ]?file|medicare|birth[-_ ]?cert)/i;
+  var CONTACT = 'hello@lambtoncapital.com.au';
+
+  var app = document.getElementById('app');
+  var token = new URLSearchParams(location.search).get('t') || '';
+  var state = { items: [], dealName: '', expires: null };
+
+  function el(tag, attrs, kids) {
+    var n = document.createElement(tag);
+    Object.keys(attrs || {}).forEach(function (k) {
+      if (k === 'text') n.textContent = attrs[k];
+      else if (k === 'class') n.className = attrs[k];
+      else n.setAttribute(k, attrs[k]);
+    });
+    (kids || []).forEach(function (c) { if (c) n.appendChild(c); });
+    return n;
+  }
+  function clear(n) { while (n.firstChild) n.removeChild(n.firstChild); }
+  function finish() { app.setAttribute('aria-busy', 'false'); }
+
+  function contactLine() {
+    var p = el('p', { class: 'muted' });
+    p.appendChild(document.createTextNode('If you think this is a mistake, email '));
+    p.appendChild(el('a', { href: 'mailto:' + CONTACT, text: CONTACT }));
+    p.appendChild(document.createTextNode(' and we will send you a new link.'));
+    return p;
+  }
+
+  function showProblem(title, text) {
+    clear(app);
+    app.appendChild(el('h1', { text: title }));
+    app.appendChild(el('p', { class: 'lead', text: text }));
+    app.appendChild(contactLine());
+    finish();
+    document.title = title + ' | Lambton Capital';
+  }
+
+  function sizeText(n) { return n < 1048576 ? Math.max(1, Math.round(n / 1024)) + ' KB' : (n / 1048576).toFixed(1) + ' MB'; }
+
+  function checkFile(f) {
+    var ext = (f.name.split('.').pop() || '').toLowerCase();
+    if (ALLOWED.indexOf(ext) === -1) return 'We can’t accept .' + ext + ' files. Please use PDF, photo, Excel, CSV or Word.';
+    if (f.size > MAX_BYTES) return 'This file is ' + sizeText(f.size) + '. The limit is 25 MB.';
+    if (f.size === 0) return 'This file is empty.';
+    if (FORBIDDEN.test(f.name)) return 'This looks like an identity document. Please don’t upload those here.';
+    return null;
+  }
+
+  // POST one file with progress. Resolves with parsed JSON or rejects with a readable message.
+  function send(file, itemId, onProgress) {
+    return new Promise(function (resolve, reject) {
+      var fd = new FormData();
+      fd.append('t', token);
+      if (itemId) fd.append('item_id', itemId);
+      fd.append('file', file, file.name);
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', API);
+      xhr.upload.onprogress = function (e) { if (e.lengthComputable) onProgress(e.loaded / e.total); };
+      xhr.onerror = function () { reject(new Error('The upload didn’t go through. Check your connection and try again.')); };
+      xhr.ontimeout = xhr.onerror;
+      xhr.onload = function () {
+        var body = null;
+        try { body = JSON.parse(xhr.responseText); } catch (e) { /* not JSON */ }
+        if (xhr.status >= 200 && xhr.status < 300) return resolve(body || {});
+        var msg = body && (body.error || body.message);
+        if (xhr.status === 404 || xhr.status === 410) msg = 'This link has expired or is no longer valid.';
+        else if (xhr.status === 429) msg = 'That’s a lot of files in a short time. Please wait a little while and try again.';
+        else if (xhr.status === 413) msg = 'That file is too big. The limit is 25 MB.';
+        else if (!msg) msg = 'Something went wrong on our side. Please try again, or email ' + CONTACT + '.';
+        reject(new Error(msg));
+      };
+      xhr.send(fd);
+    });
+  }
+
+  // Renders a row per chosen file and uploads them one at a time.
+  function uploadFiles(fileList, itemId, list, onDone) {
+    var files = Array.prototype.slice.call(fileList);
+    var chain = Promise.resolve();
+    files.forEach(function (f) {
+      var bar = el('span');
+      var status = el('span', { class: 'state', text: 'Waiting' });
+      var row = el('li', { class: 'file' }, [
+        el('span', { class: 'name', text: f.name + ' (' + sizeText(f.size) + ')' }), status,
+        el('span', { class: 'bar', 'aria-hidden': 'true' }, [bar])
+      ]);
+      list.appendChild(row);
+      var problem = checkFile(f);
+      if (problem) { row.className = 'file fail'; status.textContent = problem; bar.style.width = '100%'; return; }
+      chain = chain.then(function () {
+        status.textContent = 'Uploading 0%';
+        return send(f, itemId, function (p) { var pc = Math.round(p * 100); bar.style.width = pc + '%'; status.textContent = 'Uploading ' + pc + '%'; })
+          .then(function () { row.className = 'file done'; bar.style.width = '100%'; status.textContent = 'Received'; onDone(f); })
+          .catch(function (e) { row.className = 'file fail'; bar.style.width = '100%'; status.textContent = e.message; });
+      });
+    });
+  }
+
+  function picker(label, itemId, kind) {
+    var input = el('input', { type: 'file', multiple: 'multiple', class: 'visually-hidden', accept: '.pdf,.jpg,.jpeg,.png,.heic,.xlsx,.xls,.csv,.docx,.doc', tabindex: '-1', 'aria-hidden': 'true' });
+    var btn = el('button', { type: 'button', class: kind === 'main' ? 'btn' : 'btn alt', text: label });
+    var list = el('ul', { class: 'files', 'aria-live': 'polite' });
+    btn.addEventListener('click', function () { input.click(); });
+    input.addEventListener('change', function () {
+      if (!input.files || !input.files.length) return;
+      uploadFiles(input.files, itemId, list, function () { if (itemId) markReceived(itemId); });
+      input.value = '';
+    });
+    return { button: btn, input: input, list: list };
+  }
+
+  function markReceived(id) {
+    state.items.forEach(function (i) { if (i.id === id) i.status = 'received'; });
+    var tagEl = document.getElementById('tag-' + id);
+    if (tagEl) { tagEl.textContent = 'Received'; tagEl.className = 'tag ok'; }
+  }
+
+  function render() {
+    clear(app);
+    document.title = 'Upload your documents | Lambton Capital';
+    app.appendChild(el('h1', { text: 'Upload your documents' }));
+    var intro = state.dealName
+      ? 'Lambton Capital has asked for the documents below to move ' + state.dealName + ' forward. You can send them from your phone or computer.'
+      : 'Lambton Capital has asked for the documents below. You can send them from your phone or computer.';
+    app.appendChild(el('p', { class: 'lead', text: intro }));
+    if (state.expires) {
+      var d = new Date(state.expires);
+      if (!isNaN(d)) app.appendChild(el('p', { class: 'muted', text: 'This link works until ' + d.toLocaleDateString('en-AU', { day: 'numeric', month: 'long', year: 'numeric' }) + '.' }));
+    }
+
+    var card = el('section', { class: 'card', 'aria-labelledby': 'items-h' });
+    card.appendChild(el('h2', { id: 'items-h', text: 'What we need' }));
+    if (!state.items.length) card.appendChild(el('p', { class: 'muted', text: 'There is nothing outstanding right now. You can still send us anything else below.' }));
+    state.items.forEach(function (it) {
+      var received = it.status === 'received';
+      var row = el('div', { class: 'item' });
+      var name = el('div', {}, [el('div', { class: 'item-name', text: it.label }), el('span', { id: 'tag-' + it.id, class: received ? 'tag ok' : 'tag', text: received ? 'Received' : 'Still needed' })]);
+      var p = picker(received ? 'Add another file' : 'Choose files', it.id, received ? 'alt' : 'main');
+      p.button.setAttribute('aria-label', (received ? 'Add another file for ' : 'Choose files for ') + it.label);
+      row.appendChild(name); row.appendChild(p.button); row.appendChild(p.input); row.appendChild(p.list);
+      card.appendChild(row);
+    });
+    app.appendChild(card);
+
+    var other = el('section', { class: 'card', 'aria-labelledby': 'other-h' });
+    other.appendChild(el('h2', { id: 'other-h', text: 'Anything else' }));
+    other.appendChild(el('p', { class: 'muted', text: 'Not sure where something fits? Send it here and we’ll sort it out.' }));
+    var g = picker('Choose files', null, 'alt');
+    g.button.setAttribute('aria-label', 'Choose other files to send');
+    var wrap = el('div', { class: 'item' }, [el('div', { class: 'muted', text: 'PDF, photos, Excel, CSV or Word. Up to 25 MB each.' }), g.button, g.input, g.list]);
+    other.appendChild(wrap);
+    app.appendChild(other);
+    finish();
+  }
+
+  if (!token || token.length < 20) { showProblem('This link isn’t working', 'The link looks incomplete. Please open it again from the email or message we sent you.'); return; }
+
+  fetch(API + '?t=' + encodeURIComponent(token), { method: 'GET', mode: 'cors', credentials: 'omit' })
+    .then(function (r) {
+      if (r.status === 404 || r.status === 410) { showProblem('This link has expired', 'The upload link is no longer valid. It may have run out of time, or we may have replaced it.'); return null; }
+      if (!r.ok) throw new Error('bad status');
+      return r.json();
+    })
+    .then(function (data) {
+      if (!data) return;
+      state.items = (data.items || []).slice();
+      state.dealName = data.deal_name || '';
+      state.expires = data.expires_at || null;
+      render();
+    })
+    .catch(function () { showProblem('We couldn’t load this page', 'Something went wrong while loading your list. Please refresh the page in a moment.'); });
+})();
+</script>
+</body>
+</html>
