@@ -56,11 +56,11 @@
 <body>
 <header><div class="brand">Lambton Capital</div></header>
 <main id="main">
-  <noscript><p>This page needs JavaScript to upload files. Please turn it on, or email your documents to <a href="mailto:hello@lambtoncapital.com.au">hello@lambtoncapital.com.au</a>.</p></noscript>
+  <noscript><p>This page needs JavaScript to upload files. Please turn it on, or email your documents to <a href="mailto:enquiries@lambtoncapital.com.au">enquiries@lambtoncapital.com.au</a>.</p></noscript>
   <div id="app" aria-busy="true"><p class="lead" role="status">Checking your link…</p></div>
   <p class="privacy">Files go straight to Lambton Capital's secure document store in Sydney. Please don't upload driver licences, passports or tax file numbers. We'll ask for identity checks another way.</p>
 </main>
-<footer>Questions? Email <a href="mailto:hello@lambtoncapital.com.au">hello@lambtoncapital.com.au</a> and we'll get back to you.</footer>
+<footer>Questions? Email <a href="mailto:enquiries@lambtoncapital.com.au">enquiries@lambtoncapital.com.au</a> and we'll get back to you.</footer>
 
 <script>
 (function () {
@@ -69,7 +69,7 @@
   var MAX_BYTES = 25 * 1024 * 1024;
   var ALLOWED = ['pdf', 'jpg', 'jpeg', 'png', 'heic', 'xlsx', 'xls', 'csv', 'docx', 'doc'];
   var FORBIDDEN = /(passport|licen[cs]e|drivers?[-_ ]?lic|tfn|tax[-_ ]?file|medicare|birth[-_ ]?cert)/i;
-  var CONTACT = 'hello@lambtoncapital.com.au';
+  var CONTACT = 'enquiries@lambtoncapital.com.au';
 
   var app = document.getElementById('app');
   var token = new URLSearchParams(location.search).get('t') || '';
