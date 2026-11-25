@@ -36,7 +36,11 @@
     "On new variable loans written in September, small businesses paid 7.14% against 5.88% for large businesses.",
     "Small business loans secured by a home averaged 7.03%, about 0.45 points below the small business average of 7.48%. About 49% of small business lending is secured by a home (RBA D14, September 2026).",
     "These September figures largely predate the rises announced on 29 September and 3 November (0.50 points in total): the first took effect on 30 September, the last day of the month. If both were passed on in full, the average existing variable small business rate would be about 7.93%. This is arithmetic, not a forecast or an RBA figure; lenders set their own rates."
-   ]
+   ],
+   "link": {
+    "href": "business-loan-refinance",
+    "text": "How business loan refinancing works, and what it costs to switch"
+   }
   },
   {
    "question": "How big is the small-business premium, and is it changing?",
@@ -62,7 +66,11 @@
    "points": [
     "Approved limits were $541.0bn, leaving about $39.4bn approved but not yet drawn.",
     "APRA publishes the September quarter figures in December 2026; they will be added to the next edition."
-   ]
+   ],
+   "link": {
+    "href": "commercial-property-finance",
+    "text": "How commercial property loans work, from $500k to $20m"
+   }
   },
   {
    "question": "What did lenders commit to business borrowers in the September quarter?",
@@ -643,5 +651,29 @@
   "2026-11-03: first edition (Q3 2026).",
   "2026-11-11: added ABS Lending Indicators business lending commitments for the September quarter 2026 (released 11 November 2026).",
   "2026-11-20: RBA F7 lending rates and D14 lending by business size moved from August to September 2026 (F7 published 6 November, D14 12 November 2026); premium, growth and share calculations recomputed. RBA D1 (September 2026), APRA (June quarter 2026) and the cash rate (4.85%) unchanged: no newer release yet."
+ ],
+ "charts": [
+  {
+   "id": "chart-rates-by-size",
+   "after_question": "What are small businesses paying to borrow?",
+   "title": "Average rate on existing variable business loans, by business size",
+   "bars": [
+    {
+     "label": "Small business",
+     "metric": "Small business, variable rate, existing loans"
+    },
+    {
+     "label": "Medium business",
+     "metric": "Medium business, variable rate, existing loans"
+    },
+    {
+     "label": "Large business",
+     "metric": "Large business, variable rate, existing loans"
+    }
+   ],
+   "dp": 2,
+   "suffix": "%",
+   "caption": "Rates rose for every size of business over the year, and small businesses still pay the most. The same figures are in the data table below."
+  }
  ]
 }

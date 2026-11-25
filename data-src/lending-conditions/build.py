@@ -81,8 +81,27 @@ def build_csv(editions):
         w.writerows([r for r in rows if r["edition"] == latest["edition"]])
 
 
+def build_charts(ed):
+    """Charts named in the edition's "charts" list, drawn from the same metrics as the table (latest, previous
+    quarter, a year earlier), so each quarterly edition redraws them with no extra work."""
+    import sys
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+    from charts import grouped_bars
+    by_name = {m["metric"]: m for m in ed["metrics"]}
+    out = {}
+    for c in ed.get("charts", []):
+        ms = [by_name[x["metric"]] for x in c["bars"]]
+        series = [{"name": ms[0][k]["period"], "values": [m[k]["value"] if m.get(k) else None for m in ms]}
+                  for k in ("year_ago", "prev", "latest") if ms[0].get(k)]
+        caption = c["caption"] + " Source: " + ", ".join(sorted({f'<a href="{e(m["source_url"])}" rel="noopener">{e(m["source_name"])}</a>' for m in ms})) + "."
+        out[c["after_question"]] = grouped_bars(c["id"], c["title"], [x["label"] for x in c["bars"]], series, caption,
+                                                dp=c.get("dp", 2), suffix=c.get("suffix", ""), prefix=c.get("prefix", ""))
+    return out
+
+
 def build_page(editions):
     ed = editions[-1]
+    charts = build_charts(ed)
     gtm, body, footer = chrome()
     sources = sorted({(m["source_name"], m["source_url"]) for m in ed["metrics"]})
     dataset = {
@@ -148,6 +167,7 @@ def build_page(editions):
         f'<section class="{"section-alt" if i % 2 == 0 else ""}"><div class="wrap stack">'
         f'<h2 class="h2">{e(a["question"])}</h2><p class="answer-first max-820">{e(a["answer"])}</p>'
         + (f'<ul class="scan-list max-820">{"".join(f"<li>{e(b)}</li>" for b in a.get("points", []))}</ul>' if a.get("points") else "")
+        + (f'<div class="max-820">{charts[a["question"]]}</div>' if a["question"] in charts else "")
         + (f'<p class="body max-820"><a href="{e(a["link"]["href"])}">{e(a["link"]["text"])}</a></p>' if a.get("link") else "")
         + '</div></section>'
         for i, a in enumerate(ed["analysis"]))
@@ -173,6 +193,7 @@ def build_page(editions):
 <title>{e(title)}</title>
 <meta name="description" content="{e(ed['meta_description'])}">
 <link rel="canonical" href="{URL}">
+<link rel="alternate" type="application/atom+xml" title="Lambton Capital guides and data" href="/guides/feed.xml">
 <meta property="og:title" content="{e(title)}">
 <meta property="og:description" content="{e(ed['meta_description'])}">
 <meta property="og:image" content="https://lambtoncapital.com.au/img/og-lambton-capital.jpg">

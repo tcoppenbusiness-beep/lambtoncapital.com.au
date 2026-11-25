@@ -106,6 +106,7 @@ def build_index(guides):
 <title>Commercial finance guides and data | Lambton Capital</title>
 <meta name="description" content="Plain-English guides to commercial property and business finance in Australia, with worked examples, plus our quarterly lending data and deal notes.">
 <link rel="canonical" href="{SITE}/guides/">
+<link rel="alternate" type="application/atom+xml" title="Lambton Capital guides and data" href="/guides/feed.xml">
 <meta property="og:title" content="Commercial finance guides and data | Lambton Capital">
 <meta property="og:description" content="Plain-English guides to commercial property and business finance in Australia, with worked examples, plus our quarterly lending data and deal notes.">
 <meta property="og:image" content="{SITE}/img/og-lambton-capital.jpg">
@@ -229,6 +230,7 @@ def build_page(m):
 <title>{esc(m.get('seo_title', m['title']))}</title>
 <meta name="description" content="{esc(m['description'])}">
 <link rel="canonical" href="{url}">
+<link rel="alternate" type="application/atom+xml" title="Lambton Capital guides and data" href="/guides/feed.xml">
 <meta property="og:title" content="{esc(m['title'])}">
 <meta property="og:description" content="{esc(m['description'])}">
 <meta property="og:image" content="{SITE}/img/{m['card_image']['base'] + '.webp' if m.get('card_image') else 'og-lambton-capital.jpg'}">
@@ -370,6 +372,49 @@ def update_llms(guides):
     (PUBLIC / "llms.txt").write_text(s)
 
 
+def build_feed(guides):
+    """Atom 1.0 feed of guides, data notes and the quarterly dataset, newest first. Google accepts Atom feeds as
+    sitemaps (listed in robots.txt), and schedulers can watch it to draft social posts for each new piece."""
+    from datetime import datetime, timezone
+    items = [{"title": g["title"], "url": f"{SITE}/guides/{g['slug']}", "updated": g["updated"], "published": g["published"],
+              "summary": g["description"], "kind": g.get("kind", "Guide")} for g in guides]
+    lc = sorted((ROOT / "data-src" / "lending-conditions" / "editions").glob("*.json"))
+    if lc:
+        ed = json.loads(lc[-1].read_text())
+        items.append({"title": f"Australian commercial lending conditions, {ed['edition']}", "url": f"{SITE}/commercial-lending-conditions",
+                      "updated": ed.get("updated", ed["published"]), "published": ed["published"], "summary": ed["meta_description"], "kind": "Quarterly data"})
+    items.sort(key=lambda i: i["updated"], reverse=True)
+    stamp = lambda d: f"{d}T09:00:00+11:00"
+    entries = "".join(
+        f"""  <entry>
+    <title>{esc(i['title'])}</title>
+    <link rel="alternate" type="text/html" href="{i['url']}"/>
+    <id>{i['url']}</id>
+    <published>{stamp(i['published'])}</published>
+    <updated>{stamp(i['updated'])}</updated>
+    <category term="{esc(i['kind'])}"/>
+    <summary>{esc(i['summary'])}</summary>
+  </entry>
+""" for i in items)
+    xml = f"""<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en-AU">
+  <title>Lambton Capital: commercial finance guides and data</title>
+  <subtitle>Plain-English guides to commercial property and business finance in Australia, data notes and quarterly lending data.</subtitle>
+  <link rel="self" type="application/atom+xml" href="{SITE}/guides/feed.xml"/>
+  <link rel="alternate" type="text/html" href="{SITE}/guides/"/>
+  <id>{SITE}/guides/</id>
+  <updated>{stamp(items[0]['updated'])}</updated>
+  <author><name>Thomas Coppen</name><uri>{SITE}/about</uri></author>
+  <rights>Lambton Capital Pty Ltd</rights>
+{entries}</feed>
+"""
+    (PUBLIC / "guides" / "feed.xml").write_text(xml)
+    robots = (PUBLIC / "robots.txt").read_text()
+    line = f"Sitemap: {SITE}/guides/feed.xml"
+    if line not in robots:
+        (PUBLIC / "robots.txt").write_text(robots.rstrip("\n") + "\n" + line + "\n")
+
+
 if __name__ == "__main__":
     gs = guide_pages()
     if not gs:
@@ -382,3 +427,5 @@ if __name__ == "__main__":
     print("nav/footer patched on", patch_nav_and_footer(), "pages")
     update_sitemap(gs)
     update_llms(gs)
+    build_feed(gs)
+    print("feed: guides/feed.xml")

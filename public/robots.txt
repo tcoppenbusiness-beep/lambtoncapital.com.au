@@ -25,3 +25,4 @@ Disallow: /lp/
 Disallow: /thank-you
 
 Sitemap: https://lambtoncapital.com.au/sitemap.xml
+Sitemap: https://lambtoncapital.com.au/guides/feed.xml
