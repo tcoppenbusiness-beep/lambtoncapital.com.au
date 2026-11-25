@@ -50,11 +50,43 @@ def grouped_bars(fig_id, title, categories, series, caption, dp=2, prefix="", su
     label = f"{title}. " + "; ".join(
         f"{cat}: " + ", ".join(f"{s['name']} {_fmt(s['values'][ci], dp, prefix, suffix)}" for s in series if s["values"][ci] is not None)
         for ci, cat in enumerate(categories))
-    svg = (f'<svg viewBox="0 0 {w} {h}" width="100%" role="img" aria-label="{escape(label)}" '
-           f'style="display:block;max-width:{w}px;height:auto;font-family:var(--sans)">'
-           '<style>.ch-val{font-size:13px;fill:#131C26;font-variant-numeric:tabular-nums}.ch-cat{font-size:14px;fill:#131C26}'
-           '.ch-leg{font-size:13px;fill:#5B6770}.ch-note{font-size:12px;fill:#5B6770}</style>'
-           + "".join(parts) + '</svg>')
-    return (f'<figure class="card stack chart-figure" id="{escape(fig_id)}" style="margin:0;">'
-            f'<p class="label" style="margin:0;">{escape(title)}</p>{svg}'
+    style = ('<style>.ch-val{font-size:13px;fill:#131C26;font-variant-numeric:tabular-nums}.ch-cat{font-size:14px;fill:#131C26}'
+             '.ch-leg{font-size:13px;fill:#5B6770}.ch-note{font-size:12px;fill:#5B6770}</style>')
+    wide = (f'<svg class="ch-wide" viewBox="0 0 {w} {h}" width="100%" role="img" aria-label="{escape(label)}" '
+            f'style="max-width:{w}px;height:auto;font-family:var(--sans)">' + style + "".join(parts) + '</svg>')
+    narrow = _narrow(categories, series, label, dp, prefix, suffix, style)
+    css = ('<style>.chart-figure .ch-narrow{display:none}.chart-figure svg{display:block}'
+           '@media (max-width:640px){.chart-figure .ch-wide{display:none}.chart-figure .ch-narrow{display:block}}</style>')
+    return (f'{css}<figure class="card stack chart-figure" id="{escape(fig_id)}" style="margin:0;">'
+            f'<p class="label" style="margin:0;">{escape(title)}</p>{wide}{narrow}'
             f'<figcaption class="body-sm ink-2">{caption}</figcaption></figure>')
+
+
+def _narrow(categories, series, label, dp, prefix, suffix, style):
+    """Phone layout: horizontal bars, one block per category, drawn at about the size it is shown."""
+    w, ml, mr = 340, 4, 64
+    bar_h, gap, cat_h = 18, 6, 26
+    vals = [v for s in series for v in s["values"] if v is not None]
+    vmax = max(vals)
+    scale = (w - ml - mr) / vmax
+    parts, yy = [], 4
+    # legend, one row per series
+    for i, s in enumerate(series):
+        parts.append(f'<rect x="{ml}" y="{yy}" width="12" height="12" rx="2" fill="{COLOURS[i % len(COLOURS)]}"/>'
+                     f'<text x="{ml + 18}" y="{yy + 11}" class="ch-leg">{escape(s["name"])}</text>')
+        yy += 18
+    yy += 10
+    for ci, cat in enumerate(categories):
+        parts.append(f'<text x="{ml}" y="{yy + 15}" class="ch-cat">{escape(cat)}</text>')
+        yy += cat_h
+        for si, s in enumerate(series):
+            v = s["values"][ci]
+            if v is None:
+                continue
+            bw = max(2, v * scale)
+            parts.append(f'<rect x="{ml}" y="{yy}" width="{bw:.1f}" height="{bar_h}" rx="2" fill="{COLOURS[si % len(COLOURS)]}"/>'
+                         f'<text x="{ml + bw + 6:.1f}" y="{yy + 14}" class="ch-val">{escape(_fmt(v, dp, prefix, suffix))}</text>')
+            yy += bar_h + gap
+        yy += 10
+    return (f'<svg class="ch-narrow" viewBox="0 0 {w} {yy}" width="100%" role="img" aria-label="{escape(label)}" '
+            f'style="max-width:{w}px;height:auto;font-family:var(--sans)">' + style + "".join(parts) + '</svg>')
